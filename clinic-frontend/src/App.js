@@ -17,7 +17,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Test
+            Workflow test
           </a>
         </header>
       </div>

@@ -11,7 +11,6 @@ MySQL
 
 Docker
 
-To start MySQL on port 33601: 
- 
-`docker container run --name db -e MYSQL_ROOT_PASSWORD=pswd -p 33061:3306 mysql`
+Start an app: 
+`docker compose up`
 

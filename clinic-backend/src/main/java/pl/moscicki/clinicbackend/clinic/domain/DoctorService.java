@@ -1,10 +1,11 @@
-package pl.moscicki.clinicbackend.doctor.domain;
+package pl.moscicki.clinicbackend.clinic.domain;
 
-import pl.moscicki.clinicbackend.doctor.domain.dto.CreationDoctor;
-import pl.moscicki.clinicbackend.doctor.domain.dto.DoctorResponse;
+import pl.moscicki.clinicbackend.clinic.domain.dto.CreationDoctor;
+import pl.moscicki.clinicbackend.clinic.domain.dto.DoctorResponse;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 class DoctorService {
@@ -14,10 +15,14 @@ class DoctorService {
     this.doctorRepository = doctorRepository;
   }
 
-  List<DoctorResponse> getAll() {
+  Set<DoctorResponse> getAll(boolean withTreatments) {
     return doctorRepository.findAll().stream()
-            .map(DoctorResponse::from)
-            .collect(Collectors.toList());
+            .map(doctor -> DoctorResponse.from(doctor, withTreatments))
+            .collect(Collectors.toSet());
+  }
+
+  Set<Doctor> getDoctorsByPesel(Set<String> pesels) {
+    return doctorRepository.findAllByPeselIn(pesels);
   }
 
   void createDoctor(CreationDoctor creationDoctor) {
@@ -27,5 +32,9 @@ class DoctorService {
             .map(supervisor -> Doctor.from(creationDoctor, supervisor))
             .orElse(Doctor.from(creationDoctor, null));
     doctorRepository.save(doctor);
+  }
+
+  void deleteDoctor(String pesel) {
+    doctorRepository.deleteById(pesel);
   }
 }

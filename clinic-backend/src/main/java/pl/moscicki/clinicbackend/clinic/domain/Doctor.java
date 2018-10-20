@@ -1,14 +1,12 @@
-package pl.moscicki.clinicbackend.doctor.domain;
+package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
-import pl.moscicki.clinicbackend.doctor.domain.dto.CreationDoctor;
+import pl.moscicki.clinicbackend.clinic.domain.dto.CreationDoctor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -37,7 +35,13 @@ public class Doctor {
   @OneToOne
   private Doctor supervisor;
 
-  public static Doctor from(CreationDoctor doctor, Doctor supervisor) {
+  @ManyToMany
+  @JoinTable(name = "doctors_treatments",
+          joinColumns = @JoinColumn(name = "pesel"),
+          inverseJoinColumns = @JoinColumn(name = "treatment_id"))
+  private Set<Treatment> treatments;
+
+  static Doctor from(CreationDoctor doctor, Doctor supervisor) {
     return Doctor.builder()
             .pesel(doctor.getPesel())
             .firstName(doctor.getFirstName())

@@ -1,4 +1,4 @@
-package pl.moscicki.clinicbackend.doctors.domain;
+package pl.moscicki.clinicbackend.doctor.domain;
 
 import org.springframework.data.repository.CrudRepository;
 

@@ -1,7 +1,7 @@
-package pl.moscicki.clinicbackend.doctors.domain;
+package pl.moscicki.clinicbackend.doctor.domain;
 
 import lombok.*;
-import pl.moscicki.clinicbackend.doctors.domain.dto.CreationDoctor;
+import pl.moscicki.clinicbackend.doctor.domain.dto.CreationDoctor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

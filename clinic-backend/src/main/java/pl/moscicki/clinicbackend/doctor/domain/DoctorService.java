@@ -1,7 +1,7 @@
-package pl.moscicki.clinicbackend.doctors.domain;
+package pl.moscicki.clinicbackend.doctor.domain;
 
-import pl.moscicki.clinicbackend.doctors.domain.dto.CreationDoctor;
-import pl.moscicki.clinicbackend.doctors.domain.dto.DoctorResponse;
+import pl.moscicki.clinicbackend.doctor.domain.dto.CreationDoctor;
+import pl.moscicki.clinicbackend.doctor.domain.dto.DoctorResponse;
 
 import java.util.List;
 import java.util.Objects;

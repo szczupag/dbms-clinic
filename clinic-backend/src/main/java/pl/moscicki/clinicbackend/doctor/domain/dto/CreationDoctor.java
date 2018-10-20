@@ -1,4 +1,4 @@
-package pl.moscicki.clinicbackend.doctors.domain.dto;
+package pl.moscicki.clinicbackend.doctor.domain.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

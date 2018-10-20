@@ -1,9 +1,9 @@
-package pl.moscicki.clinicbackend.doctors.domain.dto;
+package pl.moscicki.clinicbackend.doctor.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Value;
-import pl.moscicki.clinicbackend.doctors.domain.Doctor;
+import pl.moscicki.clinicbackend.doctor.domain.Doctor;
 
 @Builder
 @Value

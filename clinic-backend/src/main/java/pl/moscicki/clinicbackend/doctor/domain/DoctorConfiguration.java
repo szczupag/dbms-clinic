@@ -1,4 +1,4 @@
-package pl.moscicki.clinicbackend.doctors.domain;
+package pl.moscicki.clinicbackend.doctor.domain;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

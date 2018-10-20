@@ -1,4 +1,4 @@
-package pl.moscicki.clinicbackend.doctors.domain;
+package pl.moscicki.clinicbackend.doctor.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;

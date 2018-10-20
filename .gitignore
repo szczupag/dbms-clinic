@@ -1,3 +1,9 @@
 */node_modules
 */*.iml
 */.idea/*
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+./clinic-backend/target/

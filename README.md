@@ -12,5 +12,5 @@ MySQL
 Docker
 
 Start an app: 
-`docker compose up`
+`docker-compose up`
 

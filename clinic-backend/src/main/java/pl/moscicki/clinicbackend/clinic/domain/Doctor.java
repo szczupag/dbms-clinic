@@ -36,10 +36,10 @@ public class Doctor {
   private Doctor supervisor;
 
   @ManyToMany
-  @JoinTable(name = "doctors_treatments",
+  @JoinTable(name = "doctors_medical_procedures",
           joinColumns = @JoinColumn(name = "pesel"),
-          inverseJoinColumns = @JoinColumn(name = "treatment_id"))
-  private Set<Treatment> treatments;
+          inverseJoinColumns = @JoinColumn(name = "medical_procedure_id"))
+  private Set<MedicalProcedure> medicalProcedures;
 
   static Doctor from(CreationDoctor doctor, Doctor supervisor) {
     return Doctor.builder()

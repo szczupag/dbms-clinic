@@ -13,11 +13,11 @@ import java.util.HashSet;
 public class ApplicationBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
   private final DoctorRepository doctorRepository;
-  private final TreatmentRepository treatmentRepository;
+  private final MedicalProcedureRepository medicalProcedureRepository;
 
-  public ApplicationBootstrap(DoctorRepository doctorRepository, TreatmentRepository treatmentRepository) {
+  public ApplicationBootstrap(DoctorRepository doctorRepository, MedicalProcedureRepository medicalProcedureRepository) {
     this.doctorRepository = doctorRepository;
-    this.treatmentRepository = treatmentRepository;
+    this.medicalProcedureRepository = medicalProcedureRepository;
   }
 
   @Override
@@ -29,7 +29,7 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
             .lastName("Moscicki")
             .salary(10000L)
             .speciality("Chirurg")
-            .treatments(new HashSet<>())
+            .medicalProcedures(new HashSet<>())
             .build();
 
     Doctor agata = Doctor.builder()
@@ -38,10 +38,10 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
             .lastName("Szczuka")
             .speciality("Kardiolog")
             .supervisor(maciej)
-            .treatments(new HashSet<>())
+            .medicalProcedures(new HashSet<>())
             .build();
 
-    Treatment masaz_serca = Treatment.builder()
+    MedicalProcedure masaz_serca = MedicalProcedure.builder()
             .name("Masaz serca")
             .cost(650L)
             .doctors(new HashSet<>(Arrays.asList(maciej, agata)))
@@ -50,10 +50,10 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
     doctorRepository.save(maciej);
     doctorRepository.save(agata);
 
-    treatmentRepository.save(masaz_serca);
+    medicalProcedureRepository.save(masaz_serca);
 
-    maciej.getTreatments().add(masaz_serca);
-    agata.getTreatments().add(masaz_serca);
+    maciej.getMedicalProcedures().add(masaz_serca);
+    agata.getMedicalProcedures().add(masaz_serca);
 
     doctorRepository.save(maciej);
     doctorRepository.save(agata);

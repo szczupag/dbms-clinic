@@ -20,8 +20,8 @@ class DoctorsEndpoint {
   }
 
   @GetMapping(value = "/all")
-  Set<DoctorResponse> getAll(@RequestParam(value = "treatments", defaultValue = "false", required = false) boolean withTreatments) {
-    return clinicFacade.getAllDoctors(withTreatments);
+  Set<DoctorResponse> getAll(@RequestParam(value = "medical-procedures", defaultValue = "false", required = false) boolean withMedicalProcedures) {
+    return clinicFacade.getAllDoctors(withMedicalProcedures);
   }
 
   @PutMapping

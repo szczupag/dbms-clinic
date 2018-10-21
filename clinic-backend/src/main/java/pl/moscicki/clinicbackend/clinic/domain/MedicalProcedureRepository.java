@@ -4,8 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-interface TreatmentRepository extends CrudRepository<Treatment, Long> {
+interface MedicalProcedureRepository extends CrudRepository<MedicalProcedure, Long> {
 
   @Override
-  List<Treatment> findAll();
+  List<MedicalProcedure> findAll();
 }

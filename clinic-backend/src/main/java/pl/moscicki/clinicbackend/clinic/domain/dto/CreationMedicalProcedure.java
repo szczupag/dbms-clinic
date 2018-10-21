@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-public class CreationTreatment {
+public class CreationMedicalProcedure {
 
   @NotNull
   private String name;

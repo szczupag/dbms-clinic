@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 class ClinicConfiguration {
 
   @Bean
-  ClinicFacade doctorsFacade(DoctorRepository doctorRepository, TreatmentRepository treatmentRepository) {
+  ClinicFacade doctorsFacade(DoctorRepository doctorRepository, MedicalProcedureRepository medicalProcedureRepository) {
     DoctorService doctorService = new DoctorService(doctorRepository);
-    TreatmentService treatmentService = new TreatmentService(treatmentRepository);
+    MedicalProcedureService medicalProcedureService = new MedicalProcedureService(medicalProcedureRepository);
 
-    return new ClinicFacade(doctorService, treatmentService);
+    return new ClinicFacade(doctorService, medicalProcedureService);
   }
 }

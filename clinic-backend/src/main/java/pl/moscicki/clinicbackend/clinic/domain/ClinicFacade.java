@@ -1,9 +1,9 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import pl.moscicki.clinicbackend.clinic.domain.dto.CreationDoctor;
-import pl.moscicki.clinicbackend.clinic.domain.dto.CreationTreatment;
+import pl.moscicki.clinicbackend.clinic.domain.dto.CreationMedicalProcedure;
 import pl.moscicki.clinicbackend.clinic.domain.dto.DoctorResponse;
-import pl.moscicki.clinicbackend.clinic.domain.dto.TreatmentResponse;
+import pl.moscicki.clinicbackend.clinic.domain.dto.MedicalProcedureResponse;
 
 import java.util.List;
 import java.util.Set;
@@ -11,15 +11,15 @@ import java.util.Set;
 public class ClinicFacade {
 
   private DoctorService doctorService;
-  private TreatmentService treatmentService;
+  private MedicalProcedureService medicalProcedureService;
 
-  public ClinicFacade(DoctorService doctorService, TreatmentService treatmentService) {
+  public ClinicFacade(DoctorService doctorService, MedicalProcedureService medicalProcedureService) {
     this.doctorService = doctorService;
-    this.treatmentService = treatmentService;
+    this.medicalProcedureService = medicalProcedureService;
   }
 
-  public Set<DoctorResponse> getAllDoctors(boolean withTreatments) {
-    return doctorService.getAll(withTreatments);
+  public Set<DoctorResponse> getAllDoctors(boolean withMedicalProcedures) {
+    return doctorService.getAll(withMedicalProcedures);
   }
 
   public void createDoctor(CreationDoctor doctor) {
@@ -34,16 +34,16 @@ public class ClinicFacade {
     return doctorService.getDoctorsByPesel(pesels);
   }
 
-  public List<TreatmentResponse> getAllTreatments(boolean withDoctors) {
-    return treatmentService.getAllTreatments(withDoctors);
+  public List<MedicalProcedureResponse> getAllMedicalProcedures(boolean withDoctors) {
+    return medicalProcedureService.getAllMedicalProcedures(withDoctors);
   }
 
-  public void createTreatment(CreationTreatment treatment) {
-    treatmentService.createTreatment(treatment, getDoctorsByPesels(treatment.getDoctorsIds()));
+  public void createMedicalProcedure(CreationMedicalProcedure medicalProcedure) {
+    medicalProcedureService.createMedicalProcedure(medicalProcedure, getDoctorsByPesels(medicalProcedure.getDoctorsIds()));
   }
 
-  public void deleteTreatment(Long id) {
-    treatmentService.deleteTreatment(id);
+  public void deleteMedicalProcedure(Long id) {
+    medicalProcedureService.deleteMedicalProcedure(id);
   }
 
 }

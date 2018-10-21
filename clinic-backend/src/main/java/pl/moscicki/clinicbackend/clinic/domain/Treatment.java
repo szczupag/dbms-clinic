@@ -1,11 +1,10 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
-import pl.moscicki.clinicbackend.clinic.domain.dto.CreationDoctor;
-import pl.moscicki.clinicbackend.clinic.domain.dto.CreationTreatment;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Set;
 
 @Builder
@@ -16,23 +15,26 @@ import java.util.Set;
 @Entity
 @Table(name = "treatments")
 public class Treatment {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long treatmentId;
 
   @NotNull
-  private String name;
+  @Temporal(TemporalType.DATE)
+  private Date startDate;
 
-  private Long cost;
+  @Temporal(TemporalType.DATE)
+  private Date endDate;
 
-  @ManyToMany(mappedBy = "treatments")
-  private Set<Doctor> doctors;
+  @ManyToMany
+  @JoinTable(name = "treatments_mecial_procedures",
+          joinColumns = @JoinColumn(name = "treatment_id"),
+          inverseJoinColumns = @JoinColumn(name = "medical_procedure_id"))
+  private Set<MedicalProcedure> medicalProcedures;
 
-  static Treatment from(CreationTreatment treatment, Set<Doctor> doctors) {
-    return Treatment.builder()
-            .name(treatment.getName())
-            .cost(treatment.getCost())
-            .doctors(doctors)
-            .build();
-  }
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "pesel")
+  private Patient patient;
+
 }

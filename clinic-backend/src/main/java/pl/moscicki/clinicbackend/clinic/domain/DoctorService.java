@@ -3,7 +3,6 @@ package pl.moscicki.clinicbackend.clinic.domain;
 import pl.moscicki.clinicbackend.clinic.domain.dto.CreationDoctor;
 import pl.moscicki.clinicbackend.clinic.domain.dto.DoctorResponse;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,9 +14,9 @@ class DoctorService {
     this.doctorRepository = doctorRepository;
   }
 
-  Set<DoctorResponse> getAll(boolean withTreatments) {
+  Set<DoctorResponse> getAll(boolean medicalProcedure) {
     return doctorRepository.findAll().stream()
-            .map(doctor -> DoctorResponse.from(doctor, withTreatments))
+            .map(doctor -> DoctorResponse.from(doctor, medicalProcedure))
             .collect(Collectors.toSet());
   }
 

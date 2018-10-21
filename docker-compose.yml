@@ -16,12 +16,13 @@ services:
 #      retries: 5
 
 #  backend:
-#    image: moscicky/clinic-backend
+#    build:
+#      context: ./clinic-backend
+#      dockerfile: Dockerfile
+#    #image: moscicky/clinic-backend
 #    ports:
 #      - 8080:8080
 #    depends_on:
 #      - "db"
-#    restart: on-failure
-#    links:
-#      - "db"
+#    command: mvn -DtestSourceDirectory=src/test/java/pl/moscicki/clinicbackend/ clean test spring-boot:run
 

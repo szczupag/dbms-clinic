@@ -5,7 +5,6 @@ import pl.moscicki.clinicbackend.clinic.domain.dto.CreationDoctor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Builder
@@ -36,11 +35,15 @@ public class Doctor {
   @OneToOne
   private Doctor supervisor;
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "doctors_medical_procedures",
           joinColumns = @JoinColumn(name = "pesel"),
           inverseJoinColumns = @JoinColumn(name = "medical_procedure_id"))
   private Set<MedicalProcedure> medicalProcedures;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "department_id")
+  private Department department;
 
   static Doctor from(CreationDoctor doctor, Doctor supervisor) {
     return Doctor.builder()

@@ -37,4 +37,8 @@ public class Treatment {
   @JoinColumn(name = "pesel")
   private Patient patient;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "disease_id")
+  private Disease disease;
+
 }

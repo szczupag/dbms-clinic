@@ -1,4 +1,6 @@
+SET GLOBAL default_storage_engine = 'InnoDB';
 
+/* 
 CREATE TABLE `sys`.`doctors` (
   `pesel` varchar(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
@@ -30,6 +32,29 @@ CREATE TABLE `sys`.`patients` (
   `phone_number` varchar(15),
   PRIMARY KEY (`pesel`)
 ); 
+
+CREATE TABLE `sys`.`visitors` (
+  `pesel` varchar(11) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `id_number` varchar(7) NOT NULL,
+  PRIMARY KEY (`pesel`)
+); 
+
+CREATE TABLE `sys`.`medicines` (
+  `medicine_id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `recommended_dose` bigint(20) NOT NULL,
+  `cost` bigint(20) NOT NULL,
+  PRIMARY KEY (`medicine_id`)
+); 
+
+CREATE TABLE `sys`.`diseases` (
+  `disease_id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `severity`  varchar(255),
+  PRIMARY KEY (`disease_id`)
+); 
  
 CREATE TABLE `sys`.`doctors_medical_procedures` (
   `doctors_medical_procedures_id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -53,3 +78,13 @@ CREATE TABLE `sys`.`treatments_mecial_procedures` (
   CONSTRAINT `fk_medical_procedure_2` FOREIGN KEY (`medical_procedure_id`) REFERENCES `medical_procedures` (`medical_procedure_id`)
 );
 
+CREATE TABLE `sys`.`patients_visitors` (
+  `patients_visitors_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `patient_pesel` varchar(20) NOT NULL,
+  `visitor_pesel` varchar(20) NOT NULL,
+  PRIMARY KEY (`patients_visitors_id`),
+  KEY `fk_patient_pesel` (`patient_pesel`),
+  KEY `fk_visitor_pesel` (`visitor_pesel`),
+  CONSTRAINT `fk_patient_pesel` FOREIGN KEY (`patient_pesel`) REFERENCES `patients` (`pesel`),
+  CONSTRAINT `fk_visitor_pesel` FOREIGN KEY (`visitor_pesel`) REFERENCES `visitors` (`pesel`)
+); */

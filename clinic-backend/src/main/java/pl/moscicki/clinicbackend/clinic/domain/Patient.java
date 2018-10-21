@@ -18,7 +18,7 @@ public class Patient {
 
   @Id
   @NotNull
-  @Size(min = 11, max = 11)
+  @Column(length = 11)
   private String pesel;
 
   @NotNull
@@ -32,4 +32,10 @@ public class Patient {
 
   @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
   private Set<Treatment> treatments;
+
+  @ManyToMany
+  @JoinTable(name = "patients_visitors",
+          joinColumns = @JoinColumn(name = "patient_pesel", referencedColumnName = "pesel"),
+          inverseJoinColumns = @JoinColumn(name = "visitor_pesel", referencedColumnName = "pesel"))
+  private Set<Visitor> visitors;
 }

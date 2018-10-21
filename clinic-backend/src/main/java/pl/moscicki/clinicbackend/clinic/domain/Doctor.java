@@ -16,9 +16,10 @@ import java.util.Set;
 @Entity
 @Table(name = "doctors")
 public class Doctor {
+
   @Id
-  @Size(min = 11, max = 11)
   @NotNull
+  @Column(length = 11)
   private String pesel;
 
   @NotNull

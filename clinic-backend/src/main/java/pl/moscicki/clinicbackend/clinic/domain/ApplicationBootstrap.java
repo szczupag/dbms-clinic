@@ -16,13 +16,16 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
   private final MedicalProcedureRepository medicalProcedureRepository;
   private final ClinicRepository clinicRepository;
   private final LocalizationRepository localizationRepository;
+  private final DepartmentRepository departmentRepository;
 
   public ApplicationBootstrap(DoctorRepository doctorRepository, MedicalProcedureRepository medicalProcedureRepository,
-                              ClinicRepository clinicRepository, LocalizationRepository localizationRepository) {
+                              ClinicRepository clinicRepository, LocalizationRepository localizationRepository,
+                              DepartmentRepository departmentRepository) {
     this.doctorRepository = doctorRepository;
     this.medicalProcedureRepository = medicalProcedureRepository;
     this.clinicRepository = clinicRepository;
     this.localizationRepository = localizationRepository;
+    this.departmentRepository = departmentRepository;
   }
 
   @Override
@@ -65,6 +68,15 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
             .localization(localization)
             .build();
 
+    Department department = Department.builder()
+            .name("Dermatologia")
+            .build();
+
+    departmentRepository.save(department);
+
+    maciej.setDepartment(department);
+    agata.setDepartment(department);
+
     localizationRepository.save(localization);
 
     clinicRepository.save(clinic);
@@ -75,6 +87,17 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
 
     doctorRepository.save(maciej);
     doctorRepository.save(agata);
+
+    department.setDoctors(new HashSet<>(Arrays.asList(maciej, agata)));
+
+    departmentRepository.save(department);
+
+    clinic.setDepartments(new HashSet<>(Arrays.asList(department)));
+
+    clinicRepository.save(clinic);
+
+    department.setClinic(clinic);
+    departmentRepository.save(department);
 
     medicalProcedureRepository.save(masaz_serca);
 

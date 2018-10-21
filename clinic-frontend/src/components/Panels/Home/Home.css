@@ -1,0 +1,31 @@
+.App.home{
+    /*background-color: #fff;*/
+}
+
+.home h1{
+    color: #fff;
+}
+
+.panel-btns-wrapper{
+    display: flex;
+}
+
+.panel-btns-wrapper > *{
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    margin: 10px;
+    padding: 20px 60px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.panel-btns-wrapper > *:hover{
+    color: #fff;
+    background-color: transparent;
+}
+
+.home .App-header{
+    height: 100vh;
+}

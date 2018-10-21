@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Value;
 import pl.moscicki.clinicbackend.clinic.domain.Clinic;
-import pl.moscicki.clinicbackend.clinic.domain.Department;
-import pl.moscicki.clinicbackend.clinic.domain.Doctor;
-import pl.moscicki.clinicbackend.clinic.domain.Localization;
 
 import java.util.Objects;
 import java.util.Set;

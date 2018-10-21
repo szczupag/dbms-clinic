@@ -4,6 +4,7 @@ import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationDoctor;
 import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationMedicalProcedure;
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.ClinicResponse;
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.DoctorResponse;
+import pl.moscicki.clinicbackend.clinic.domain.dto.find.LocalizationResponse;
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.MedicalProcedureResponse;
 
 import java.util.List;
@@ -15,13 +16,16 @@ public class ClinicFacade {
   private MedicalProcedureService medicalProcedureService;
   private ClinicService clinicService;
   private LocalizationService localizationService;
+  private DepartmentService departmentService;
 
   public ClinicFacade(DoctorService doctorService, MedicalProcedureService medicalProcedureService,
-                      ClinicService clinicService, LocalizationService localizationService) {
+                      ClinicService clinicService, LocalizationService localizationService,
+                      DepartmentService departmentService) {
     this.doctorService = doctorService;
     this.medicalProcedureService = medicalProcedureService;
     this.clinicService = clinicService;
     this.localizationService = localizationService;
+    this.departmentService = departmentService;
   }
 
   public Set<DoctorResponse> getAllDoctors(boolean withMedicalProcedures) {
@@ -54,6 +58,10 @@ public class ClinicFacade {
 
   public Set<ClinicResponse> getAllClinics() {
     return clinicService.getAllClinics();
+  }
+
+  public Set<LocalizationResponse> getAllLocalizations(boolean withClinic) {
+    return localizationService.getAllLocalizations(withClinic);
   }
 
 }

@@ -19,7 +19,7 @@ public class ClinicResponse {
 
   private String name;
   private String type;
-  private Set<String> departments;
+  private Set<DepartmentResponse> departments;
   private String localization;
 
   public static ClinicResponse from(Clinic clinic) {
@@ -31,9 +31,9 @@ public class ClinicResponse {
             .build();
   }
 
-  private static Set<String> mapDepartments(Clinic clinic) {
+  private static Set<DepartmentResponse> mapDepartments(Clinic clinic) {
     return clinic.getDepartments().stream()
-            .map(Department::getName)
+            .map(DepartmentResponse::from)
             .collect(Collectors.toSet());
   }
 

@@ -14,7 +14,7 @@ class ClinicsEndpoint {
 
   private ClinicFacade clinicFacade;
 
-  public ClinicsEndpoint(ClinicFacade clinicFacade) {
+  ClinicsEndpoint(ClinicFacade clinicFacade) {
     this.clinicFacade = clinicFacade;
   }
 

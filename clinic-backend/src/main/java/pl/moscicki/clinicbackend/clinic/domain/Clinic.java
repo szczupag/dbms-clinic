@@ -1,6 +1,7 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationClinic;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,5 +32,12 @@ public class Clinic {
   @OneToOne
   private Localization localization;
 
+  static Clinic from(CreationClinic creationClinic, Localization localization) {
+    return Clinic.builder()
+            .name(creationClinic.getName())
+            .type(creationClinic.getType())
+            .localization(localization)
+            .build();
+  }
 
 }

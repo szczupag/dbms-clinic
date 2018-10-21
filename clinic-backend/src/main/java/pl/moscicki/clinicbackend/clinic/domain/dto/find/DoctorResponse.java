@@ -1,4 +1,4 @@
-package pl.moscicki.clinicbackend.clinic.domain.dto;
+package pl.moscicki.clinicbackend.clinic.domain.dto.find;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

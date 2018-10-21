@@ -14,10 +14,15 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
 
   private final DoctorRepository doctorRepository;
   private final MedicalProcedureRepository medicalProcedureRepository;
+  private final ClinicRepository clinicRepository;
+  private final LocalizationRepository localizationRepository;
 
-  public ApplicationBootstrap(DoctorRepository doctorRepository, MedicalProcedureRepository medicalProcedureRepository) {
+  public ApplicationBootstrap(DoctorRepository doctorRepository, MedicalProcedureRepository medicalProcedureRepository,
+                              ClinicRepository clinicRepository, LocalizationRepository localizationRepository) {
     this.doctorRepository = doctorRepository;
     this.medicalProcedureRepository = medicalProcedureRepository;
+    this.clinicRepository = clinicRepository;
+    this.localizationRepository = localizationRepository;
   }
 
   @Override
@@ -46,6 +51,27 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
             .cost(650L)
             .doctors(new HashSet<>(Arrays.asList(maciej, agata)))
             .build();
+
+    Localization localization = Localization.builder()
+            .city("Poznan")
+            .postalCode("60-023")
+            .buildingNo(7L)
+            .street("Szpitalna")
+            .build();
+
+    Clinic clinic = Clinic.builder()
+            .type("Klinika chirurgi plastycznej")
+            .name("Piekna skora")
+            .localization(localization)
+            .build();
+
+    localizationRepository.save(localization);
+
+    clinicRepository.save(clinic);
+
+    localization.setClinic(clinic);
+
+    localizationRepository.save(localization);
 
     doctorRepository.save(maciej);
     doctorRepository.save(agata);

@@ -1,0 +1,11 @@
+.App.visitor,
+.App.patient,
+.App.doctor{
+    background-color: #fff;
+}
+
+.App.visitor *,
+.App.patient *,
+.App.doctor *{
+    color: #000;
+}

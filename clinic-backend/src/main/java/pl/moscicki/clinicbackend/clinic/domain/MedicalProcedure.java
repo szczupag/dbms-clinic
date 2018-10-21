@@ -1,7 +1,7 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
-import pl.moscicki.clinicbackend.clinic.domain.dto.CreationMedicalProcedure;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationMedicalProcedure;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

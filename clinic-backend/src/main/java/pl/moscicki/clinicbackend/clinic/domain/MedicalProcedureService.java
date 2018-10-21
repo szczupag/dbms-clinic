@@ -1,7 +1,7 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
-import pl.moscicki.clinicbackend.clinic.domain.dto.CreationMedicalProcedure;
-import pl.moscicki.clinicbackend.clinic.domain.dto.MedicalProcedureResponse;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationMedicalProcedure;
+import pl.moscicki.clinicbackend.clinic.domain.dto.find.MedicalProcedureResponse;
 
 import java.util.List;
 import java.util.Set;

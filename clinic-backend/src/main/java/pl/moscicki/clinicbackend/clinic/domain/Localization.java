@@ -2,6 +2,7 @@ package pl.moscicki.clinicbackend.clinic.domain;
 
 
 import lombok.*;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationLocalization;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,9 +29,18 @@ public class Localization {
   @NotNull
   private String postalCode;
 
-  @NotNull
-  private String buildingNo;
+  private Long buildingNo;
 
   @OneToOne
   private Clinic clinic;
+
+  static Localization from(CreationLocalization creationLocalization, Clinic clinic) {
+    return Localization.builder()
+            .city(creationLocalization.getCity())
+            .street(creationLocalization.getStreet())
+            .postalCode(creationLocalization.getPostalCode())
+            .buildingNo(creationLocalization.getBuildingNo())
+            .clinic(clinic)
+            .build();
+  }
 }

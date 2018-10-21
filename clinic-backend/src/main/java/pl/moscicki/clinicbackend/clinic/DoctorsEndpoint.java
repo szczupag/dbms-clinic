@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.moscicki.clinicbackend.clinic.domain.ClinicFacade;
-import pl.moscicki.clinicbackend.clinic.domain.dto.CreationDoctor;
-import pl.moscicki.clinicbackend.clinic.domain.dto.DoctorResponse;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationDoctor;
+import pl.moscicki.clinicbackend.clinic.domain.dto.find.DoctorResponse;
 
 import java.util.Set;
 

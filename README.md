@@ -14,9 +14,12 @@ MySQL
 
 Docker
 
+
 Start an app: 
 `docker-compose up`
 
-Spring 
+Spring: 
 `localhost:8080`
+
+React:
 

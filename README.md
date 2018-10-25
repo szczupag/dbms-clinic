@@ -17,3 +17,6 @@ Docker
 Start an app: 
 `docker-compose up`
 
+Spring 
+`localhost:8080`
+

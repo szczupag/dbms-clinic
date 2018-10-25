@@ -14,11 +14,10 @@ MySQL
 
 Docker
 
-
-Start an app: 
+### Starting the app:
 `docker-compose up`
 
-Spring: 
+Spring endpoints available at: 
 `localhost:8080`
 
 React:

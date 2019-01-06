@@ -36,6 +36,7 @@ public class Visitor {
 
   static Visitor from(CreationVisitor creationVisitor, Set<Visit> visits) {
     return Visitor.builder()
+            .pesel(creationVisitor.getPesel())
             .firstName(creationVisitor.getFirstName())
             .lastName(creationVisitor.getLastName())
             .idNumber(creationVisitor.getIdNumber())

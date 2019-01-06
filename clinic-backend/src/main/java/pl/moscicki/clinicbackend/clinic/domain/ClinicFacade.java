@@ -65,11 +65,13 @@ public class ClinicFacade {
   }
 
   public void createMedicalProcedure(CreationMedicalProcedure medicalProcedure) {
-    medicalProcedureService.createMedicalProcedure(medicalProcedure, getDoctorsByPesels(medicalProcedure.getDoctorsIds()));
+    medicalProcedureService.createMedicalProcedure(medicalProcedure,
+            medicalProcedure.getDoctorsIds() != null ? getDoctorsByPesels(medicalProcedure.getDoctorsIds()) : null);
   }
 
   public void updateMedicalProcedure(CreationMedicalProcedure medicalProcedure, Long medicalProcedureId) {
-    medicalProcedureService.updateMedicalProcedure(medicalProcedure, getDoctorsByPesels(medicalProcedure.getDoctorsIds()),
+    medicalProcedureService.updateMedicalProcedure(medicalProcedure,
+            medicalProcedure.getDoctorsIds() != null ? getDoctorsByPesels(medicalProcedure.getDoctorsIds()) : null,
             medicalProcedureId);
   }
 
@@ -82,8 +84,9 @@ public class ClinicFacade {
   }
 
   public void createClinic(CreationClinic clinic) {
-    clinicService.createClinic(clinic, getLocalizationById(clinic.getLocalizationId()),
-            getAllDepartmentsByIds(clinic.getDepartmentIds()));
+    clinicService.createClinic(clinic,
+            clinic.getLocalizationId() != null ? getLocalizationById(clinic.getLocalizationId()) : null,
+            clinic.getDepartmentIds() != null ?  getAllDepartmentsByIds(clinic.getDepartmentIds()) : null);
   }
 
   public void deleteClinic(Long clinicId) {
@@ -94,9 +97,11 @@ public class ClinicFacade {
     return clinicService.getClinicById(clinicId);
   }
 
-  public void updateClinic(CreationClinic creationClinic, long clinicId) {
-    clinicService.updateClinic(creationClinic, getLocalizationById(creationClinic.getLocalizationId()),
-            getAllDepartmentsByIds(creationClinic.getDepartmentIds()), clinicId);
+  public void updateClinic(CreationClinic clinic, long clinicId) {
+    clinicService.updateClinic(clinic,
+            clinic.getLocalizationId() != null ? getLocalizationById(clinic.getLocalizationId()) : null,
+            clinic.getDepartmentIds() != null ?  getAllDepartmentsByIds(clinic.getDepartmentIds()) : null,
+            clinicId);
   }
 
   public Localization getLocalizationById(Long localizationId) {
@@ -108,7 +113,8 @@ public class ClinicFacade {
   }
 
   public void createLocalization(CreationLocalization localization) {
-    localizationService.createLocalization(localization, getClinicById(localization.getClinicId()));
+    localizationService.createLocalization(localization,
+            localization.getClinicId() != null ? getClinicById(localization.getClinicId()) : null);
   }
 
   public void deleteLocalization(Long localizationId) {
@@ -116,7 +122,9 @@ public class ClinicFacade {
   }
 
   public void updateLocalization(CreationLocalization localization, Long localizationId) {
-    localizationService.updateLocalization(localization, getClinicById(localization.getClinicId()), localizationId);
+    localizationService.updateLocalization(localization,
+            localization.getClinicId() != null ? getClinicById(localization.getClinicId()) : null,
+            localizationId);
   }
 
   public Set<Department> getAllDepartmentsByIds(Set<Long> ids) {
@@ -132,13 +140,16 @@ public class ClinicFacade {
   }
 
   public void createDepartment(CreationDepartment department) {
-    departmentService.createDepartment(department, getClinicById(department.getClinicId()),
-            getDoctorsByPesels(department.getDoctorsPesels()));
+    departmentService.createDepartment(department,
+            department.getClinicId() != null ? getClinicById(department.getClinicId()) : null,
+            department.getDoctorsPesels() != null ? getDoctorsByPesels(department.getDoctorsPesels()) : null);
   }
 
   public void updateDepartment(CreationDepartment department, long departmentId) {
-    departmentService.updateDepartment(department, getClinicById(department.getClinicId()),
-            getDoctorsByPesels(department.getDoctorsPesels()), departmentId);
+    departmentService.updateDepartment(department,
+            department.getClinicId() != null ? getClinicById(department.getClinicId()) : null,
+            department.getDoctorsPesels() != null ? getDoctorsByPesels(department.getDoctorsPesels()) : null,
+            departmentId);
   }
 
   public Set<DiseaseResponse> getAllDiseases() {
@@ -150,11 +161,14 @@ public class ClinicFacade {
   }
 
   public void createDisease(CreationDisease disease) {
-    diseaseService.createDisease(disease, getTreatmentsByIds(disease.getTreatmentsIds()));
+    diseaseService.createDisease(disease,
+            disease.getTreatmentsIds() != null ? getTreatmentsByIds(disease.getTreatmentsIds()) : null);
   }
 
   public void updateDisease(CreationDisease disease, Long diseaseId) {
-    diseaseService.updateDisease(disease, getTreatmentsByIds(disease.getTreatmentsIds()), diseaseId);
+    diseaseService.updateDisease(disease,
+            disease.getTreatmentsIds() != null ? getTreatmentsByIds(disease.getTreatmentsIds()) : null,
+            diseaseId);
   }
 
   public void deleteDisease(Long diseaseId) {
@@ -170,13 +184,18 @@ public class ClinicFacade {
   }
 
   public void createTreatment(CreationTreatment treatment) {
-    treatmentService.createTreatment(treatment, getMedicalProceduresById(treatment.getMedicalProceduresIds()),
-            getPatientByPesel(treatment.getPatientPesel()), getDiseaseById(treatment.getDiseaseId()));
+    treatmentService.createTreatment(treatment,
+            treatment.getMedicalProceduresIds() != null ? getMedicalProceduresById(treatment.getMedicalProceduresIds()) : null,
+            treatment.getPatientPesel() != null ? getPatientByPesel(treatment.getPatientPesel()) : null,
+            treatment.getDiseaseId() != null ? getDiseaseById(treatment.getDiseaseId()) : null);
   }
 
   public void updateTreatment(CreationTreatment treatment, long treatmentId) {
-    treatmentService.updateTreatment(treatment, getMedicalProceduresById(treatment.getMedicalProceduresIds()),
-            getPatientByPesel(treatment.getPatientPesel()), getDiseaseById(treatment.getDiseaseId()), treatmentId);
+    treatmentService.updateTreatment(treatment,
+            treatment.getMedicalProceduresIds() != null ? getMedicalProceduresById(treatment.getMedicalProceduresIds()) : null,
+            treatment.getPatientPesel() != null ? getPatientByPesel(treatment.getPatientPesel()) : null,
+            treatment.getDiseaseId() != null ? getDiseaseById(treatment.getDiseaseId()) : null,
+            treatmentId);
   }
 
   public void deleteTreatment(long treatmentId) {
@@ -192,13 +211,16 @@ public class ClinicFacade {
   }
 
   public void createPatient(CreationPatient creationPatient) {
-    patientService.createPatient(creationPatient, getTreatmentsByIds(creationPatient.getTreatmentIds()),
-            getVisitsByIds(creationPatient.getVisitIds()));
+    patientService.createPatient(creationPatient,
+            creationPatient.getTreatmentIds() != null ? getTreatmentsByIds(creationPatient.getTreatmentIds()) : null,
+            creationPatient.getVisitIds() != null ? getVisitsByIds(creationPatient.getVisitIds()) : null);
   }
 
   public void updatePatient(CreationPatient creationPatient, String pesel) {
-    patientService.updatePatient(creationPatient, getTreatmentsByIds(creationPatient.getTreatmentIds()),
-            getVisitsByIds(creationPatient.getVisitIds()), pesel);
+    patientService.updatePatient(creationPatient,
+            creationPatient.getTreatmentIds() != null ? getTreatmentsByIds(creationPatient.getTreatmentIds()) : null,
+            creationPatient.getVisitIds() != null ? getVisitsByIds(creationPatient.getVisitIds()) : null,
+            pesel);
   }
 
   public void deletePatient(String pesel) {
@@ -214,13 +236,16 @@ public class ClinicFacade {
   }
 
   public void createVisit(CreationVisit creationVisit) {
-    visitService.createVisit(creationVisit, getPatientByPesel(creationVisit.getPatientPesel()),
-            getVisitorByPesel(creationVisit.getVisitorPesel()));
+    visitService.createVisit(creationVisit,
+            creationVisit.getPatientPesel() != null ? getPatientByPesel(creationVisit.getPatientPesel()) : null,
+            creationVisit.getVisitorPesel() != null ? getVisitorByPesel(creationVisit.getVisitorPesel()) : null);
   }
 
   public void updateVisit(CreationVisit creationVisit, Long visitId) {
-    visitService.updateVisit(creationVisit, getPatientByPesel(creationVisit.getPatientPesel()),
-            getVisitorByPesel(creationVisit.getVisitorPesel()), visitId);
+    visitService.updateVisit(creationVisit,
+            creationVisit.getPatientPesel() != null ? getPatientByPesel(creationVisit.getPatientPesel()) : null,
+            creationVisit.getVisitorPesel() != null ? getVisitorByPesel(creationVisit.getVisitorPesel()) : null,
+            visitId);
   }
 
   public void deleteVisit(Long visitId) {
@@ -236,11 +261,14 @@ public class ClinicFacade {
   }
 
   public void createVisitor(CreationVisitor visitor) {
-    visitorService.createVisitor(visitor, getVisitsByIds(visitor.getVisitsIds()));
+    visitorService.createVisitor(visitor,
+            visitor.getVisitsIds() != null ? getVisitsByIds(visitor.getVisitsIds()) : null);
   }
 
   public void updateVisitor(CreationVisitor visitor, String pesel) {
-    visitorService.updateVisitor(visitor, getVisitsByIds(visitor.getVisitsIds()), pesel);
+    visitorService.updateVisitor(visitor,
+            visitor.getVisitsIds() != null ? getVisitsByIds(visitor.getVisitsIds()) : null,
+            pesel);
   }
 
   public void deleteVisitor(String pesel) {

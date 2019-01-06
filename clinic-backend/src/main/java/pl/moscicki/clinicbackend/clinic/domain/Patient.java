@@ -39,6 +39,7 @@ public class Patient {
 
   static Patient from(CreationPatient creationPatient, Set<Treatment> treatments, Set<Visit> visits) {
     return Patient.builder()
+            .pesel(creationPatient.getPesel())
             .firstName(creationPatient.getFirstName())
             .lastName(creationPatient.getLastName())
             .phoneNumber(creationPatient.getPhoneNumber())

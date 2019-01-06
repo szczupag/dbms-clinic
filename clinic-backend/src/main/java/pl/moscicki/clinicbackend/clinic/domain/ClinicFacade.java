@@ -16,11 +16,13 @@ public class ClinicFacade {
   private DiseaseService diseaseService;
   private TreatmentService treatmentService;
   private PatientService patientService;
+  private VisitService visitService;
 
   public ClinicFacade(DoctorService doctorService, MedicalProcedureService medicalProcedureService,
                       ClinicService clinicService, LocalizationService localizationService,
                       DepartmentService departmentService, DiseaseService diseaseService,
-                      TreatmentService treatmentService, PatientService patientService) {
+                      TreatmentService treatmentService, PatientService patientService,
+                      VisitService visitService) {
     this.doctorService = doctorService;
     this.medicalProcedureService = medicalProcedureService;
     this.clinicService = clinicService;
@@ -29,6 +31,7 @@ public class ClinicFacade {
     this.diseaseService = diseaseService;
     this.treatmentService = treatmentService;
     this.patientService = patientService;
+    this.visitService = visitService;
   }
 
   public Set<DoctorResponse> getAllDoctors(boolean withMedicalProcedures) {
@@ -148,6 +151,10 @@ public class ClinicFacade {
     return treatmentService.getAllTreatments();
   }
 
+  private Set<Treatment> getTreatmentsByIds(Set<Long> treatmentIds) {
+    return treatmentService.getTreatmentsByIds(treatmentIds);
+  }
+
   public void createTreatment(CreationTreatment treatment) {
     treatmentService.createTreatment(treatment, getMedicalProceduresById(treatment.getMedicalProceduresIds()),
             getPatientByPesel(treatment.getPatientPesel()), getDiseaseById(treatment.getDiseaseId()));
@@ -166,5 +173,26 @@ public class ClinicFacade {
     return patientService.getPatientByPesel(pesel);
   }
 
+  public Set<PatientResponse> getAllPatients() {
+    return patientService.getAllPatients();
+  }
+
+  public void createPatient(CreationPatient creationPatient) {
+    patientService.createPatient(creationPatient, getTreatmentsByIds(creationPatient.getTreatmentIds()),
+            getVisitsByIds(creationPatient.getVisitIds()));
+  }
+
+  public void updatePatient(CreationPatient creationPatient, String pesel) {
+    patientService.updatePatient(creationPatient, getTreatmentsByIds(creationPatient.getTreatmentIds()),
+            getVisitsByIds(creationPatient.getVisitIds()), pesel);
+  }
+
+  public void deletePatient(String pesel) {
+    patientService.deletePatient(pesel);
+  }
+
+  private Set<Visit> getVisitsByIds(Set<Long> ids) {
+    return visitService.getVisitsById(ids);
+  }
 
 }

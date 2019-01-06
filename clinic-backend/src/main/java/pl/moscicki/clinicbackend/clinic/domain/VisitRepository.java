@@ -4,8 +4,10 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Set;
 
-interface PatientRepository extends CrudRepository<Patient, String> {
+interface VisitRepository extends CrudRepository<Visit, Long> {
 
   @Override
-  Set<Patient> findAll();
+  Set<Visit> findAll();
+
+  Set<Visit> findAllByVisitId(Set<Long> id);
 }

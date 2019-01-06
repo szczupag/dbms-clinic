@@ -41,9 +41,4 @@ public class Clinic {
             .departments(departments)
             .build();
   }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(clinicId);
-  }
 }

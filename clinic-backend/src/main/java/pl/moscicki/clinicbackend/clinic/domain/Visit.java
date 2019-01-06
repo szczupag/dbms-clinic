@@ -1,6 +1,7 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationVisit;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,14 +17,24 @@ public class Visit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  Long medicineId;
+  Long visitId;
 
   @Temporal(TemporalType.DATE)
-  Date startDate;
+  Date visitDate;
 
-  @OneToOne
+  @ManyToOne
+  @JoinColumn(name = "pesel")
   Patient patient;
 
-  @OneToOne
+  @ManyToOne
+  @JoinColumn(name = "pesel")
   Visitor visitor;
+
+  static Visit from(CreationVisit creationVisit, Patient patient, Visitor visitor) {
+    return Visit.builder()
+            .visitDate(creationVisit.getVisitDate())
+            .patient(patient)
+            .visitor(visitor)
+            .build();
+  }
 }

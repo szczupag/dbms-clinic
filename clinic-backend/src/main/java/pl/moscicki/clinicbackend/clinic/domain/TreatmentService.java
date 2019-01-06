@@ -19,6 +19,10 @@ class TreatmentService {
             .collect(Collectors.toSet());
   }
 
+  Set<Treatment> getTreatmentsByIds(Set<Long> treatmentIds) {
+    return treatmentRepository.findAllByTreatmentId(treatmentIds);
+  }
+
   void createTreatment(CreationTreatment creationTreatment, Set<MedicalProcedure> medicalProcedures, Patient patient,
                        Disease disease) {
     treatmentRepository.save(Treatment.from(creationTreatment, medicalProcedures, patient, disease));

@@ -30,6 +30,6 @@ public class Visitor {
   @Size(max = 7)
   private String idNumber;
 
-  @OneToOne
-  private Visit visit;
+  @OneToMany(mappedBy = "visitor", fetch = FetchType.LAZY)
+  private Set<Visit> visits;
 }

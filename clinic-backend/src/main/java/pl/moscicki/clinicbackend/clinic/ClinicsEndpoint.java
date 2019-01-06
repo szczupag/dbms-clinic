@@ -1,6 +1,5 @@
 package pl.moscicki.clinicbackend.clinic;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.moscicki.clinicbackend.clinic.domain.ClinicFacade;
@@ -10,7 +9,7 @@ import pl.moscicki.clinicbackend.clinic.domain.dto.find.ClinicResponse;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/clinics")
+@RequestMapping("/api/clinics")
 class ClinicsEndpoint {
 
   private ClinicFacade clinicFacade;

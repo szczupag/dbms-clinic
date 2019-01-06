@@ -9,7 +9,7 @@ import pl.moscicki.clinicbackend.clinic.domain.dto.find.LocalizationResponse;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/localizations")
+@RequestMapping("/api/localizations")
 class LocalizationsEndpoint {
   private ClinicFacade clinicFacade;
 

@@ -37,7 +37,7 @@ public class TreatmentResponse {
   }
 
   private static DiseaseResponse mapDisease(Treatment treatment) {
-    return DiseaseResponse.from(treatment.getDisease(), false, false);
+    return DiseaseResponse.from(treatment.getDisease(),false);
   }
 
   private static PatientResponse mapPatient(Treatment treatment) {

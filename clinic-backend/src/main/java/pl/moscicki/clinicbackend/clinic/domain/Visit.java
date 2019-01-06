@@ -23,11 +23,11 @@ public class Visit {
   Date visitDate;
 
   @ManyToOne
-  @JoinColumn(name = "pesel")
+  @JoinColumn(name = "patient_pesel")
   Patient patient;
 
   @ManyToOne
-  @JoinColumn(name = "pesel")
+  @JoinColumn(name = "visitor_pesel")
   Visitor visitor;
 
   static Visit from(CreationVisit creationVisit, Patient patient, Visitor visitor) {

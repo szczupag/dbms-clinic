@@ -9,7 +9,7 @@ import pl.moscicki.clinicbackend.clinic.domain.dto.find.DoctorResponse;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/doctors")
+@RequestMapping("/api/doctors")
 class DoctorsEndpoint {
 
   private ClinicFacade clinicFacade;

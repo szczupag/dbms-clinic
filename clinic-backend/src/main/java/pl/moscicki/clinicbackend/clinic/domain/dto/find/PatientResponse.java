@@ -23,7 +23,7 @@ public class PatientResponse {
     return PatientResponse.builder()
             .pesel(patient.getPesel())
             .firstName(patient.getFirstName())
-            .lastName(patient.getFirstName())
+            .lastName(patient.getLastName())
             .phoneNumber(patient.getPhoneNumber())
             .treatments(withTreatments ? mapTreatments(patient) : null)
             .build();

@@ -1,13 +1,7 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
-import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationClinic;
-import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationDoctor;
-import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationLocalization;
-import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationMedicalProcedure;
-import pl.moscicki.clinicbackend.clinic.domain.dto.find.ClinicResponse;
-import pl.moscicki.clinicbackend.clinic.domain.dto.find.DoctorResponse;
-import pl.moscicki.clinicbackend.clinic.domain.dto.find.LocalizationResponse;
-import pl.moscicki.clinicbackend.clinic.domain.dto.find.MedicalProcedureResponse;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.*;
+import pl.moscicki.clinicbackend.clinic.domain.dto.find.*;
 
 import java.util.List;
 import java.util.Set;
@@ -19,15 +13,17 @@ public class ClinicFacade {
   private ClinicService clinicService;
   private LocalizationService localizationService;
   private DepartmentService departmentService;
+  private DiseaseService diseaseService;
 
   public ClinicFacade(DoctorService doctorService, MedicalProcedureService medicalProcedureService,
                       ClinicService clinicService, LocalizationService localizationService,
-                      DepartmentService departmentService) {
+                      DepartmentService departmentService, DiseaseService diseaseService) {
     this.doctorService = doctorService;
     this.medicalProcedureService = medicalProcedureService;
     this.clinicService = clinicService;
     this.localizationService = localizationService;
     this.departmentService = departmentService;
+    this.diseaseService = diseaseService;
   }
 
   public Set<DoctorResponse> getAllDoctors(boolean withMedicalProcedures) {
@@ -93,6 +89,23 @@ public class ClinicFacade {
 
   public Set<Department> getAllDepartmentsByIds(Set<Long> ids) {
     return departmentService.getDepartmentsByIds(ids);
+  }
+
+  public Set<DepartmentResponse> getAllDepartments() {
+    return departmentService.getAllDepartments();
+  }
+
+  public void deleteDepartment(Long departmentId) {
+    departmentService.deleteDepartment(departmentId);
+  }
+
+  public void createDepartment(CreationDepartment department) {
+    departmentService.createDepartment(department, getClinicById(department.getClinicId()),
+            getDoctorsByPesels(department.getDoctorsPesels()));
+  }
+
+  public Set<DiseaseResponse> getAllDiseases() {
+    return diseaseService.getAllDiseases();
   }
 
 }

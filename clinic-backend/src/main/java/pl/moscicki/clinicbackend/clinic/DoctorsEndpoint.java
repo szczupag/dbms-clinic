@@ -24,15 +24,15 @@ class DoctorsEndpoint {
     return clinicFacade.getAllDoctors(withMedicalProcedures);
   }
 
-  @PutMapping
+  @PostMapping
   @ResponseStatus(value = HttpStatus.OK)
   void createDoctor(@RequestBody @Validated CreationDoctor doctor) {
     clinicFacade.createDoctor(doctor);
   }
 
 
-  @DeleteMapping(value = "/{pesel}")
-  void deleteDoctor(@PathVariable(value = "pesel") String pesel) {
+  @DeleteMapping()
+  void deleteDoctor(@RequestBody @Validated String pesel) {
     clinicFacade.deleteDoctor(pesel);
   }
 

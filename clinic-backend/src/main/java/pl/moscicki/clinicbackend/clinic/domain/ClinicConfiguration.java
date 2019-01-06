@@ -9,14 +9,15 @@ class ClinicConfiguration {
   @Bean
   ClinicFacade clinicFacade(DoctorRepository doctorRepository, MedicalProcedureRepository medicalProcedureRepository,
                             ClinicRepository clinicRepository, LocalizationRepository localizationRepository,
-                            DepartmentRepository departmentRepository) {
+                            DepartmentRepository departmentRepository, DiseaseRepository diseaseRepository) {
 
     DoctorService doctorService = new DoctorService(doctorRepository);
     MedicalProcedureService medicalProcedureService = new MedicalProcedureService(medicalProcedureRepository);
     ClinicService clinicService = new ClinicService(clinicRepository);
     LocalizationService localizationService = new LocalizationService(localizationRepository);
     DepartmentService departmentService = new DepartmentService(departmentRepository);
+    DiseaseService diseaseService = new DiseaseService(diseaseRepository);
 
-    return new ClinicFacade(doctorService, medicalProcedureService, clinicService, localizationService, departmentService);
+    return new ClinicFacade(doctorService, medicalProcedureService, clinicService, localizationService, departmentService, diseaseService);
   }
 }

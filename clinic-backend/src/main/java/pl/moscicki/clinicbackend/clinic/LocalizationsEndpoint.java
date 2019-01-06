@@ -1,5 +1,6 @@
 package pl.moscicki.clinicbackend.clinic;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.moscicki.clinicbackend.clinic.domain.ClinicFacade;
 import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationLocalization;
@@ -22,12 +23,12 @@ class LocalizationsEndpoint {
   }
 
   @PostMapping
-  void createLocalization(CreationLocalization creationLocalization) {
+  void createLocalization(@RequestBody @Validated CreationLocalization creationLocalization) {
     clinicFacade.createLocalization(creationLocalization);
   }
 
   @DeleteMapping
-  void deleteLocalization(Long localizationId) {
+  void deleteLocalization(@RequestBody @Validated Long localizationId) {
     clinicFacade.deleteLocalization(localizationId);
   }
 }

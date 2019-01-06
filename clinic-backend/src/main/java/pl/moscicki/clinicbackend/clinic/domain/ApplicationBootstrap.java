@@ -72,37 +72,37 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
             .name("Dermatologia")
             .build();
 
-    departmentRepository.save(department);
-
-    maciej.setDepartment(department);
-    agata.setDepartment(department);
-
-    localizationRepository.save(localization);
-
-    clinicRepository.save(clinic);
-
-    localization.setClinic(clinic);
-
-    localizationRepository.save(localization);
-
-    doctorRepository.save(maciej);
-    doctorRepository.save(agata);
-
-    department.setDoctors(new HashSet<>(Arrays.asList(maciej, agata)));
-
-    departmentRepository.save(department);
-
-    clinic.setDepartments(new HashSet<>(Arrays.asList(department)));
-
-    clinicRepository.save(clinic);
-
-    department.setClinic(clinic);
-    departmentRepository.save(department);
-
-    medicalProcedureRepository.save(masaz_serca);
-
-    maciej.getMedicalProcedures().add(masaz_serca);
-    agata.getMedicalProcedures().add(masaz_serca);
+//    departmentRepository.save(department);
+//
+//    maciej.setDepartment(department);
+//    agata.setDepartment(department);
+//
+//    localizationRepository.save(localization);
+//
+//    clinicRepository.save(clinic);
+//
+//    localization.setClinic(clinic);
+//
+//    localizationRepository.save(localization);
+//
+//    doctorRepository.save(maciej);
+//    doctorRepository.save(agata);
+//
+//    department.setDoctors(new HashSet<>(Arrays.asList(maciej, agata)));
+//
+//    departmentRepository.save(department);
+//
+//    clinic.setDepartments(new HashSet<>(Arrays.asList(department)));
+//
+//    clinicRepository.save(clinic);
+//
+//    department.setClinic(clinic);
+//    departmentRepository.save(department);
+//
+//    medicalProcedureRepository.save(masaz_serca);
+//
+//    maciej.getMedicalProcedures().add(masaz_serca);
+//    agata.getMedicalProcedures().add(masaz_serca);
 
     doctorRepository.save(maciej);
     doctorRepository.save(agata);

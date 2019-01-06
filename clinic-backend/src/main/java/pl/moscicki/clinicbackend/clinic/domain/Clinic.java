@@ -5,6 +5,7 @@ import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationClinic;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 import java.util.Set;
 
 @Builder
@@ -41,4 +42,8 @@ public class Clinic {
             .build();
   }
 
+  @Override
+  public int hashCode() {
+    return Objects.hash(clinicId);
+  }
 }

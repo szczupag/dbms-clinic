@@ -1,6 +1,5 @@
 package pl.moscicki.clinicbackend.clinic;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.moscicki.clinicbackend.clinic.domain.ClinicFacade;
@@ -25,14 +24,17 @@ class DoctorsEndpoint {
   }
 
   @PostMapping
-  @ResponseStatus(value = HttpStatus.OK)
   void createDoctor(@RequestBody @Validated CreationDoctor doctor) {
     clinicFacade.createDoctor(doctor);
   }
 
+  @PutMapping("/{pesel}")
+  void updateDoctor(@RequestBody @Validated CreationDoctor creationDoctor, @PathVariable String pesel) {
+    clinicFacade.updateDoctor(creationDoctor, pesel);
+  }
 
-  @DeleteMapping()
-  void deleteDoctor(@RequestBody @Validated String pesel) {
+  @DeleteMapping("/{pesel}")
+  void deleteDoctor(@PathVariable String pesel) {
     clinicFacade.deleteDoctor(pesel);
   }
 

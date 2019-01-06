@@ -26,6 +26,12 @@ class ClinicService {
     clinicRepository.save(clinic);
   }
 
+  void updateClinic(CreationClinic creationClinic, Localization localization, Set<Department> departments, Long clinicId) {
+    Clinic clinic = Clinic.from(creationClinic, localization, departments);
+    clinic.setClinicId(clinicId);
+    clinicRepository.save(clinic);
+  }
+
   Clinic getClinicById(Long clinicId) {
     return clinicRepository.findById(clinicId).orElse(null);
   }

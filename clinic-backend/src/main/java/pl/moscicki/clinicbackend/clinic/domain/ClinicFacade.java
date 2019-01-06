@@ -34,6 +34,10 @@ public class ClinicFacade {
     doctorService.createDoctor(doctor);
   }
 
+  public void updateDoctor(CreationDoctor doctor, String pesel) {
+    doctorService.updateDoctor(doctor, pesel);
+  }
+
   public void deleteDoctor(String pesel) {
     doctorService.deleteDoctor(pesel);
   }
@@ -71,6 +75,11 @@ public class ClinicFacade {
     return clinicService.getClinicById(clinicId);
   }
 
+  public void updateClinic(CreationClinic creationClinic, long clinicId) {
+    clinicService.updateClinic(creationClinic, getLocalizationById(creationClinic.getLocalizationId()),
+            getAllDepartmentsByIds(creationClinic.getDepartmentIds()), clinicId);
+  }
+
   public Localization getLocalizationById(Long localizationId) {
     return localizationService.getLocalizationById(localizationId);
   }
@@ -85,6 +94,10 @@ public class ClinicFacade {
 
   public void deleteLocalization(Long localizationId) {
     localizationService.deleteLocalization(localizationId);
+  }
+
+  public void updateLocalization(CreationLocalization localization, Long localizationId) {
+    localizationService.updateLocalization(localization, getClinicById(localization.getClinicId()), localizationId);
   }
 
   public Set<Department> getAllDepartmentsByIds(Set<Long> ids) {
@@ -102,6 +115,11 @@ public class ClinicFacade {
   public void createDepartment(CreationDepartment department) {
     departmentService.createDepartment(department, getClinicById(department.getClinicId()),
             getDoctorsByPesels(department.getDoctorsPesels()));
+  }
+
+  public void updateDepartment(CreationDepartment department, long departmentId) {
+    departmentService.updateDepartment(department, getClinicById(department.getClinicId()),
+            getDoctorsByPesels(department.getDoctorsPesels()), departmentId);
   }
 
   public Set<DiseaseResponse> getAllDiseases() {

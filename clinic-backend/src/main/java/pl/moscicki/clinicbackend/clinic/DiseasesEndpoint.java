@@ -1,6 +1,7 @@
 package pl.moscicki.clinicbackend.clinic;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.moscicki.clinicbackend.clinic.domain.ClinicFacade;
@@ -21,5 +22,7 @@ public class DiseasesEndpoint {
   Set<DiseaseResponse> getAllDiseases() {
     return clinicFacade.getAllDiseases();
   }
+
+//  @PostMapping("")
 
 }

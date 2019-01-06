@@ -28,6 +28,13 @@ class LocalizationService {
     localizationRepository.save(localization);
   }
 
+  void updateLocalization(CreationLocalization creationLocalization, Clinic clinic, long localizationId) {
+    Localization localization = Localization.from(creationLocalization, clinic);
+    localization.setLocalizationId(localizationId);
+
+    localizationRepository.save(localization);
+  }
+
   void deleteLocalization(Long localizationId) {
     localizationRepository.deleteById(localizationId);
   }

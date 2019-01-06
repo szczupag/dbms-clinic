@@ -27,8 +27,13 @@ class DepartmentsEndpoint {
     clinicFacade.createDepartment(creationDepartment);
   }
 
-  @DeleteMapping
-  void deleteDepartment(@RequestBody @Validated Long departmentId) {
+  @PutMapping("/{id}")
+  void updateDepartment(@RequestBody @Validated CreationDepartment creationDepartment) {
+
+  }
+
+  @DeleteMapping("/{id}")
+  void deleteDepartment(@PathVariable Long departmentId) {
     clinicFacade.deleteDepartment(departmentId);
   }
 }

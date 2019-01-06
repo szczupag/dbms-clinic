@@ -29,6 +29,13 @@ class DepartmentService {
     departmentRepository.save(department);
   }
 
+  void updateDepartment(CreationDepartment creationDepartment, Clinic clinic, Set<Doctor> doctors, long departmentId) {
+    Department department = Department.from(creationDepartment, clinic, doctors);
+    department.setDepartmentId(departmentId);
+
+    departmentRepository.save(department);
+  }
+
   void deleteDepartment(Long departmentId) {
     departmentRepository.deleteById(departmentId);
   }

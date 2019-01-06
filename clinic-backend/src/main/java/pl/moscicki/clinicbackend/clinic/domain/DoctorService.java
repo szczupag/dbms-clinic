@@ -33,6 +33,16 @@ class DoctorService {
     doctorRepository.save(doctor);
   }
 
+  void updateDoctor(CreationDoctor creationDoctor, String pesel) {
+    String supervisorId = Objects.nonNull(creationDoctor.getSupervisorId()) ? creationDoctor.getSupervisorId() : "";
+
+    Doctor doctor = doctorRepository.findById(supervisorId)
+            .map(supervisor -> Doctor.from(creationDoctor, supervisor))
+            .orElse(Doctor.from(creationDoctor, null));
+    doctor.setPesel(pesel);
+    doctorRepository.save(doctor);
+  }
+
   void deleteDoctor(String pesel) {
     doctorRepository.deleteById(pesel);
   }

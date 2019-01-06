@@ -1,5 +1,6 @@
 package pl.moscicki.clinicbackend.clinic;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.moscicki.clinicbackend.clinic.domain.ClinicFacade;
@@ -28,9 +29,13 @@ class ClinicsEndpoint {
     clinicFacade.createClinic(clinic);
   }
 
-  @DeleteMapping
-  void deleteClinic(@RequestBody @Validated Long clinicId) {
-    clinicFacade.deleteClinic(clinicId);
+  @PutMapping("/{id}")
+ void updateClinic(@RequestBody @Validated CreationClinic clinic, @PathVariable long id) {
+    clinicFacade.updateClinic(clinic, id);
   }
 
+  @DeleteMapping("/{id}")
+  void deleteClinic(@PathVariable long id) {
+    clinicFacade.deleteClinic(id);
+  }
 }

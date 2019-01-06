@@ -1,10 +1,8 @@
 package pl.moscicki.clinicbackend.clinic;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.moscicki.clinicbackend.clinic.domain.ClinicFacade;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationLocalization;
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.LocalizationResponse;
 
 import java.util.Set;
@@ -23,4 +21,13 @@ class LocalizationsEndpoint {
     return clinicFacade.getAllLocalizations(withClinic);
   }
 
+  @PostMapping
+  void createLocalization(CreationLocalization creationLocalization) {
+    clinicFacade.createLocalization(creationLocalization);
+  }
+
+  @DeleteMapping
+  void deleteLocalization(Long localizationId) {
+    clinicFacade.deleteLocalization(localizationId);
+  }
 }

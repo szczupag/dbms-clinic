@@ -30,6 +30,6 @@ public class Visitor {
   @Size(max = 7)
   private String idNumber;
 
-  @ManyToMany(mappedBy = "visitors")
-  private Set<Patient> patients;
+  @OneToOne
+  private Visit visit;
 }

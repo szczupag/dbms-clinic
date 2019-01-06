@@ -1,6 +1,8 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationClinic;
 import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationDoctor;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationLocalization;
 import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationMedicalProcedure;
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.ClinicResponse;
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.DoctorResponse;
@@ -60,8 +62,37 @@ public class ClinicFacade {
     return clinicService.getAllClinics();
   }
 
+  public void createClinic(CreationClinic clinic) {
+    clinicService.createClinic(clinic, getLocalizationById(clinic.getLocalizationId()),
+            getAllDepartmentsByIds(clinic.getDepartmentIds()));
+  }
+
+  public void deleteClinic(Long clinicId) {
+    clinicService.deleteClinic(clinicId);
+  }
+
+  public Clinic getClinicById(Long clinicId) {
+    return clinicService.getClinicById(clinicId);
+  }
+
+  public Localization getLocalizationById(Long localizationId) {
+    return localizationService.getLocalizationById(localizationId);
+  }
+
   public Set<LocalizationResponse> getAllLocalizations(boolean withClinic) {
     return localizationService.getAllLocalizations(withClinic);
+  }
+
+  public void createLocalization(CreationLocalization localization) {
+    localizationService.createLocalization(localization, getClinicById(localization.getClinicId()));
+  }
+
+  public void deleteLocalization(Long localizationId) {
+    localizationService.deleteLocalization(localizationId);
+  }
+
+  public Set<Department> getAllDepartmentsByIds(Set<Long> ids) {
+    return departmentService.getDepartmentsByIds(ids);
   }
 
 }

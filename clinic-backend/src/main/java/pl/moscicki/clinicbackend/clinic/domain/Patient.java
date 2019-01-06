@@ -33,9 +33,6 @@ public class Patient {
   @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
   private Set<Treatment> treatments;
 
-  @ManyToMany
-  @JoinTable(name = "patients_visitors",
-          joinColumns = @JoinColumn(name = "patient_pesel", referencedColumnName = "pesel"),
-          inverseJoinColumns = @JoinColumn(name = "visitor_pesel", referencedColumnName = "pesel"))
-  private Set<Visitor> visitors;
+  @OneToOne
+  private Visit visit;
 }

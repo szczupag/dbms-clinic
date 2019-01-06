@@ -19,12 +19,12 @@ public class DiseaseResponse {
   private Set<TreatmentResponse> treatments;
   private Set<MedicineResponse> medicines;
 
-  public static DiseaseResponse from(Disease disease, boolean withMedicines) {
+  public static DiseaseResponse from(Disease disease, boolean withMedicines, boolean withTreatments) {
     return DiseaseResponse.builder()
             .name(disease.getName())
             .severity(disease.getSeverity())
             .medicines(withMedicines ? mapMedicines(disease) : null)
-            .treatments(mapTreatments(disease))
+            .treatments(withTreatments ? mapTreatments(disease) : null)
             .build();
   }
 

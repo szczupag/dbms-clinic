@@ -14,8 +14,11 @@ class DiseaseService {
 
   Set<DiseaseResponse> getAllDiseases() {
     return diseaseRepository.findAll().stream()
-            .map(disease -> DiseaseResponse.from(disease, false))
+            .map(disease -> DiseaseResponse.from(disease, false, false))
             .collect(Collectors.toSet());
   }
 
+  Disease getDiseaseById(Long diseaseId) {
+    return diseaseRepository.findById(diseaseId).orElse(null);
+  }
 }

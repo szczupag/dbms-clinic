@@ -20,8 +20,20 @@ class MedicalProcedureService {
             .collect(Collectors.toList());
   }
 
+  Set<MedicalProcedure> getMedicalProceduresById(Set<Long> medicalProcedureIds) {
+    return medicalProcedureRepository.findAllByMedicalProcedureId(medicalProcedureIds);
+  }
+
   void createMedicalProcedure(CreationMedicalProcedure creationMedicalProcedure, Set<Doctor> doctors) {
     medicalProcedureRepository.save(MedicalProcedure.from(creationMedicalProcedure, doctors));
+  }
+
+  public void updateMedicalProcedure(CreationMedicalProcedure creationMedicalProcedure, Set<Doctor> doctors,
+                                     Long medicalProcedureId) {
+    MedicalProcedure medicalProcedure = MedicalProcedure.from(creationMedicalProcedure, doctors);
+    medicalProcedure.setMedicalProcedureId(medicalProcedureId);
+
+    medicalProcedureRepository.save(medicalProcedure);
   }
 
   void deleteMedicalProcedure(Long id) {

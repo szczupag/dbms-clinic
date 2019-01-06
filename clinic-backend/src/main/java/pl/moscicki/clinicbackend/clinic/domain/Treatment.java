@@ -1,6 +1,8 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationClinic;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationTreatment;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -40,5 +42,16 @@ public class Treatment {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "disease_id")
   private Disease disease;
+
+  static Treatment from(CreationTreatment treatment, Set<MedicalProcedure> medicalProcedures, Patient patient, Disease disease) {
+    return Treatment.builder()
+            .startDate(treatment.getStartDate())
+            .endDate(treatment.getEndDate())
+            .medicalProcedures(medicalProcedures)
+            .patient(patient)
+            .disease(disease)
+            .build();
+  }
+
 
 }

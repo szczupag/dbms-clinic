@@ -6,4 +6,9 @@ class PatientService {
   public PatientService(PatientRepository patientRepository) {
     this.patientRepository = patientRepository;
   }
+
+  Patient getPatientByPesel(String pesel) {
+    return patientRepository.findById(pesel).orElse(null);
+  }
+
 }

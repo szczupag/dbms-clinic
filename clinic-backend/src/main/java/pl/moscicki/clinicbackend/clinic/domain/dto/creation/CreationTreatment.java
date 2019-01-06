@@ -14,7 +14,7 @@ public class CreationTreatment implements Serializable {
   @NotNull
   private Date startDate;
   private Date endDate;
-  private Set<String> medicalProceduresIds;
+  private Set<Long> medicalProceduresIds;
   private Long diseaseId;
   private String patientPesel;
 }

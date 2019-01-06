@@ -14,16 +14,21 @@ public class ClinicFacade {
   private LocalizationService localizationService;
   private DepartmentService departmentService;
   private DiseaseService diseaseService;
+  private TreatmentService treatmentService;
+  private PatientService patientService;
 
   public ClinicFacade(DoctorService doctorService, MedicalProcedureService medicalProcedureService,
                       ClinicService clinicService, LocalizationService localizationService,
-                      DepartmentService departmentService, DiseaseService diseaseService) {
+                      DepartmentService departmentService, DiseaseService diseaseService,
+                      TreatmentService treatmentService, PatientService patientService) {
     this.doctorService = doctorService;
     this.medicalProcedureService = medicalProcedureService;
     this.clinicService = clinicService;
     this.localizationService = localizationService;
     this.departmentService = departmentService;
     this.diseaseService = diseaseService;
+    this.treatmentService = treatmentService;
+    this.patientService = patientService;
   }
 
   public Set<DoctorResponse> getAllDoctors(boolean withMedicalProcedures) {
@@ -50,8 +55,17 @@ public class ClinicFacade {
     return medicalProcedureService.getAllMedicalProcedures(withDoctors);
   }
 
+  public Set<MedicalProcedure> getMedicalProceduresById(Set<Long> medicalProcedureIds) {
+    return medicalProcedureService.getMedicalProceduresById(medicalProcedureIds);
+  }
+
   public void createMedicalProcedure(CreationMedicalProcedure medicalProcedure) {
     medicalProcedureService.createMedicalProcedure(medicalProcedure, getDoctorsByPesels(medicalProcedure.getDoctorsIds()));
+  }
+
+  public void updateMedicalProcedure(CreationMedicalProcedure medicalProcedure, Long medicalProcedureId) {
+    medicalProcedureService.updateMedicalProcedure(medicalProcedure, getDoctorsByPesels(medicalProcedure.getDoctorsIds()),
+            medicalProcedureId);
   }
 
   public void deleteMedicalProcedure(Long id) {
@@ -125,5 +139,32 @@ public class ClinicFacade {
   public Set<DiseaseResponse> getAllDiseases() {
     return diseaseService.getAllDiseases();
   }
+
+  private Disease getDiseaseById(long diseaseId) {
+    return diseaseService.getDiseaseById(diseaseId);
+  }
+
+  public Set<TreatmentResponse> getAllTreatments() {
+    return treatmentService.getAllTreatments();
+  }
+
+  public void createTreatment(CreationTreatment treatment) {
+    treatmentService.createTreatment(treatment, getMedicalProceduresById(treatment.getMedicalProceduresIds()),
+            getPatientByPesel(treatment.getPatientPesel()), getDiseaseById(treatment.getDiseaseId()));
+  }
+
+  public void updateTreatment(CreationTreatment treatment, long treatmentId) {
+    treatmentService.updateTreatment(treatment, getMedicalProceduresById(treatment.getMedicalProceduresIds()),
+            getPatientByPesel(treatment.getPatientPesel()), getDiseaseById(treatment.getDiseaseId()), treatmentId);
+  }
+
+  public void deleteTreatment(long treatmentId) {
+    treatmentService.deleteTreatment(treatmentId);
+  }
+
+  private Patient getPatientByPesel(String pesel) {
+    return patientService.getPatientByPesel(pesel);
+  }
+
 
 }

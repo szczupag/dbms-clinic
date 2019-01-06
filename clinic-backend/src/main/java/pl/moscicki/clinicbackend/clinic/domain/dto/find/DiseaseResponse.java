@@ -12,12 +12,14 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DiseaseResponse {
 
+  private Long id;
   private String name;
   private String severity;
   private Set<TreatmentResponse> treatments;
 
   public static DiseaseResponse from(Disease disease, boolean withTreatments) {
     return DiseaseResponse.builder()
+            .id(disease.getDiseaseId())
             .name(disease.getName())
             .severity(disease.getSeverity())
             .treatments(withTreatments ? mapTreatments(disease) : null)

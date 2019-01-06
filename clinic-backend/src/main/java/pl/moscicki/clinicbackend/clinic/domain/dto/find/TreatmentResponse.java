@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 @Value
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TreatmentResponse {
+
+  private Long id;
   private Date startDate;
   private Date endDate;
   private Set<String> medicalProcedures;
@@ -22,6 +24,7 @@ public class TreatmentResponse {
 
   public static TreatmentResponse from(Treatment treatment, boolean withMedicalProcedures, boolean withDisease, boolean withPatient) {
     return TreatmentResponse.builder()
+            .id(treatment.getTreatmentId())
             .startDate(treatment.getStartDate())
             .endDate(treatment.getEndDate())
             .medicalProcedures(withMedicalProcedures ? mapMedicalProcedures(treatment) : null)

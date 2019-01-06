@@ -10,6 +10,7 @@ import pl.moscicki.clinicbackend.clinic.domain.Localization;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LocalizationResponse {
 
+  private Long id;
   private String city;
   private String street;
   private String postalCode;
@@ -18,6 +19,7 @@ public class LocalizationResponse {
 
   public static LocalizationResponse from(Localization localization, boolean withClinic) {
     return LocalizationResponse.builder()
+            .id(localization.getLocalizationId())
             .city(localization.getCity())
             .street(localization.getStreet())
             .postalCode(localization.getPostalCode())

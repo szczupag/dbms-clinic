@@ -12,12 +12,14 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class VisitResponse {
 
+  private Long id;
   private Date visitDate;
   private PatientResponse patient;
   private VisitorResponse visitor;
 
   public static VisitResponse from(Visit visit, boolean withVisitor, boolean withPatient) {
     return VisitResponse.builder()
+            .id(visit.getVisitId())
             .visitDate(visit.getVisitDate())
             .patient(withPatient ? mapFromPatient(visit) : null)
             .visitor(withVisitor ? mapFromVisitor(visit) : null)

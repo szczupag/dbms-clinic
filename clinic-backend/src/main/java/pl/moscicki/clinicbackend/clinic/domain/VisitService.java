@@ -1,5 +1,6 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationVisit;
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.VisitResponse;
 
 import java.util.Set;
@@ -21,5 +22,20 @@ public class VisitService {
 
   Set<Visit> getVisitsById(Set<Long> ids) {
     return visitRepository.findAllByVisitId(ids);
+  }
+
+  void createVisit(CreationVisit creationVisit, Patient patient, Visitor visitor) {
+    visitRepository.save(Visit.from(creationVisit, patient, visitor));
+  }
+
+  void updateVisit(CreationVisit creationVisit, Patient patient, Visitor visitor, Long visitId) {
+    Visit visit = Visit.from(creationVisit, patient, visitor);
+    visit.setVisitId(visitId);
+
+    visitRepository.save(visit);
+  }
+
+  void deleteVisit(Long visitId) {
+    visitRepository.deleteById(visitId);
   }
 }

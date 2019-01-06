@@ -28,13 +28,13 @@ public class TreatmentsEndpoint {
   }
 
   @PutMapping("/{id}")
-  void updateTreatment(@RequestBody @Validated CreationTreatment creationTreatment, @PathVariable long treatmentId) {
-    clinicFacade.updateTreatment(creationTreatment, treatmentId);
+  void updateTreatment(@RequestBody @Validated CreationTreatment creationTreatment, @PathVariable long id) {
+    clinicFacade.updateTreatment(creationTreatment, id);
   }
 
   @DeleteMapping("/{id}")
-  void deleteTreatment(@PathVariable long treatmentId) {
-    clinicFacade.deleteTreatment(treatmentId);
+  void deleteTreatment(@PathVariable long id) {
+    clinicFacade.deleteTreatment(id);
   }
 
 }

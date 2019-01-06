@@ -28,13 +28,13 @@ public class PatientsEndpoint {
     clinicFacade.createPatient(creationPatient);
   }
 
-  @PutMapping("/{id}")
-  void updatePatient(@RequestBody @Validated CreationPatient creationPatient, @PathVariable String id) {
-    clinicFacade.updatePatient(creationPatient, id);
+  @PutMapping("/{pesel}")
+  void updatePatient(@RequestBody @Validated CreationPatient creationPatient, @PathVariable String pesel) {
+    clinicFacade.updatePatient(creationPatient, pesel);
   }
 
-  @DeleteMapping("/{id}")
-  void deletePatient(@PathVariable String id) {
-    clinicFacade.deletePatient(id);
+  @DeleteMapping("/{pesel}")
+  void deletePatient(@PathVariable String pesel) {
+    clinicFacade.deletePatient(pesel);
   }
 }

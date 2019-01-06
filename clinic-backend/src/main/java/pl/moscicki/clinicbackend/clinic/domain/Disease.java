@@ -1,6 +1,7 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationDisease;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -27,7 +28,12 @@ public class Disease {
   @OneToMany(mappedBy = "disease", fetch = FetchType.LAZY)
   private Set<Treatment> treatments;
 
-  @OneToMany(mappedBy = "disease", fetch = FetchType.LAZY)
-  private Set<Medicine> medicines;
+  static Disease from(CreationDisease creationDisease, Set<Treatment> treatments) {
+    return Disease.builder()
+            .name(creationDisease.getName())
+            .severity(creationDisease.getSeverity())
+            .treatments(treatments)
+            .build();
+  }
 
 }

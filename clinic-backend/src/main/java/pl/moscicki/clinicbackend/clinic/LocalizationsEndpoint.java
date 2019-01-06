@@ -28,12 +28,12 @@ class LocalizationsEndpoint {
   }
 
   @PutMapping("/{id}")
-  void updateLocalization(@RequestBody @Validated CreationLocalization creationLocalization, @PathVariable Long localizationId) {
-    clinicFacade.updateLocalization(creationLocalization, localizationId);
+  void updateLocalization(@RequestBody @Validated CreationLocalization creationLocalization, @PathVariable Long id) {
+    clinicFacade.updateLocalization(creationLocalization, id);
   }
 
   @DeleteMapping("/{id}")
-  void deleteLocalization(@PathVariable Long localizationId) {
-    clinicFacade.deleteLocalization(localizationId);
+  void deleteLocalization(@PathVariable Long id) {
+    clinicFacade.deleteLocalization(id);
   }
 }

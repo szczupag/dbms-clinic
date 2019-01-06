@@ -28,14 +28,14 @@ class MedicalProceduresEndpoint {
   }
 
   @PutMapping("/{id}")
-  void updateMedicalProcedure(@RequestBody @Validated CreationMedicalProcedure medicalProcedure, @PathVariable Long medicalProcedureId) {
-    clinicFacade.updateMedicalProcedure(medicalProcedure, medicalProcedureId);
+  void updateMedicalProcedure(@RequestBody @Validated CreationMedicalProcedure medicalProcedure, @PathVariable Long id) {
+    clinicFacade.updateMedicalProcedure(medicalProcedure, id);
   }
 
 
   @DeleteMapping("/{id}")
-  void deleteMedicalProcedure(@PathVariable Long medicalProcedureId) {
-    clinicFacade.deleteMedicalProcedure(medicalProcedureId);
+  void deleteMedicalProcedure(@PathVariable Long id) {
+    clinicFacade.deleteMedicalProcedure(id);
   }
 
 }

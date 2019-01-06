@@ -1,7 +1,6 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationVisitor;
-import pl.moscicki.clinicbackend.clinic.domain.dto.find.VisitResponse;
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.VisitorResponse;
 
 import java.util.Set;
@@ -18,6 +17,10 @@ class VisitorService {
     return visitorRepository.findAll().stream()
             .map(visitor -> VisitorResponse.from(visitor, false))
             .collect(Collectors.toSet());
+  }
+
+  Visitor getVisitorByPesel(String pesel) {
+    return visitorRepository.findById(pesel).orElse(null);
   }
 
   void createVisitor(CreationVisitor creationVisitor, Set<Visit> visits) {

@@ -32,7 +32,7 @@ public class VisitorsEndpoint {
     clinicFacade.updateVisitor(creationVisitor, pesel);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/{pesel}")
   void deleteVisitor(@PathVariable String pesel) {
     clinicFacade.deleteVisitor(pesel);
   }

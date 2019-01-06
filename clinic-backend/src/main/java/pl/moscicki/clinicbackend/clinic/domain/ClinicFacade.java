@@ -149,6 +149,18 @@ public class ClinicFacade {
     return diseaseService.getDiseaseById(diseaseId);
   }
 
+  public void createDisease(CreationDisease disease) {
+    diseaseService.createDisease(disease, getTreatmentsByIds(disease.getTreatmentsIds()));
+  }
+
+  public void updateDisease(CreationDisease disease, Long diseaseId) {
+    diseaseService.updateDisease(disease, getTreatmentsByIds(disease.getTreatmentsIds()), diseaseId);
+  }
+
+  public void deleteDisease(Long diseaseId) {
+    diseaseService.deleteDisease(diseaseId);
+  }
+
   public Set<TreatmentResponse> getAllTreatments() {
     return treatmentService.getAllTreatments();
   }
@@ -197,8 +209,30 @@ public class ClinicFacade {
     return visitService.getVisitsById(ids);
   }
 
+  public Set<VisitResponse> getAllVisits(){
+    return visitService.getAllVisits();
+  }
+
+  public void createVisit(CreationVisit creationVisit) {
+    visitService.createVisit(creationVisit, getPatientByPesel(creationVisit.getPatientPesel()),
+            getVisitorByPesel(creationVisit.getVisitorPesel()));
+  }
+
+  public void updateVisit(CreationVisit creationVisit, Long visitId) {
+    visitService.updateVisit(creationVisit, getPatientByPesel(creationVisit.getPatientPesel()),
+            getVisitorByPesel(creationVisit.getVisitorPesel()), visitId);
+  }
+
+  public void deleteVisit(Long visitId) {
+    visitService.deleteVisit(visitId);
+  }
+
   public Set<VisitorResponse> getAllVisitors() {
     return visitorService.getAllVisistors();
+  }
+
+  private Visitor getVisitorByPesel(String pesel) {
+    return visitorService.getVisitorByPesel(pesel);
   }
 
   public void createVisitor(CreationVisitor visitor) {

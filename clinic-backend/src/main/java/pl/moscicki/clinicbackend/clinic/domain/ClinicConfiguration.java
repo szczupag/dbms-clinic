@@ -11,7 +11,7 @@ class ClinicConfiguration {
                             ClinicRepository clinicRepository, LocalizationRepository localizationRepository,
                             DepartmentRepository departmentRepository, DiseaseRepository diseaseRepository,
                             TreatmentRepository treatmentRepository, PatientRepository patientRepository,
-                            VisitRepository visitRepository) {
+                            VisitRepository visitRepository, VisitorRepository visitorRepository) {
 
     DoctorService doctorService = new DoctorService(doctorRepository);
     MedicalProcedureService medicalProcedureService = new MedicalProcedureService(medicalProcedureRepository);
@@ -22,8 +22,9 @@ class ClinicConfiguration {
     TreatmentService treatmentService = new TreatmentService(treatmentRepository);
     PatientService patientService = new PatientService(patientRepository);
     VisitService visitService = new VisitService(visitRepository);
+    VisitorService visitorService = new VisitorService(visitorRepository);
 
     return new ClinicFacade(doctorService, medicalProcedureService, clinicService, localizationService,
-            departmentService, diseaseService, treatmentService, patientService, visitService);
+            departmentService, diseaseService, treatmentService, patientService, visitService, visitorService);
   }
 }

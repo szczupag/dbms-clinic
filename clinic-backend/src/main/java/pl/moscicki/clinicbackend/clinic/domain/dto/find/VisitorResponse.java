@@ -19,7 +19,7 @@ public class VisitorResponse {
   private String idNumber;
   private Set<VisitResponse> visits;
 
-  static VisitorResponse from(Visitor visitor, boolean withVisits) {
+  public static VisitorResponse from(Visitor visitor, boolean withVisits) {
     return VisitorResponse.builder()
             .firstName(visitor.getFirstName())
             .lastName(visitor.getLastName())

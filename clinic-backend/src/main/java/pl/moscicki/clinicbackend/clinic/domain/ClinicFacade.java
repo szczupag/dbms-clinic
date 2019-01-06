@@ -17,12 +17,13 @@ public class ClinicFacade {
   private TreatmentService treatmentService;
   private PatientService patientService;
   private VisitService visitService;
+  private VisitorService visitorService;
 
   public ClinicFacade(DoctorService doctorService, MedicalProcedureService medicalProcedureService,
                       ClinicService clinicService, LocalizationService localizationService,
                       DepartmentService departmentService, DiseaseService diseaseService,
                       TreatmentService treatmentService, PatientService patientService,
-                      VisitService visitService) {
+                      VisitService visitService, VisitorService visitorService) {
     this.doctorService = doctorService;
     this.medicalProcedureService = medicalProcedureService;
     this.clinicService = clinicService;
@@ -32,6 +33,7 @@ public class ClinicFacade {
     this.treatmentService = treatmentService;
     this.patientService = patientService;
     this.visitService = visitService;
+    this.visitorService = visitorService;
   }
 
   public Set<DoctorResponse> getAllDoctors(boolean withMedicalProcedures) {
@@ -194,5 +196,22 @@ public class ClinicFacade {
   private Set<Visit> getVisitsByIds(Set<Long> ids) {
     return visitService.getVisitsById(ids);
   }
+
+  public Set<VisitorResponse> getAllVisitors() {
+    return visitorService.getAllVisistors();
+  }
+
+  public void createVisitor(CreationVisitor visitor) {
+    visitorService.createVisitor(visitor, getVisitsByIds(visitor.getVisitsIds()));
+  }
+
+  public void updateVisitor(CreationVisitor visitor, String pesel) {
+    visitorService.updateVisitor(visitor, getVisitsByIds(visitor.getVisitsIds()), pesel);
+  }
+
+  public void deleteVisitor(String pesel) {
+    visitorService.deleteVisitor(pesel);
+  }
+
 
 }

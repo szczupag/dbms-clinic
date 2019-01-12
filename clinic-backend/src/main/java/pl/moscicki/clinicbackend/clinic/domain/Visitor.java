@@ -1,6 +1,7 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationVisitor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,6 +31,16 @@ public class Visitor {
   @Size(max = 7)
   private String idNumber;
 
-  @ManyToMany(mappedBy = "visitors")
-  private Set<Patient> patients;
+  @OneToMany(mappedBy = "visitor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private Set<Visit> visits;
+
+  static Visitor from(CreationVisitor creationVisitor, Set<Visit> visits) {
+    return Visitor.builder()
+            .pesel(creationVisitor.getPesel())
+            .firstName(creationVisitor.getFirstName())
+            .lastName(creationVisitor.getLastName())
+            .idNumber(creationVisitor.getIdNumber())
+            .visits(visits)
+            .build();
+  }
 }

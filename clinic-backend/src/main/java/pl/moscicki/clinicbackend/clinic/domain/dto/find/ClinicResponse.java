@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClinicResponse {
 
+  private Long id;
   private String name;
   private String type;
   private Set<DepartmentResponse> departments;
@@ -21,6 +22,7 @@ public class ClinicResponse {
 
   public static ClinicResponse from(Clinic clinic) {
     return ClinicResponse.builder()
+            .id(clinic.getClinicId())
             .name(clinic.getName())
             .type(clinic.getType())
             .departments(mapDepartments(clinic))

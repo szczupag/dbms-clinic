@@ -10,4 +10,5 @@ interface DoctorRepository extends CrudRepository<Doctor, String> {
   Set<Doctor> findAll();
 
   Set<Doctor> findAllByPeselIn(Set<String> doctorsPesels);
+
 }

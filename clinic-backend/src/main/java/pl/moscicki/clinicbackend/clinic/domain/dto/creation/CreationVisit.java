@@ -2,19 +2,18 @@ package pl.moscicki.clinicbackend.clinic.domain.dto.creation;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.moscicki.clinicbackend.clinic.domain.Visitor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
-public class CreationTreatment implements Serializable {
+public class CreationVisit implements Serializable {
+
   @NotNull
-  private Date startDate;
-  private Date endDate;
-  private Set<Long> medicalProceduresIds;
-  private Long diseaseId;
+  private Date visitDate;
   private String patientPesel;
+  private String visitorPesel;
 }

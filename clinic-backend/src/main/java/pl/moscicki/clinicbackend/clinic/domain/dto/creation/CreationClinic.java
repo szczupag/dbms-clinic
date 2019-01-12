@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +15,6 @@ public class CreationClinic implements Serializable {
   private String name;
   @NotNull
   private String type;
-  private Long departmentId;
+  private Set<Long> departmentIds;
   private Long localizationId;
 }

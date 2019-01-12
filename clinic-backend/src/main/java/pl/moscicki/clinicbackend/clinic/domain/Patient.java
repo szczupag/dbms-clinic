@@ -1,6 +1,7 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationPatient;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,12 +31,21 @@ public class Patient {
   @Size(max = 15)
   private String phoneNumber;
 
-  @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<Treatment> treatments;
 
-  @ManyToMany
-  @JoinTable(name = "patients_visitors",
-          joinColumns = @JoinColumn(name = "patient_pesel", referencedColumnName = "pesel"),
-          inverseJoinColumns = @JoinColumn(name = "visitor_pesel", referencedColumnName = "pesel"))
-  private Set<Visitor> visitors;
+  @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+  private Set<Visit> visits;
+
+  static Patient from(CreationPatient creationPatient, Set<Treatment> treatments, Set<Visit> visits) {
+    return Patient.builder()
+            .pesel(creationPatient.getPesel())
+            .firstName(creationPatient.getFirstName())
+            .lastName(creationPatient.getLastName())
+            .phoneNumber(creationPatient.getPhoneNumber())
+            .visits(visits)
+            .treatments(treatments)
+            .build();
+  }
+
 }

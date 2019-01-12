@@ -6,7 +6,6 @@ import lombok.Value;
 import pl.moscicki.clinicbackend.clinic.domain.Department;
 import pl.moscicki.clinicbackend.clinic.domain.Doctor;
 
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,13 +14,14 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DepartmentResponse {
 
-  @NotNull
+  private Long id;
   private String name;
   private Set<DoctorResponse> doctors;
   private Long clinicId;
 
   public static DepartmentResponse from(Department department) {
     return DepartmentResponse.builder()
+            .id(department.getDepartmentId())
             .name(department.getName())
             .doctors(mapDoctors(department.getDoctors()))
             .build();

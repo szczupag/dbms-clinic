@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Value;
 import pl.moscicki.clinicbackend.clinic.domain.Disease;
 
-import java.util.Date;
 import java.util.Set;
 
 @Builder
@@ -13,9 +12,21 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DiseaseResponse {
 
-  private Date startDate;
-  private Date endDate;
-  private Set<String> medicalProceduresIds;
-  private Long diseaseId;
-  private String patientPesel;
+  private Long id;
+  private String name;
+  private String severity;
+  private Set<TreatmentResponse> treatments;
+
+  public static DiseaseResponse from(Disease disease, boolean withTreatments) {
+    return DiseaseResponse.builder()
+            .id(disease.getDiseaseId())
+            .name(disease.getName())
+            .severity(disease.getSeverity())
+            .treatments(withTreatments ? mapTreatments(disease) : null)
+            .build();
+  }
+
+  private static Set<TreatmentResponse> mapTreatments(Disease disease) {
+    return null;
+  }
 }

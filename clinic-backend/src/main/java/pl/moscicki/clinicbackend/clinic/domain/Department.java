@@ -1,6 +1,7 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationDepartment;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -28,4 +29,12 @@ public class Department {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "clinic_id")
   private Clinic clinic;
+
+  static Department from(CreationDepartment creationClinic, Clinic clinic, Set<Doctor> doctors) {
+    return Department.builder()
+            .name(creationClinic.getName())
+            .doctors(doctors)
+            .clinic(clinic)
+            .build();
+  }
 }

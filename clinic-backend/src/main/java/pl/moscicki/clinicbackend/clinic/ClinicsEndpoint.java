@@ -1,15 +1,15 @@
 package pl.moscicki.clinicbackend.clinic;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import pl.moscicki.clinicbackend.clinic.domain.ClinicFacade;
+import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationClinic;
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.ClinicResponse;
 
 import java.util.Set;
 
 @RestController
-@RequestMapping("/clinics")
+@RequestMapping("/api/clinics")
 class ClinicsEndpoint {
 
   private ClinicFacade clinicFacade;
@@ -21,5 +21,20 @@ class ClinicsEndpoint {
   @GetMapping("/all")
   Set<ClinicResponse> getAllClinics() {
     return clinicFacade.getAllClinics();
+  }
+
+  @PostMapping
+  void addClinic(@RequestBody @Validated CreationClinic clinic) {
+    clinicFacade.createClinic(clinic);
+  }
+
+  @PutMapping("/{id}")
+ void updateClinic(@RequestBody @Validated CreationClinic clinic, @PathVariable long id) {
+    clinicFacade.updateClinic(clinic, id);
+  }
+
+  @DeleteMapping("/{id}")
+  void deleteClinic(@PathVariable long id) {
+    clinicFacade.deleteClinic(id);
   }
 }

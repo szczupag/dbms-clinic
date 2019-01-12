@@ -13,12 +13,14 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MedicalProcedureResponse {
 
+  private Long id;
   private String name;
   private Long cost;
   private Set<String> doctors;
 
   public static MedicalProcedureResponse from(MedicalProcedure medicalProcedure, boolean withDoctors) {
     return MedicalProcedureResponse.builder()
+            .id(medicalProcedure.getMedicalProcedureId())
             .name(medicalProcedure.getName())
             .cost(medicalProcedure.getCost())
             .doctors(mapDoctors(medicalProcedure, withDoctors))

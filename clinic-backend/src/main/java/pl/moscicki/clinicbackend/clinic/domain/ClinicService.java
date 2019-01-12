@@ -1,10 +1,8 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationClinic;
-import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationDoctor;
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.ClinicResponse;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 

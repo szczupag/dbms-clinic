@@ -31,7 +31,7 @@ public class Patient {
   @Size(max = 15)
   private String phoneNumber;
 
-  @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
   private Set<Treatment> treatments;
 
   @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)

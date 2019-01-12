@@ -31,7 +31,7 @@ public class Visitor {
   @Size(max = 7)
   private String idNumber;
 
-  @OneToMany(mappedBy = "visitor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "visitor", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
   private Set<Visit> visits;
 
   static Visitor from(CreationVisitor creationVisitor, Set<Visit> visits) {

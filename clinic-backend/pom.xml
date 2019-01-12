@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>clinic-backend</name>
-    <description>Backend for DB Managment Systems project</description>
+    <description>Backend for DB Management Systems project</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

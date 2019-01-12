@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 
 @Component
@@ -13,19 +13,26 @@ import java.util.HashSet;
 public class ApplicationBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
   private final DoctorRepository doctorRepository;
+  private final PatientRepository patientRepository;
   private final MedicalProcedureRepository medicalProcedureRepository;
   private final ClinicRepository clinicRepository;
   private final LocalizationRepository localizationRepository;
   private final DepartmentRepository departmentRepository;
+  private final VisitorRepository visitorRepository;
+  private final VisitRepository visitRepository;
 
   public ApplicationBootstrap(DoctorRepository doctorRepository, MedicalProcedureRepository medicalProcedureRepository,
                               ClinicRepository clinicRepository, LocalizationRepository localizationRepository,
-                              DepartmentRepository departmentRepository) {
+                              DepartmentRepository departmentRepository, PatientRepository patientRepository,
+                              VisitorRepository visitorRepository, VisitRepository visitRepository) {
     this.doctorRepository = doctorRepository;
     this.medicalProcedureRepository = medicalProcedureRepository;
     this.clinicRepository = clinicRepository;
     this.localizationRepository = localizationRepository;
     this.departmentRepository = departmentRepository;
+    this.patientRepository = patientRepository;
+    this.visitorRepository = visitorRepository;
+    this.visitRepository = visitRepository;
   }
 
   @Override
@@ -49,28 +56,35 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
             .medicalProcedures(new HashSet<>())
             .build();
 
-    MedicalProcedure masaz_serca = MedicalProcedure.builder()
-            .name("Masaz serca")
-            .cost(650L)
-            .doctors(new HashSet<>(Arrays.asList(maciej, agata)))
+    Patient patient = Patient.builder()
+            .firstName("pacjent")
+            .lastName("kowalski")
+            .pesel("12345678903")
             .build();
 
-    Localization localization = Localization.builder()
-            .city("Poznan")
-            .postalCode("60-023")
-            .buildingNo(7L)
-            .street("Szpitalna")
+    patientRepository.save(patient);
+
+    Visitor visitor = Visitor.builder()
+            .firstName("wizytujacy")
+            .lastName("nowak")
+            .pesel("12345678904")
+            .idNumber("123")
             .build();
 
-    Clinic clinic = Clinic.builder()
-            .type("Klinika chirurgi plastycznej")
-            .name("Piekna skora")
-            .localization(localization)
+    visitorRepository.save(visitor);
+
+    Visit visit = Visit.builder()
+            .visitDate(new Date(1547305232))
+            .patient(patient)
+            .visitor(visitor)
             .build();
 
-    Department department = Department.builder()
-            .name("Dermatologia")
-            .build();
+    visitRepository.save(visit);
+
+    doctorRepository.dropProcedureRaiseIfExists();
+    doctorRepository.createProcedureRaise();
+    patientRepository.dropCreaterVisitorsCountFunctionIfExists();
+    patientRepository.createVisitorsCountFunction();
 
 //    departmentRepository.save(department);
 //

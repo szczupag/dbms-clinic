@@ -5,7 +5,6 @@ import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationClinic;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
 import java.util.Set;
 
 @Builder
@@ -27,10 +26,10 @@ public class Clinic {
   @NotNull
   private String type;
 
-  @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
   private Set<Department> departments;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = CascadeType.MERGE)
   private Localization localization;
 
   static Clinic from(CreationClinic creationClinic, Localization localization, Set<Department> departments) {

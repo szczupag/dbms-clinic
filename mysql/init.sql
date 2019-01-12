@@ -1,6 +1,6 @@
 SET GLOBAL default_storage_engine = 'InnoDB';
 
-/* 
+/*
 CREATE TABLE `sys`.`doctors` (
   `pesel` varchar(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
@@ -9,21 +9,21 @@ CREATE TABLE `sys`.`doctors` (
   `speciality` varchar(255),
   `supervisor_pesel` varchar(255),
   PRIMARY KEY (`pesel`)
-); 
- 
+);
+
 CREATE TABLE `sys`.`medical_procedures` (
   `medical_procedure_id` bigint(20) NOT NULL,
   `name` varchar(255) NOT NULL,
   `cost` bigint(20),
   PRIMARY KEY (`medical_procedure_id`)
-); 
+);
 
 CREATE TABLE `sys`.`treatments` (
   `treatment_id` bigint(20) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date,
   PRIMARY KEY (`treatment_id`)
-); 
+);
 
 CREATE TABLE `sys`.`patients` (
   `pesel` varchar(11) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE `sys`.`patients` (
   `last_name` varchar(255) NOT NULL,
   `phone_number` varchar(15),
   PRIMARY KEY (`pesel`)
-); 
+);
 
 CREATE TABLE `sys`.`visitors` (
   `pesel` varchar(11) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `sys`.`visitors` (
   `last_name` varchar(255) NOT NULL,
   `id_number` varchar(7) NOT NULL,
   PRIMARY KEY (`pesel`)
-); 
+);
 
 CREATE TABLE `sys`.`medicines` (
   `medicine_id` bigint(20) NOT NULL,
@@ -47,15 +47,15 @@ CREATE TABLE `sys`.`medicines` (
   `recommended_dose` bigint(20) NOT NULL,
   `cost` bigint(20) NOT NULL,
   PRIMARY KEY (`medicine_id`)
-); 
+);
 
 CREATE TABLE `sys`.`diseases` (
   `disease_id` bigint(20) NOT NULL,
   `name` varchar(255) NOT NULL,
   `severity`  varchar(255),
   PRIMARY KEY (`disease_id`)
-); 
- 
+);
+
 CREATE TABLE `sys`.`doctors_medical_procedures` (
   `doctors_medical_procedures_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `pesel` varchar(20) NOT NULL,

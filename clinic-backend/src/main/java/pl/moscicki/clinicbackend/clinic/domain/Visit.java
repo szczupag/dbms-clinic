@@ -22,11 +22,11 @@ public class Visit {
   @Temporal(TemporalType.DATE)
   Date visitDate;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name = "patient_pesel")
   Patient patient;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name = "visitor_pesel")
   Visitor visitor;
 

@@ -17,21 +17,25 @@ class DepartmentsEndpoint {
     this.clinicFacade = clinicFacade;
   }
 
+  @CrossOrigin
   @GetMapping("/all")
   Set<DepartmentResponse> getAllDepartments() {
     return clinicFacade.getAllDepartments();
   }
 
+  @CrossOrigin
   @PostMapping
   void createDepartment(@RequestBody @Validated CreationDepartment creationDepartment) {
     clinicFacade.createDepartment(creationDepartment);
   }
 
+  @CrossOrigin
   @PutMapping("/{id}")
   void updateDepartment(@RequestBody @Validated CreationDepartment creationDepartment, @PathVariable long id) {
     clinicFacade.updateDepartment(creationDepartment, id);
   }
 
+  @CrossOrigin
   @DeleteMapping("/{id}")
   void deleteDepartment(@PathVariable Long id) {
     clinicFacade.deleteDepartment(id);

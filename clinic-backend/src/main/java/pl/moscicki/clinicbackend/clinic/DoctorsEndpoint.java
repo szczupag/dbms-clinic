@@ -18,21 +18,25 @@ class DoctorsEndpoint {
     this.clinicFacade = clinicFacade;
   }
 
+  @CrossOrigin
   @GetMapping(value = "/all")
   Set<DoctorResponse> getAll(@RequestParam(value = "medical-procedures", defaultValue = "false", required = false) boolean withMedicalProcedures) {
     return clinicFacade.getAllDoctors(withMedicalProcedures);
   }
 
+  @CrossOrigin
   @PostMapping
   void createDoctor(@RequestBody @Validated CreationDoctor doctor) {
     clinicFacade.createDoctor(doctor);
   }
 
+  @CrossOrigin
   @PutMapping("/{pesel}")
   void updateDoctor(@RequestBody @Validated CreationDoctor creationDoctor, @PathVariable String pesel) {
     clinicFacade.updateDoctor(creationDoctor, pesel);
   }
 
+  @CrossOrigin
   @DeleteMapping("/{pesel}")
   void deleteDoctor(@PathVariable String pesel) {
     clinicFacade.deleteDoctor(pesel);

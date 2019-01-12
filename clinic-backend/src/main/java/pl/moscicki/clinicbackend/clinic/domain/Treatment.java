@@ -1,7 +1,6 @@
 package pl.moscicki.clinicbackend.clinic.domain;
 
 import lombok.*;
-import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationClinic;
 import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationTreatment;
 
 import javax.persistence.*;
@@ -35,11 +34,11 @@ public class Treatment {
           inverseJoinColumns = @JoinColumn(name = "medical_procedure_id"))
   private Set<MedicalProcedure> medicalProcedures;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
   @JoinColumn(name = "pesel")
   private Patient patient;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
   @JoinColumn(name = "disease_id")
   private Disease disease;
 

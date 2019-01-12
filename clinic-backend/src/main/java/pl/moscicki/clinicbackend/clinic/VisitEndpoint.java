@@ -17,21 +17,25 @@ public class VisitEndpoint {
     this.clinicFacade = clinicFacade;
   }
 
+  @CrossOrigin
   @GetMapping("/all")
   public Set<VisitResponse> getAllVisits() {
     return clinicFacade.getAllVisits();
   }
 
+  @CrossOrigin
   @PostMapping
   public void createVisit(@RequestBody @Validated CreationVisit creationVisit) {
     clinicFacade.createVisit(creationVisit);
   }
 
+  @CrossOrigin
   @PutMapping("/{id}")
   public void updateVisit(@RequestBody @Validated CreationVisit creationVisit, @PathVariable Long id) {
     clinicFacade.updateVisit(creationVisit, id);
   }
 
+  @CrossOrigin
   @DeleteMapping("/{id}")
   public void deleteVisit(@PathVariable Long id) {
     clinicFacade.deleteVisit(id);

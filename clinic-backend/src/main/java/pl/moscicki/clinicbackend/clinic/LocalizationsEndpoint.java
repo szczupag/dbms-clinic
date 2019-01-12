@@ -17,21 +17,25 @@ class LocalizationsEndpoint {
     this.clinicFacade = clinicFacade;
   }
 
+  @CrossOrigin
   @GetMapping("/all")
   Set<LocalizationResponse> getAllLocalizations(@RequestParam(name = "withClinic", defaultValue = "false", required = false) boolean withClinic) {
     return clinicFacade.getAllLocalizations(withClinic);
   }
 
+  @CrossOrigin
   @PostMapping
   void createLocalization(@RequestBody @Validated CreationLocalization creationLocalization) {
     clinicFacade.createLocalization(creationLocalization);
   }
 
+  @CrossOrigin
   @PutMapping("/{id}")
   void updateLocalization(@RequestBody @Validated CreationLocalization creationLocalization, @PathVariable Long id) {
     clinicFacade.updateLocalization(creationLocalization, id);
   }
 
+  @CrossOrigin
   @DeleteMapping("/{id}")
   void deleteLocalization(@PathVariable Long id) {
     clinicFacade.deleteLocalization(id);

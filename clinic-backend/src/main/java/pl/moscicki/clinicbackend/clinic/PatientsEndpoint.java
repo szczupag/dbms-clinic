@@ -18,21 +18,25 @@ public class PatientsEndpoint {
     this.clinicFacade = clinicFacade;
   }
 
+  @CrossOrigin
   @GetMapping("/all")
   Set<PatientResponse> getAllPatients() {
     return clinicFacade.getAllPatients();
   }
 
+  @CrossOrigin
   @PostMapping
   void addPatient(@RequestBody @Validated CreationPatient creationPatient) {
     clinicFacade.createPatient(creationPatient);
   }
 
+  @CrossOrigin
   @PutMapping("/{pesel}")
   void updatePatient(@RequestBody @Validated CreationPatient creationPatient, @PathVariable String pesel) {
     clinicFacade.updatePatient(creationPatient, pesel);
   }
 
+  @CrossOrigin
   @DeleteMapping("/{pesel}")
   void deletePatient(@PathVariable String pesel) {
     clinicFacade.deletePatient(pesel);

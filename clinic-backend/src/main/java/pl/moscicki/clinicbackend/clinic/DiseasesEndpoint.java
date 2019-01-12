@@ -17,21 +17,25 @@ public class DiseasesEndpoint {
     this.clinicFacade = clinicFacade;
   }
 
+  @CrossOrigin
   @GetMapping("/all")
   Set<DiseaseResponse> getAllDiseases() {
     return clinicFacade.getAllDiseases();
   }
 
+  @CrossOrigin
   @PostMapping
   void createDisease(@RequestBody @Validated CreationDisease creationDisease) {
     clinicFacade.createDisease(creationDisease);
   }
 
+  @CrossOrigin
   @PutMapping("/{id}")
   void updateDisease(@RequestBody @Validated CreationDisease creationDisease, @PathVariable Long id) {
     clinicFacade.updateDisease(creationDisease, id);
   }
 
+  @CrossOrigin
   @DeleteMapping
   void deleteDisease(@PathVariable Long id) {
     clinicFacade.deleteDisease(id);

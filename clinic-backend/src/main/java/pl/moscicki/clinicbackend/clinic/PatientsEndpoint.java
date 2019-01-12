@@ -41,4 +41,10 @@ public class PatientsEndpoint {
   void deletePatient(@PathVariable String pesel) {
     clinicFacade.deletePatient(pesel);
   }
+
+  @CrossOrigin
+  @GetMapping("/visitors/count/{pesel}")
+  Integer countVisitors(@PathVariable String pesel) {
+    return clinicFacade.countVisitors(pesel);
+  }
 }

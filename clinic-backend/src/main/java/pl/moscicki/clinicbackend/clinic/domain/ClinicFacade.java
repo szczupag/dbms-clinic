@@ -275,5 +275,11 @@ public class ClinicFacade {
     visitorService.deleteVisitor(pesel);
   }
 
+  public void raiseSalary(String pesel) {
+    doctorService.raiseSalary(pesel);
+  }
 
+  public Integer countVisitors(String pesel) {
+    return patientService.countVisitors(pesel);
+  }
 }

@@ -71,7 +71,15 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
             .idNumber("123")
             .build();
 
+    Visitor visitor2 = Visitor.builder()
+            .firstName("wizytujacy2")
+            .lastName("nowak")
+            .pesel("12345678905")
+            .idNumber("123")
+            .build();
+
     visitorRepository.save(visitor);
+    visitorRepository.save(visitor2);
 
     Visit visit = Visit.builder()
             .visitDate(new Date(1547305232))
@@ -79,12 +87,21 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
             .visitor(visitor)
             .build();
 
+    Visit visit2 = Visit.builder()
+            .visitDate(new Date(1547305231))
+            .patient(patient)
+            .visitor(visitor2)
+            .build();
+
     visitRepository.save(visit);
+    visitRepository.save(visit2);
 
     doctorRepository.dropProcedureRaiseIfExists();
     doctorRepository.createProcedureRaise();
     patientRepository.dropCreaterVisitorsCountFunctionIfExists();
     patientRepository.createVisitorsCountFunction();
+
+    doctorRepository.raise("12345678902");
 
 //    departmentRepository.save(department);
 //

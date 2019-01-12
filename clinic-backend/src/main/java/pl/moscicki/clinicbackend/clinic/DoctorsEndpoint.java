@@ -42,4 +42,10 @@ class DoctorsEndpoint {
     clinicFacade.deleteDoctor(pesel);
   }
 
+  @CrossOrigin
+  @PutMapping("/raise/{pesel}")
+  void raiseSalary(@PathVariable String pesel) {
+    clinicFacade.raiseSalary(pesel);
+  }
+
 }

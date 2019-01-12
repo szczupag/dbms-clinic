@@ -29,6 +29,8 @@ interface DoctorRepository extends CrudRepository<Doctor, String> {
           "DROP PROCEDURE IF EXISTS `sys`.`raise`", nativeQuery = true)
   void dropProcedureRaiseIfExists();
 
-
-
+  @Transactional
+  @Modifying
+  @Query(value = "CALL `sys`.`raise`(?1)", nativeQuery = true)
+  void raise(String pesel);
 }

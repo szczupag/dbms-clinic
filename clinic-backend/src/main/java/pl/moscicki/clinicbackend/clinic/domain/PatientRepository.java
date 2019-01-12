@@ -33,4 +33,7 @@ interface PatientRepository extends CrudRepository<Patient, String> {
           "DROP FUNCTION IF EXISTS `sys`.`visitors_count`", nativeQuery = true)
   void dropCreaterVisitorsCountFunctionIfExists();
 
+  @Query(value =
+          "SELECT `sys`.`visitors_count`(?1)", nativeQuery = true)
+  Integer countVisitors(String pesel);
 }

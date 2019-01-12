@@ -46,4 +46,8 @@ class DoctorService {
   void deleteDoctor(String pesel) {
     doctorRepository.deleteById(pesel);
   }
+
+  void raiseSalary(String pesel) {
+    doctorRepository.raise(pesel);
+  }
 }

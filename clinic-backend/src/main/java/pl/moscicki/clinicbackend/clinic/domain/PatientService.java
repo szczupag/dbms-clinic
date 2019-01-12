@@ -38,4 +38,7 @@ class PatientService {
     patientRepository.deleteById(pesel);
   }
 
+  Integer countVisitors(String pesel) {
+    return patientRepository.countVisitors(pesel);
+  }
 }

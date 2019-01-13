@@ -15,7 +15,7 @@ class ClinicService {
 
   Set<ClinicResponse> getAllClinics() {
     return clinicRepository.findAll().stream()
-            .map(ClinicResponse::from)
+            .map(clinic -> ClinicResponse.from(clinic, true, true))
             .collect(Collectors.toSet());
   }
 

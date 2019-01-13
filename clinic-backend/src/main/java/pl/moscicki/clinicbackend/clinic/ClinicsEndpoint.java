@@ -32,7 +32,7 @@ class ClinicsEndpoint {
 
   @CrossOrigin
   @PutMapping("/{id}")
- void updateClinic(@RequestBody @Validated CreationClinic clinic, @PathVariable long id) {
+  void updateClinic(@RequestBody @Validated CreationClinic clinic, @PathVariable long id) {
     clinicFacade.updateClinic(clinic, id);
   }
 

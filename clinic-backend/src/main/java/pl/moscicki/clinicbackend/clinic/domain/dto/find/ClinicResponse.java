@@ -20,19 +20,19 @@ public class ClinicResponse {
   private Set<DepartmentResponse> departments;
   private String localization;
 
-  public static ClinicResponse from(Clinic clinic) {
+  public static ClinicResponse from(Clinic clinic, boolean withLocalization, boolean withDepartments) {
     return ClinicResponse.builder()
             .id(clinic.getClinicId())
             .name(clinic.getName())
             .type(clinic.getType())
-            .departments(mapDepartments(clinic))
-            .localization(mapLocalization(clinic))
+            .departments(withDepartments ? mapDepartments(clinic) : null)
+            .localization(withLocalization ? mapLocalization(clinic) : null)
             .build();
   }
 
   private static Set<DepartmentResponse> mapDepartments(Clinic clinic) {
     return clinic.getDepartments().stream()
-            .map(DepartmentResponse::from)
+            .map(department -> DepartmentResponse.from(department, false, false))
             .collect(Collectors.toSet());
   }
 

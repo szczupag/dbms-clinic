@@ -6,6 +6,7 @@ import lombok.Value;
 import pl.moscicki.clinicbackend.clinic.domain.Department;
 import pl.moscicki.clinicbackend.clinic.domain.Doctor;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,13 +18,14 @@ public class DepartmentResponse {
   private Long id;
   private String name;
   private Set<DoctorResponse> doctors;
-  private Long clinicId;
+  private ClinicResponse clinic;
 
-  public static DepartmentResponse from(Department department) {
+  public static DepartmentResponse from(Department department, boolean withClinic, boolean withDoctors) {
     return DepartmentResponse.builder()
             .id(department.getDepartmentId())
             .name(department.getName())
-            .doctors(mapDoctors(department.getDoctors()))
+            .clinic(withClinic ? mapClinic(department) : null)
+            .doctors(withDoctors ? mapDoctors(department.getDoctors()) : null)
             .build();
 
   }
@@ -33,5 +35,10 @@ public class DepartmentResponse {
             .map(doctor -> DoctorResponse.from(doctor, false))
             .collect(Collectors.toSet());
 
+  }
+
+  private static ClinicResponse mapClinic(Department department) {
+    return Objects.nonNull(department.getClinic()) ? ClinicResponse.from(department.getClinic(), false, false) :
+            null;
   }
 }

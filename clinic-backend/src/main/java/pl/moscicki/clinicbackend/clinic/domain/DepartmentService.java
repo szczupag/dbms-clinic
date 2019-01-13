@@ -19,7 +19,7 @@ class DepartmentService {
 
   Set<DepartmentResponse> getAllDepartments() {
     return departmentRepository.findAll().stream()
-            .map(DepartmentResponse::from)
+            .map(department -> DepartmentResponse.from(department, true, true))
             .collect(Collectors.toSet());
   }
 

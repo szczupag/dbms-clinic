@@ -6,6 +6,7 @@ import lombok.Value;
 import pl.moscicki.clinicbackend.clinic.domain.Disease;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Builder
 @Value
@@ -27,6 +28,8 @@ public class DiseaseResponse {
   }
 
   private static Set<TreatmentResponse> mapTreatments(Disease disease) {
-    return null;
+    return disease.getTreatments().stream()
+            .map(treatment -> TreatmentResponse.from(treatment, false, false, false))
+            .collect(Collectors.toSet());
   }
 }

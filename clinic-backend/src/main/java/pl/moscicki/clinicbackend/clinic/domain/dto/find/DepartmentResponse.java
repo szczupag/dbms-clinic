@@ -29,11 +29,9 @@ public class DepartmentResponse {
   }
 
   private static Set<DoctorResponse> mapDoctors(Set<Doctor> doctors) {
-    return doctors.stream().map(doctor -> DoctorResponse.builder()
-            .firstName(doctor.getFirstName())
-            .lastName(doctor.getLastName())
-            .speciality(doctor.getSpeciality())
-            .build())
+    return doctors.stream()
+            .map(doctor -> DoctorResponse.from(doctor, false))
             .collect(Collectors.toSet());
+
   }
 }

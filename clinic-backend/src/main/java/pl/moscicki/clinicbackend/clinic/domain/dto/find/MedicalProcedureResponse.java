@@ -23,14 +23,14 @@ public class MedicalProcedureResponse {
             .id(medicalProcedure.getMedicalProcedureId())
             .name(medicalProcedure.getName())
             .cost(medicalProcedure.getCost())
-            .doctors(mapDoctors(medicalProcedure, withDoctors))
+            .doctors(withDoctors ? mapDoctors(medicalProcedure) : null)
             .build();
   }
 
-  private static Set<String> mapDoctors(MedicalProcedure medicalProcedure, boolean withDoctors) {
-    return withDoctors ? medicalProcedure.getDoctors().stream()
+  private static Set<String> mapDoctors(MedicalProcedure medicalProcedure) {
+    return medicalProcedure.getDoctors().stream()
             .map(doctor -> doctor.getFirstName() + " " + doctor.getLastName())
-            .collect(Collectors.toSet()) : null;
+            .collect(Collectors.toSet());
   }
 
 }

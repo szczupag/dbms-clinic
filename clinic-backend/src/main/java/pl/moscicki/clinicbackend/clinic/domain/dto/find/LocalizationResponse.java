@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Value;
 import pl.moscicki.clinicbackend.clinic.domain.Localization;
 
+import java.util.Objects;
+
 @Builder
 @Value
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -24,11 +26,11 @@ public class LocalizationResponse {
             .street(localization.getStreet())
             .postalCode(localization.getPostalCode())
             .buildingNo(localization.getBuildingNo())
-            .clinic(mapClinic(localization, withClinic))
+            .clinic(withClinic ? mapClinic(localization) : null)
             .build();
   }
 
-  private static String mapClinic(Localization localization, boolean withClinic) {
-    return withClinic ? localization.getClinic().getName() : null;
+  private static String mapClinic(Localization localization) {
+    return Objects.nonNull(localization.getClinic()) ? localization.getClinic().getName() : null;
   }
 }

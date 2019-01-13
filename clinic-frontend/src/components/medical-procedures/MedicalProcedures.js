@@ -1,33 +1,34 @@
 import React, {Component} from 'react';
-import Clinic from './Clinic';
 import constants from '../../constants/pages';
+import MedicalProcedure from './MedicalProcedure';
 
-class Clinics extends Component {
+class MedicalProcedures extends Component {
     constructor(props){
         super(props)
         this.state = {
-            clinics: []
+            medicalProcedures: []
         }
     }
 
     componentDidMount () {
-        this.props.getHandler(constants.CLINICS);
+        this.props.getHandler(constants.MEDICAL_PROCEDURES);
         this.setState({
-            clinics: this.props.clinics
+            medicalProcedures: this.props.medicalProcedures
         })
+        console.log(this.state.medicalProcedure)
     }
 
     componentWillReceiveProps(newProps){
         this.setState({
-            clinics: newProps.clinics
+            medicalProcedures: newProps.medicalProcedures
         })
     }
 
     render(){
         return(
-            <div className="clinics">
+            <div className="medical-procedure">
                 <div className="page-title">
-                    <span>Clinics</span>
+                    <span>Medical procedures</span>
                     <button 
                         className="default-btn back"
                         onClick={()=>this.props.changePanel(constants.HOME)}
@@ -36,15 +37,15 @@ class Clinics extends Component {
                 <div className="options">
                     <button 
                         className="controls-btn add"
-                        onClick={()=>this.props.changePanel(constants.NEW_CLINIC)}
-                    >Add new clinic</button>
+                        onClick={()=>this.props.changePanel(constants.NEW_MEDICAL_PROCEDURE)}
+                    >Add new medical procedure</button>
                 </div>
                 <div className="elements">
                 {
-                    this.state.clinics.map( (clinic, index) => {
-                        return <Clinic 
+                    this.state.medicalProcedures.map( (procedure, index) => {
+                        return <MedicalProcedure
                             key={index} 
-                            data={clinic}
+                            data={procedure}
                             deleteHandler={this.props.deleteHandler}
                             editItemHandler={this.props.editItemHandler}
                             changePanel={this.props.changePanel}
@@ -57,4 +58,4 @@ class Clinics extends Component {
     }
 }
 
-export default Clinics;
+export default MedicalProcedures;

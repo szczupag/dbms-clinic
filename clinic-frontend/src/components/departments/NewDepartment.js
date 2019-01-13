@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import constants from '../../constants/pages';
 
-class EditClinic extends Component {
+class NewDepartment extends Component {
     constructor(props){
         super(props)
         this.state={
-            name: this.props.data.name,
-            type: this.props.data.type,
-            departments: this.props.departments,
+            name: '',
             error: null
         }
         this.nameChangeHandler = this.nameChangeHandler.bind(this);
@@ -18,24 +16,14 @@ class EditClinic extends Component {
         this.setState({name: e.target.value})
     }
 
-    typeChangeHandler(e){
-        this.setState({type: e.target.value})
-    }
-
     submitHandler(){
-        if( this.state.name != '' && this.state.type!=''){
-            if( this.state.name != this.props.data.name || this.state.type != this.props.data.type){
-                const data = {
-                    id: this.props.data.id,
-                    name: this.state.name,
-                    type: this.state.type
-                }
-                this.props.putHandler(constants.CLINICS, data);
-                this.props.changePanel(constants.CLINICS);
-            }else{
-                this.setState({error: 'There are no updates for this clinic!'})
+        if( this.state.name != ''){
+            const data = {
+                name: this.state.name
             }
-        }else if(this.state.name == '' || this.state.type ==''){
+            this.props.postHandler(constants.DEPARTMENTS, data);
+            this.props.changePanel(constants.DEPARTMENTS);
+        }else{
             this.setState({error: 'Not all required inputs are filled!'})
         }
     }
@@ -44,10 +32,10 @@ class EditClinic extends Component {
         return(
             <div className="form-panel">
                 <div className="page-title">
-                    <span>Edit clinic</span>
+                    <span>New department</span>
                     <button 
                         className="default-btn back"
-                        onClick={()=>this.props.changePanel(constants.CLINICS)}
+                        onClick={()=>this.props.changePanel(constants.DEPARTMENTS)}
                     >Back</button>
                 </div>
                 <div className="form">
@@ -56,15 +44,11 @@ class EditClinic extends Component {
                             placeholder="Name*"
                             value={this.state.name}
                             onChange={(e)=>this.nameChangeHandler(e)}></input>
-                        <input 
-                            placeholder="Type*"
-                            value={this.state.type}
-                            onChange={(e)=>this.typeChangeHandler(e)}></input>
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}
                         <div className="controls">
-                            <button className="controls-btn add" onClick={()=>this.submitHandler()}>Edit</button>
+                            <button className="controls-btn add" onClick={()=>this.submitHandler()}>Add</button>
                         </div>
                     </div>
                 </div>
@@ -73,4 +57,4 @@ class EditClinic extends Component {
     }
 }
 
-export default EditClinic;
+export default NewDepartment;

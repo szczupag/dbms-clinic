@@ -41,6 +41,7 @@ p{
   background-color: #fff;
 }
 
+.home .default-btn,
 .default-btn.back{
   padding: 5px 20px;
   font-size: 11px;
@@ -96,6 +97,39 @@ p{
   margin: auto;
 }
 
+
+/* HOME */
+
+.home .page-title{
+  background-color: #fff;
+  color: #282c34;
+}
+
+.home .options{
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.home .options > *{
+  margin: 10px 0; 
+}
+
+.home .subtitle{
+  margin-bottom: 30px;
+}
+
+/* ---- */
+
+/* ITEM */
+
+.item-wrapper{
+  padding: 0px;
+  margin-bottom: 20px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.432);
+}
+
 .item-header{
   color: #fff;
   background-color: #282c34;
@@ -139,41 +173,9 @@ p{
   justify-content: center;
 }
 
-/* HOME */
-
-.home .page-title{
-  background-color: #fff;
-  color: #282c34;
-}
-
-.home .options{
-  max-width: 300px;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-}
-
-.home .options > *{
-  margin: 10px 0; 
-}
-
-.home .subtitle{
-  margin-bottom: 30px;
-}
-
 /* ---- */
 
-/* CLINICS */
-
-.clinic{
-  padding: 0px;
-  margin-bottom: 20px;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.432);
-}
-
-/* ---- */
-
-/* NEW CLINIC */
+/* NEW or EDIT ITEM */
 
 .form{
   max-width: 500px;
@@ -182,22 +184,22 @@ p{
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.432);
 }
 
-.new-clinic .item-content{
+.form-panel .item-content{
   display: flex;
   flex-direction: column;
 }
 
-.new-clinic .item-content > * {
+.form-panel .item-content > * {
   margin: 10px 0;
   padding: 10px;
 }
 
-.new-clinic .item-footer{
+.form-panel .item-footer{
   display: flex;
   flex-direction: column;
 }
 
-.new-clinic .controls,
+.form-panel .controls,
 .form-error{
   display: block;
   margin: auto;

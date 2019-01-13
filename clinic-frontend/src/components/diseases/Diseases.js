@@ -1,33 +1,34 @@
 import React, {Component} from 'react';
-import Clinic from './Clinic';
 import constants from '../../constants/pages';
+import Disease from './Disease';
 
-class Clinics extends Component {
+class Diseases extends Component {
     constructor(props){
         super(props)
         this.state = {
-            clinics: []
+            diseases: []
         }
     }
 
     componentDidMount () {
-        this.props.getHandler(constants.CLINICS);
+        this.props.getHandler(constants.DISEASES);
         this.setState({
-            clinics: this.props.clinics
+            diseases: this.props.diseases
         })
+        console.log(this.state.diseases)
     }
 
     componentWillReceiveProps(newProps){
         this.setState({
-            clinics: newProps.clinics
+            diseases: newProps.diseases
         })
     }
 
     render(){
         return(
-            <div className="clinics">
+            <div className="diseases">
                 <div className="page-title">
-                    <span>Clinics</span>
+                    <span>Diseases</span>
                     <button 
                         className="default-btn back"
                         onClick={()=>this.props.changePanel(constants.HOME)}
@@ -36,15 +37,15 @@ class Clinics extends Component {
                 <div className="options">
                     <button 
                         className="controls-btn add"
-                        onClick={()=>this.props.changePanel(constants.NEW_CLINIC)}
-                    >Add new clinic</button>
+                        onClick={()=>this.props.changePanel(constants.NEW_DISEASE)}
+                    >Add new disease</button>
                 </div>
                 <div className="elements">
                 {
-                    this.state.clinics.map( (clinic, index) => {
-                        return <Clinic 
+                    this.state.diseases.map( (disease, index) => {
+                        return <Disease
                             key={index} 
-                            data={clinic}
+                            data={disease}
                             deleteHandler={this.props.deleteHandler}
                             editItemHandler={this.props.editItemHandler}
                             changePanel={this.props.changePanel}
@@ -57,4 +58,4 @@ class Clinics extends Component {
     }
 }
 
-export default Clinics;
+export default Diseases;

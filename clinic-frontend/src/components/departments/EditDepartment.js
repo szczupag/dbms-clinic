@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import constants from '../../constants/pages';
 
-class EditClinic extends Component {
+class EditDepartment extends Component {
     constructor(props){
         super(props)
         this.state={
             name: this.props.data.name,
-            type: this.props.data.type,
-            departments: this.props.departments,
             error: null
         }
         this.nameChangeHandler = this.nameChangeHandler.bind(this);
@@ -18,24 +16,19 @@ class EditClinic extends Component {
         this.setState({name: e.target.value})
     }
 
-    typeChangeHandler(e){
-        this.setState({type: e.target.value})
-    }
-
     submitHandler(){
-        if( this.state.name != '' && this.state.type!=''){
+        if( this.state.name != ''){
             if( this.state.name != this.props.data.name || this.state.type != this.props.data.type){
                 const data = {
                     id: this.props.data.id,
-                    name: this.state.name,
-                    type: this.state.type
+                    name: this.state.name
                 }
-                this.props.putHandler(constants.CLINICS, data);
-                this.props.changePanel(constants.CLINICS);
+                this.props.putHandler(constants.DEPARTMENTS, data);
+                this.props.changePanel(constants.DEPARTMENTS);
             }else{
-                this.setState({error: 'There are no updates for this clinic!'})
+                this.setState({error: 'There are no updates for this department!'})
             }
-        }else if(this.state.name == '' || this.state.type ==''){
+        }else if(this.state.name == ''){
             this.setState({error: 'Not all required inputs are filled!'})
         }
     }
@@ -44,10 +37,10 @@ class EditClinic extends Component {
         return(
             <div className="form-panel">
                 <div className="page-title">
-                    <span>Edit clinic</span>
+                    <span>Edit department</span>
                     <button 
                         className="default-btn back"
-                        onClick={()=>this.props.changePanel(constants.CLINICS)}
+                        onClick={()=>this.props.changePanel(constants.DEPARTMENTS)}
                     >Back</button>
                 </div>
                 <div className="form">
@@ -56,10 +49,6 @@ class EditClinic extends Component {
                             placeholder="Name*"
                             value={this.state.name}
                             onChange={(e)=>this.nameChangeHandler(e)}></input>
-                        <input 
-                            placeholder="Type*"
-                            value={this.state.type}
-                            onChange={(e)=>this.typeChangeHandler(e)}></input>
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}
@@ -73,4 +62,4 @@ class EditClinic extends Component {
     }
 }
 
-export default EditClinic;
+export default EditDepartment;

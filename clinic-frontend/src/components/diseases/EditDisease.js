@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import constants from '../../constants/pages';
 
-class EditClinic extends Component {
+class EditDoctor extends Component {
     constructor(props){
         super(props)
         this.state={
             name: this.props.data.name,
-            type: this.props.data.type,
-            departments: this.props.departments,
+            severity: this.props.data.severity,
+            treatmentsIds: [],
             error: null
         }
         this.nameChangeHandler = this.nameChangeHandler.bind(this);
+        this.severityChangeHandler = this.severityChangeHandler.bind(this);
+        this.treatmentsIdChangeHandler = this.treatmentsIdChangeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
     }
 
@@ -18,24 +20,30 @@ class EditClinic extends Component {
         this.setState({name: e.target.value})
     }
 
-    typeChangeHandler(e){
-        this.setState({type: e.target.value})
+    severityChangeHandler(e){
+        this.setState({severity: e.target.value})
+    }
+
+    treatmentsIdChangeHandler(e){
+        this.setState({treatmentsId: e.target.value})
     }
 
     submitHandler(){
-        if( this.state.name != '' && this.state.type!=''){
-            if( this.state.name != this.props.data.name || this.state.type != this.props.data.type){
+        if( this.state.name != '' && this.state.severity!=''){
+            if( this.state.name != this.props.data.name || this.state.severity != this.props.data.severity){
                 const data = {
                     id: this.props.data.id,
                     name: this.state.name,
-                    type: this.state.type
+                    severity: this.state.severity,
+                    treatmentsIds: this.state.treatmentsIds
                 }
-                this.props.putHandler(constants.CLINICS, data);
-                this.props.changePanel(constants.CLINICS);
+                console.log(data);
+                this.props.putHandler(constants.DISEASES, data);
+                this.props.changePanel(constants.DISEASES);
             }else{
-                this.setState({error: 'There are no updates for this clinic!'})
+                this.setState({error: 'There are no updates for this treatment'})
             }
-        }else if(this.state.name == '' || this.state.type ==''){
+        }else if( this.state.name == '' || this.state.severity ==''){
             this.setState({error: 'Not all required inputs are filled!'})
         }
     }
@@ -44,10 +52,10 @@ class EditClinic extends Component {
         return(
             <div className="form-panel">
                 <div className="page-title">
-                    <span>Edit clinic</span>
+                    <span>Edit disease</span>
                     <button 
                         className="default-btn back"
-                        onClick={()=>this.props.changePanel(constants.CLINICS)}
+                        onClick={()=>this.props.changePanel(constants.DISEASES)}
                     >Back</button>
                 </div>
                 <div className="form">
@@ -57,9 +65,13 @@ class EditClinic extends Component {
                             value={this.state.name}
                             onChange={(e)=>this.nameChangeHandler(e)}></input>
                         <input 
-                            placeholder="Type*"
-                            value={this.state.type}
-                            onChange={(e)=>this.typeChangeHandler(e)}></input>
+                            placeholder="Severity*"
+                            value={this.state.severity}
+                            onChange={(e)=>this.severityChangeHandler(e)}></input>
+                        <input 
+                            placeholder="Treatments"
+                            value={this.state.treatmentsIds}
+                            onChange={(e)=>this.treatmentsIdChangeHandler(e)}></input>
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}
@@ -73,4 +85,4 @@ class EditClinic extends Component {
     }
 }
 
-export default EditClinic;
+export default EditDoctor;

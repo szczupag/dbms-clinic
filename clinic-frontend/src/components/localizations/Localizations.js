@@ -1,33 +1,34 @@
 import React, {Component} from 'react';
-import Clinic from './Clinic';
 import constants from '../../constants/pages';
+import Localization from './Localization';
 
-class Clinics extends Component {
+class Localizations extends Component {
     constructor(props){
         super(props)
         this.state = {
-            clinics: []
+            localizations: []
         }
     }
 
     componentDidMount () {
-        this.props.getHandler(constants.CLINICS);
+        this.props.getHandler(constants.LOCALIZATIONS);
         this.setState({
-            clinics: this.props.clinics
+            localizations: this.props.localizations
         })
+        console.log(this.state.localizations)
     }
 
     componentWillReceiveProps(newProps){
         this.setState({
-            clinics: newProps.clinics
+            localizations: newProps.localizations
         })
     }
 
     render(){
         return(
-            <div className="clinics">
+            <div className="localizations">
                 <div className="page-title">
-                    <span>Clinics</span>
+                    <span>Localizations</span>
                     <button 
                         className="default-btn back"
                         onClick={()=>this.props.changePanel(constants.HOME)}
@@ -36,15 +37,15 @@ class Clinics extends Component {
                 <div className="options">
                     <button 
                         className="controls-btn add"
-                        onClick={()=>this.props.changePanel(constants.NEW_CLINIC)}
-                    >Add new clinic</button>
+                        onClick={()=>this.props.changePanel(constants.NEW_LOCALIZATION)}
+                    >Add new localizations</button>
                 </div>
                 <div className="elements">
                 {
-                    this.state.clinics.map( (clinic, index) => {
-                        return <Clinic 
+                    this.state.localizations.map( (localization, index) => {
+                        return <Localization
                             key={index} 
-                            data={clinic}
+                            data={localization}
                             deleteHandler={this.props.deleteHandler}
                             editItemHandler={this.props.editItemHandler}
                             changePanel={this.props.changePanel}
@@ -57,4 +58,4 @@ class Clinics extends Component {
     }
 }
 
-export default Clinics;
+export default Localizations;

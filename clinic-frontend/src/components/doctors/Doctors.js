@@ -1,33 +1,34 @@
 import React, {Component} from 'react';
-import Clinic from './Clinic';
 import constants from '../../constants/pages';
+import Doctor from './Doctor';
 
-class Clinics extends Component {
+class Doctors extends Component {
     constructor(props){
         super(props)
         this.state = {
-            clinics: []
+            doctors: []
         }
     }
 
     componentDidMount () {
-        this.props.getHandler(constants.CLINICS);
+        this.props.getHandler(constants.DOCTORS);
         this.setState({
-            clinics: this.props.clinics
+            doctors: this.props.doctors
         })
+        console.log(this.state.doctors)
     }
 
     componentWillReceiveProps(newProps){
         this.setState({
-            clinics: newProps.clinics
+            doctors: newProps.doctors
         })
     }
 
     render(){
         return(
-            <div className="clinics">
+            <div className="doctors">
                 <div className="page-title">
-                    <span>Clinics</span>
+                    <span>Doctors</span>
                     <button 
                         className="default-btn back"
                         onClick={()=>this.props.changePanel(constants.HOME)}
@@ -36,15 +37,15 @@ class Clinics extends Component {
                 <div className="options">
                     <button 
                         className="controls-btn add"
-                        onClick={()=>this.props.changePanel(constants.NEW_CLINIC)}
-                    >Add new clinic</button>
+                        onClick={()=>this.props.changePanel(constants.NEW_DOCTOR)}
+                    >Add new doctor</button>
                 </div>
                 <div className="elements">
                 {
-                    this.state.clinics.map( (clinic, index) => {
-                        return <Clinic 
+                    this.state.doctors.map( (doctor, index) => {
+                        return <Doctor
                             key={index} 
-                            data={clinic}
+                            data={doctor}
                             deleteHandler={this.props.deleteHandler}
                             editItemHandler={this.props.editItemHandler}
                             changePanel={this.props.changePanel}
@@ -57,4 +58,4 @@ class Clinics extends Component {
     }
 }
 
-export default Clinics;
+export default Doctors;

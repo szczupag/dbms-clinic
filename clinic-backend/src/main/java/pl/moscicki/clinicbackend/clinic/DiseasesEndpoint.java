@@ -36,7 +36,7 @@ public class DiseasesEndpoint {
   }
 
   @CrossOrigin
-  @DeleteMapping
+  @DeleteMapping("/{id}")
   void deleteDisease(@PathVariable Long id) {
     clinicFacade.deleteDisease(id);
   }

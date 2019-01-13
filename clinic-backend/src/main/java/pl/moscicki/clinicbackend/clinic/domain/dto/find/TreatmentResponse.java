@@ -7,6 +7,7 @@ import pl.moscicki.clinicbackend.clinic.domain.MedicalProcedure;
 import pl.moscicki.clinicbackend.clinic.domain.Treatment;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,10 +41,10 @@ public class TreatmentResponse {
   }
 
   private static DiseaseResponse mapDisease(Treatment treatment) {
-    return DiseaseResponse.from(treatment.getDisease(),false);
+    return Objects.nonNull(treatment.getDisease()) ? DiseaseResponse.from(treatment.getDisease(),false) : null;
   }
 
   private static PatientResponse mapPatient(Treatment treatment) {
-    return PatientResponse.from(treatment.getPatient(), false);
+    return Objects.nonNull(treatment.getPatient()) ? PatientResponse.from(treatment.getPatient(), false) : null;
   }
 }

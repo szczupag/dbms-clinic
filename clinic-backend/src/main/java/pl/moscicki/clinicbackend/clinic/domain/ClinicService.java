@@ -21,7 +21,9 @@ class ClinicService {
 
   void createClinic(CreationClinic creationClinic, Localization localization, Set<Department> departments) {
     Clinic clinic = Clinic.from(creationClinic, localization, departments);
-    localization.setClinic(clinic);
+    if (localization != null) {
+      localization.setClinic(clinic);
+    }
     clinicRepository.save(clinic);
   }
 

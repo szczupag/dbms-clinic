@@ -37,7 +37,9 @@ class LocalizationService {
 
   void deleteLocalization(Long localizationId) {
     Localization localization = getLocalizationById(localizationId);
-    localization.getClinic().setLocalization(null);
+    if (localization.getClinic() != null) {
+      localization.getClinic().setLocalization(null);
+    }
     localizationRepository.deleteById(localizationId);
   }
 }

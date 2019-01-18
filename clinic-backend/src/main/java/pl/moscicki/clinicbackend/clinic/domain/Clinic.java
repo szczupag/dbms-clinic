@@ -29,7 +29,7 @@ public class Clinic {
   @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
   private Set<Department> departments;
 
-  @OneToOne(cascade = CascadeType.MERGE)
+  @OneToOne(cascade = CascadeType.ALL)
   private Localization localization;
 
   static Clinic from(CreationClinic creationClinic, Localization localization, Set<Department> departments) {

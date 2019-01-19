@@ -5,8 +5,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 @Component
 @Slf4j
@@ -38,12 +39,56 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
   @Override
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
     log.info("Adding entities to DB on application startup");
+
+    //Localizations
+    Localization szpitalna = Localization.builder()
+            .city("Poznan")
+            .street("Szpitalna")
+            .buildingNo(13L)
+            .postalCode("62-002")
+            .clinic(null)
+            .build();
+
+    localizationRepository.save(szpitalna);
+
+    //Departments
+    Department departmentOnkologii = Department.builder()
+            .name("Oddział onkologii")
+            .build();
+
+    Department departmentKardiologii = Department.builder()
+            .name("Oddział kardiologii")
+            .build();
+
+    departmentRepository.save(departmentKardiologii);
+    departmentRepository.save(departmentOnkologii);
+
+    //Kliniki
+    Localization lokalizacjaSzpitalna = localizationRepository.findById(1L).orElse(null);
+    Set<Department> departmentySzpitalna = departmentRepository.findAllByDepartmentIdIn(new HashSet<>(Arrays.asList(2L,3L)));
+
+    Clinic clinic = Clinic.builder()
+            .name("Szpital MSW")
+            .type("Ogolny")
+            .build();
+
+    clinicRepository.save(clinic);
+
+    clinic.setLocalization(lokalizacjaSzpitalna);
+    clinic.setDepartments(departmentySzpitalna);
+    lokalizacjaSzpitalna.setClinic(clinic);
+    departmentySzpitalna.forEach(department -> department.setClinic(clinic));
+
+    clinicRepository.save(clinic);
+
+    //Doctors
     Doctor maciej = Doctor.builder()
             .pesel("12345678902")
             .firstName("Maciej")
             .lastName("Moscicki")
             .salary(10000L)
             .speciality("Chirurg")
+            .department(departmentOnkologii)
             .medicalProcedures(new HashSet<>())
             .build();
 
@@ -52,93 +97,13 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
             .firstName("Agata")
             .lastName("Szczuka")
             .speciality("Kardiolog")
+            .department(departmentOnkologii)
             .supervisor(maciej)
             .medicalProcedures(new HashSet<>())
             .build();
 
-    Patient patient = Patient.builder()
-            .firstName("pacjent")
-            .lastName("kowalski")
-            .pesel("12345678903")
-            .build();
-
-    patientRepository.save(patient);
-
-    Visitor visitor = Visitor.builder()
-            .firstName("wizytujacy")
-            .lastName("nowak")
-            .pesel("12345678904")
-            .idNumber("123")
-            .build();
-
-    Visitor visitor2 = Visitor.builder()
-            .firstName("wizytujacy2")
-            .lastName("nowak")
-            .pesel("12345678905")
-            .idNumber("123")
-            .build();
-
-    visitorRepository.save(visitor);
-    visitorRepository.save(visitor2);
-
-    Visit visit = Visit.builder()
-            .visitDate(new Date(1547305232))
-            .patient(patient)
-            .visitor(visitor)
-            .build();
-
-    Visit visit2 = Visit.builder()
-            .visitDate(new Date(1547305231))
-            .patient(patient)
-            .visitor(visitor2)
-            .build();
-
-    visitRepository.save(visit);
-    visitRepository.save(visit2);
-
-    doctorRepository.dropProcedureRaiseIfExists();
-    doctorRepository.createProcedureRaise();
-    patientRepository.dropCreaterVisitorsCountFunctionIfExists();
-    patientRepository.createVisitorsCountFunction();
-
-    doctorRepository.raise("12345678902");
-
-//    departmentRepository.save(department);
-//
-//    maciej.setDepartment(department);
-//    agata.setDepartment(department);
-//
-//    localizationRepository.save(localization);
-//
-//    clinicRepository.save(clinic);
-//
-//    localization.setClinic(clinic);
-//
-//    localizationRepository.save(localization);
-//
-//    doctorRepository.save(maciej);
-//    doctorRepository.save(agata);
-//
-//    department.setDoctors(new HashSet<>(Arrays.asList(maciej, agata)));
-//
-//    departmentRepository.save(department);
-//
-//    clinic.setDepartments(new HashSet<>(Arrays.asList(department)));
-//
-//    clinicRepository.save(clinic);
-//
-//    department.setClinic(clinic);
-//    departmentRepository.save(department);
-//
-//    medicalProcedureRepository.save(masaz_serca);
-//
-//    maciej.getMedicalProcedures().add(masaz_serca);
-//    agata.getMedicalProcedures().add(masaz_serca);
-
     doctorRepository.save(maciej);
     doctorRepository.save(agata);
-
-
 
     log.info("Added entities to DB on application startup");
   }

@@ -24,7 +24,9 @@ class ClinicService {
     if (localization != null) {
       localization.setClinic(clinic);
     }
-    departments.forEach(department -> department.setClinic(clinic));
+    if (departments != null) {
+      departments.forEach(department -> department.setClinic(clinic));
+    }
     clinicRepository.save(clinic);
   }
 
@@ -34,7 +36,9 @@ class ClinicService {
     if (localization != null) {
       localization.setClinic(clinic);
     }
-    departments.forEach(department -> department.setClinic(clinic));
+    if (departments != null) {
+      departments.forEach(department -> department.setClinic(clinic));
+    }
     clinicRepository.save(clinic);
   }
 

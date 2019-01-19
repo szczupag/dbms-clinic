@@ -44,7 +44,14 @@ class DoctorService {
   }
 
   void deleteDoctor(String pesel) {
-    doctorRepository.deleteById(pesel);
+    Doctor doctor = doctorRepository.findById(pesel).orElse(null);
+
+    if (doctor != null) {
+      doctorRepository.findAll().stream()
+              .filter(doc -> doc.getSupervisor() != null && doc.getSupervisor().getPesel().equals(pesel))
+              .forEach(empl -> empl.setSupervisor(null));
+      doctorRepository.deleteById(pesel);
+    }
   }
 
   void raiseSalary(String pesel) {

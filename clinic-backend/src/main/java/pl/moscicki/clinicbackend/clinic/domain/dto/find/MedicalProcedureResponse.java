@@ -16,7 +16,7 @@ public class MedicalProcedureResponse {
   private Long id;
   private String name;
   private Long cost;
-  private Set<String> doctors;
+  private Set<DoctorResponse> doctors;
 
   public static MedicalProcedureResponse from(MedicalProcedure medicalProcedure, boolean withDoctors) {
     return MedicalProcedureResponse.builder()
@@ -27,9 +27,9 @@ public class MedicalProcedureResponse {
             .build();
   }
 
-  private static Set<String> mapDoctors(MedicalProcedure medicalProcedure) {
+  private static Set<DoctorResponse> mapDoctors(MedicalProcedure medicalProcedure) {
     return medicalProcedure.getDoctors().stream()
-            .map(doctor -> doctor.getFirstName() + " " + doctor.getLastName())
+            .map(doctor -> DoctorResponse.from(doctor, false, false, false))
             .collect(Collectors.toSet());
   }
 

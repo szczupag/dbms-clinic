@@ -16,7 +16,7 @@ class MedicalProcedureService {
 
   List<MedicalProcedureResponse> getAllMedicalProcedures() {
     return medicalProcedureRepository.findAll().stream()
-            .map(medicalProcedure -> MedicalProcedureResponse.from(medicalProcedure, true))
+            .map(medicalProcedure -> MedicalProcedureResponse.from(medicalProcedure, true, true))
             .collect(Collectors.toList());
   }
 

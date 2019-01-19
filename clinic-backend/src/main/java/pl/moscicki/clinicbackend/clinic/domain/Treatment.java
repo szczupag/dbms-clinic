@@ -28,14 +28,14 @@ public class Treatment {
   @Temporal(TemporalType.DATE)
   private Date endDate;
 
-  @OneToMany(mappedBy = "treatment", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "treatment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<MedicalProcedure> medicalProcedures;
 
-  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "pesel")
   private Patient patient;
 
-  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "disease_id")
   private Disease disease;
 

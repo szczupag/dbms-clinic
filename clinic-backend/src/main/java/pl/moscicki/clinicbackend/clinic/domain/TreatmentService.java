@@ -25,7 +25,13 @@ class TreatmentService {
 
   void createTreatment(CreationTreatment creationTreatment, Set<MedicalProcedure> medicalProcedures, Patient patient,
                        Disease disease) {
-    treatmentRepository.save(Treatment.from(creationTreatment, medicalProcedures, patient, disease));
+    Treatment treatment = Treatment.from(creationTreatment, medicalProcedures, patient, disease);
+
+    if (medicalProcedures != null) {
+      medicalProcedures.forEach(medicalProcedure -> medicalProcedure.setTreatment(treatment));
+    }
+
+    treatmentRepository.save(treatment);
   }
 
   void updateTreatment(CreationTreatment creationTreatment, Set<MedicalProcedure> medicalProcedures, Patient patient,

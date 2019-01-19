@@ -19,7 +19,7 @@ class PatientService {
 
   Set<PatientResponse> getAllPatients() {
     return patientRepository.findAll().stream()
-            .map(patient -> PatientResponse.from(patient, false))
+            .map(patient -> PatientResponse.from(patient, true))
             .collect(Collectors.toSet());
   }
 

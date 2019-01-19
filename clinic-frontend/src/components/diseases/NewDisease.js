@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import constants from '../../constants/pages';
+import Select from 'react-select';
 
 class NewDisease extends Component {
     constructor(props){
         super(props)
+        // let treatmentsMap = this.props.treatments.map((treatment)=>{
+        //     return { value: treatment, label: treatment}
+        // })
         this.state={
             name: '',
             severity: '',
@@ -33,7 +37,7 @@ class NewDisease extends Component {
             const data = {
                 name: this.state.name,
                 severity: this.state.severity,
-                treatmentsIds: this.state.treatmentsIds
+                // treatmentsIds: this.state.treatmentsIds
             }
             console.log(data);
             this.props.postHandler(constants.DISEASES, data);
@@ -63,10 +67,10 @@ class NewDisease extends Component {
                             placeholder="Severity*"
                             value={this.state.severity}
                             onChange={(e)=>this.severityChangeHandler(e)}></input>
-                        <input 
+                        {/* <input 
                             placeholder="Treatments"
                             value={this.state.treatmentsIds}
-                            onChange={(e)=>this.treatmentsIdChangeHandler(e)}></input>
+                            onChange={(e)=>this.treatmentsIdChangeHandler(e)}></input> */}
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}

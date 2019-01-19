@@ -1,15 +1,28 @@
 import React, {Component} from 'react';
 import constants from '../../constants/pages';
+import Select from 'react-select';
 
 class EditTreatment extends Component {
     constructor(props){
         super(props)
+        let patientsMap = this.props.patients.map((patient)=>{
+            return { value: patient, label: <span>{patient.firstName+" "+patient.lastName}<span className="empty">{patient.pesel}</span></span>}
+        });
+        let diseasesMap = this.props.diseases.map((disease)=>{
+            return {value: disease, label: <span>{disease.name}<span className="empty">{disease.serverity}</span></span>}
+        });
+        let medicalProceduresMap = this.props.medicalProcedures.map((medicalProcedure)=>{
+            return {valueFix: medicalProcedure, value: medicalProcedure.id+'', label: medicalProcedure.name}
+        });
         this.state={
-            patientPesel: this.props.data.patientPesel,
-            diseaseId: this.props.data.diseaseId,
+            medicalProcedures: medicalProceduresMap,
+            medicalProcedure: null,
+            patient: null,
+            patients: patientsMap,
+            diseases: diseasesMap,
+            disease: null,
             startDate: this.props.data.startDate,
             endDate: this.props.data.endDate,
-            medicalProceduresIds: this.props.medicalProceduresIds,
             error: null
         }
         this.patientChangeHandler = this.patientChangeHandler.bind(this);
@@ -20,8 +33,8 @@ class EditTreatment extends Component {
         this.submitHandler = this.submitHandler.bind(this);
     }
 
-    patientChangeHandler(e){
-        this.setState({patientPesel: e.target.value})
+    patientChangeHandler(selectedPatient){
+        this.setState({patient: selectedPatient});
     }
 
     startDateChangeHandler(e){
@@ -32,32 +45,30 @@ class EditTreatment extends Component {
         this.setState({endDate: e.target.value})
     }
 
-    diseaseChangeHandler(e){
-        this.setState({diseaseId: e.target.value})
+    diseaseChangeHandler(selectedDis){
+        this.setState({disease: selectedDis});
     }
 
-    medicalProceduresChangeHandler(e){
-        this.setState({medicalProceduresIds: e.target.value})
+    medicalProceduresChangeHandler(selectedMedProc){
+        this.setState({medicalProcedure: selectedMedProc})
     }
 
     submitHandler(){
-        if( this.state.startDate != '' && this.state.patientPesel!=''){
-            if( this.state.startDate != this.props.data.startDate || this.state.patientPesel != this.props.data.patientPesel){
-                const data = {
-                    id: this.props.data.id,
-                    patientPesel: this.state.patientPesel,
-                    startDate: this.state.startDate,
-                    endDate: this.state.endDate,
-                    diseaseId: this.state.diseaseId,
-                    medicalProceduresIds: this.state.medicalProcedures
-                }
-                console.log(data);
-                this.props.putHandler(constants.TREATMENTS, data);
-                this.props.changePanel(constants.TREATMENTS);
-            }else{
-                this.setState({error: 'There are no updates for this treatment'})
+        if( this.state.startDate != '' && this.state.patient!=null){
+            const medicalProceduresIds = this.state.medicalProcedure!=null?this.state.medicalProcedure.map(med=>{return med.valueFix.id}):[];
+            const diseaseId = this.state.disease!=undefined?this.state.disease.value.id:'';
+            const data = {
+                id: this.props.data.id,
+                patientPesel: this.state.patient.value.pesel,
+                startDate: this.state.startDate,
+                endDate: this.state.endDate,
+                diseaseId: diseaseId,
+                medicalProceduresIds: medicalProceduresIds
             }
-        }else if( this.state.startDate == '' || this.state.patientPesel ==''){
+            console.log(data);
+            this.props.putHandler(constants.TREATMENTS, data);
+            this.props.changePanel(constants.TREATMENTS);
+        }else {
             this.setState({error: 'Not all required inputs are filled!'})
         }
     }
@@ -74,26 +85,38 @@ class EditTreatment extends Component {
                 </div>
                 <div className="form">
                     <div className="item-content">
-                        <input 
+                        <Select
                             placeholder="Patient*"
+                            className="selectBox"
                             value={this.state.patient}
-                            onChange={(e)=>this.patientChangeHandler(e)}></input>
+                            onChange={this.patientChangeHandler}
+                            options={this.state.patients}
+                        />
                         <input 
                             placeholder="Start date*"
+                            type="date"
                             value={this.state.startDate}
                             onChange={(e)=>this.startDateChangeHandler(e)}></input>
                         <input 
                             placeholder="End date"
+                            type="date"
                             value={this.state.endDate}
                             onChange={(e)=>this.endDateChangeHandler(e)}></input>
-                        <input 
+                        <Select
                             placeholder="Disease"
+                            className="selectBox"
                             value={this.state.disease}
-                            onChange={(e)=>this.diseaseChangeHandler(e)}></input>
-                        <input 
-                            placeholder="Medical procedures"
-                            value={this.state.medicalProcedures}
-                            onChange={(e)=>this.medicalProceduresChangeHandler(e)}></input>
+                            onChange={this.diseaseChangeHandler}
+                            options={this.state.diseases}
+                        />
+                        <Select
+                            isMulti
+                            placeholder="Medical Procedure"
+                            className="selectBox"
+                            value={this.state.medicalProcedure}
+                            onChange={this.medicalProceduresChangeHandler}
+                            options={this.state.medicalProcedures}
+                        />    
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}

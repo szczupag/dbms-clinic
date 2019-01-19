@@ -7,14 +7,14 @@ class NewClinic extends Component {
         super(props)
         let localizationMap = this.props.localizations.map((localization)=>{
             // show localizations without clinic only            
-            if (localization.clinic==undefined) {
+            if (localization.clinic===undefined) {
                 return { value: localization, label: localization.street+" "+localization.postalCode+" "+localization.city}
             }
         });
         let departmentsMap = this.props.departments.map((department)=>{
             // show departments without clinic only
             if(department.clinic==undefined){
-                return { value: department, label: department.name }
+                return { valueFix: department, value: department+'', label: department.name }
             }
         });
         localizationMap = localizationMap.filter(function(el){return el !== undefined;});
@@ -53,7 +53,7 @@ class NewClinic extends Component {
 
     submitHandler(){
         const localizationId = this.state.localization!=null ? this.state.localization.value.id : null;
-        const departmentIds = this.state.department!=null ? this.state.department.map(dep=>{return dep.value.id}):null;
+        const departmentIds = this.state.department!=null ? this.state.department.map(dep=>{return dep.valueFix.id}):null;
         console.log(departmentIds)
         if( this.state.name != '' && this.state.type!='' && localizationId!=null){
             const data = {

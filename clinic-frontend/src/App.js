@@ -81,6 +81,12 @@ class App extends Component {
       this.getHandler(constants.CLINICS);
       this.getHandler(constants.DEPARTMENTS);
       this.getHandler(constants.DOCTORS);
+      this.getHandler(constants.DISEASES);
+      this.getHandler(constants.MEDICAL_PROCEDURES);
+      this.getHandler(constants.PATEINTS);
+      this.getHandler(constants.TREATMENTS);
+      this.getHandler(constants.VISITS);
+      this.getHandler(constants.VISITORS);
     }
 
 //----------------- DATABASE HANDLERS -----------------
@@ -220,11 +226,17 @@ class App extends Component {
               changePanel={this.changePanel}
               data={this.state.edit}
               putHandler={this.putHandler}
+              patients={this.state.patients}
+              diseases={this.state.diseases}
+              medicalProcedures={this.state.medicalProcedures}
             />;
           case constants.NEW_TREATMENT:
             return <NewTreatment
               changePanel={this.changePanel}
               postHandler={this.postHandler}
+              patients={this.state.patients}
+              diseases={this.state.diseases}
+              medicalProcedures={this.state.medicalProcedures}
             />;
           case constants.TREATMENTS:
             return <Treatments
@@ -234,17 +246,24 @@ class App extends Component {
               deleteHandler={this.deleteHandler}
               editItemHandler={this.editItemHandler}
               changePanel={this.changePanel}
+              patients={this.state.patients}
+              diseases={this.state.diseases}
+              medicalProcedures={this.state.medicalProcedures}
             />;
           case constants.EDIT_PATIENT:
             return <EditPatient
               changePanel={this.changePanel}
               data={this.state.edit}
               putHandler={this.putHandler}
+              treatments={this.state.treatments}
+              medicalProcedures={this.state.medicalProcedures}
             />;
           case constants.NEW_PATIENT:
             return <NewPatient
               changePanel={this.changePanel}
               postHandler={this.postHandler}
+              treatments={this.state.treatments}
+              medicalProcedures={this.state.medicalProcedures}
             />;
           case constants.PATEINTS:
             return <Patients
@@ -254,17 +273,21 @@ class App extends Component {
               deleteHandler={this.deleteHandler}
               editItemHandler={this.editItemHandler}
               changePanel={this.changePanel}
+              treatments={this.state.treatments}
+              medicalProcedures={this.state.medicalProcedures}
             />;
           case constants.EDIT_MEDICAL_PROCEDURE:
             return <EditMedicalProcedure
               changePanel={this.changePanel}
               data={this.state.edit}
               putHandler={this.putHandler}
+              doctors={this.state.doctors}
             />;
           case constants.NEW_MEDICAL_PROCEDURE:
             return <NewMedicalProcedure
               changePanel={this.changePanel}
               postHandler={this.postHandler}
+              doctors={this.state.doctors}
             />;
           case constants.MEDICAL_PROCEDURES:
             return <MedicalProcedures
@@ -274,17 +297,20 @@ class App extends Component {
               deleteHandler={this.deleteHandler}
               editItemHandler={this.editItemHandler}
               changePanel={this.changePanel}
+              doctors={this.state.doctors}
             />;
           case constants.EDIT_DISEASE:
             return <EditDisease
               changePanel={this.changePanel}
               data={this.state.edit}
               putHandler={this.putHandler}
+              treatments={this.state.treatments}
             />;
           case constants.NEW_DISEASE:
             return <NewDisease
               changePanel={this.changePanel}
               postHandler={this.postHandler}
+              treatments={this.state.treatments}
             />;
           case constants.DISEASES:
             return <Diseases
@@ -294,6 +320,7 @@ class App extends Component {
               deleteHandler={this.deleteHandler}
               editItemHandler={this.editItemHandler}
               changePanel={this.changePanel}
+              treatments={this.state.treatments}
             />;
           case constants.EDIT_DOCTOR:
             return <EditDoctor
@@ -317,6 +344,7 @@ class App extends Component {
               getHandler={this.getHandler}
               deleteHandler={this.deleteHandler}
               editItemHandler={this.editItemHandler}
+              departments={this.state.departments}
               changePanel={this.changePanel}
             />;
           case constants.EDIT_LOCALIZATION:
@@ -384,6 +412,7 @@ class App extends Component {
               deleteHandler={this.deleteHandler}
               editItemHandler={this.editItemHandler}
               changePanel={this.changePanel}
+              localizations={this.state.localizations}
             />;
           case constants.WELCOME:
             return <Welcome changePanel={this.changePanel}/>;

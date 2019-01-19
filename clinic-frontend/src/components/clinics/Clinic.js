@@ -16,7 +16,7 @@ const Clinic = props => {
                 <p className="label">departments:</p>
                     {departments}
                 <p className="label">localization:</p>                
-                <p>{props.data.localization}</p>
+                <p>{props.data.localization.city+" "+props.data.localization.postalCode+" "+props.data.localization.street+" "+props.data.localization.buildingNo}</p>
                 
             </div>
             <div className="item-footer">

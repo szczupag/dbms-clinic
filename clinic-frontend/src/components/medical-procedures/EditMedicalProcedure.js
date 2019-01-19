@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import constants from '../../constants/pages';
+import Select from 'react-select';
 
 class EditMedicalProcedure extends Component {
     constructor(props){
         super(props)
+        let doctorsMap = this.props.doctors.map(doctor=>{
+            return { valueFix: doctor, value: doctor.pesel+'', label:doctor.firstName+" "+doctor.lastName }
+        })
         this.state={
             cost: this.props.data.cost,
-            doctors: this.props.data.doctors,
+            doctors: doctorsMap,
+            doctor: null,
             name: this.props.data.name,
             error: null
         }
@@ -20,8 +25,8 @@ class EditMedicalProcedure extends Component {
         this.setState({cost: e.target.value})
     }
 
-    doctorsChangeHandler(e){
-        this.setState({doctors: e.target.value})
+    doctorsChangeHandler(selectedDoc){
+        this.setState({doctor: selectedDoc})
     }
 
     nameChangeHandler(e){
@@ -30,19 +35,16 @@ class EditMedicalProcedure extends Component {
 
     submitHandler(){
         if( this.state.name != '' && this.state.cost!=''){
-            if( this.state.name != this.props.data.name || this.state.cost != this.props.data.cost){
-                const data = {
-                    id: this.props.data.id,
-                    cost: this.state.cost,
-                    doctors: this.state.doctors,
-                    name: this.state.name
-                }
-                console.log(data);
-                this.props.putHandler(constants.MEDICAL_PROCEDURES, data);
-                this.props.changePanel(constants.MEDICAL_PROCEDURES);
-            }else{
-                this.setState({error: 'There are no updates for this procedure'})
+            const doctorsIds = this.state.doctor!=null?this.state.doctor.map(doc=>{return doc.valueFix.pesel}):[];
+            const data = {
+                id: this.props.data.id,
+                cost: this.state.cost,
+                doctorsIds: doctorsIds,
+                name: this.state.name
             }
+            console.log(data);
+            this.props.putHandler(constants.MEDICAL_PROCEDURES, data);
+            this.props.changePanel(constants.MEDICAL_PROCEDURES);
         }else if( this.state.name == '' || this.state.cost ==''){
             this.setState({error: 'Not all required inputs are filled!'})
         }
@@ -61,17 +63,21 @@ class EditMedicalProcedure extends Component {
                 <div className="form">
                 <div className="item-content">
                         <input 
+                            placeholder="Name*"
+                            value={this.state.name}
+                            onChange={(e)=>this.nameChangeHandler(e)}></input>
+                        <input 
                             placeholder="Cost*"
                             value={this.state.cost}
                             onChange={(e)=>this.costChangeHandler(e)}></input>
-                        <input 
+                        <Select
+                            isMulti
                             placeholder="Doctors"
-                            value={this.state.doctors}
-                            onChange={(e)=>this.doctorsChangeHandler(e)}></input>
-                        <input 
-                            placeholder="Treatments*"
-                            value={this.state.name}
-                            onChange={(e)=>this.nameChangeHandler(e)}></input>
+                            className="selectBox"
+                            value={this.state.doctor}
+                            onChange={this.doctorsChangeHandler}
+                            options={this.state.doctors}
+                        />
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}

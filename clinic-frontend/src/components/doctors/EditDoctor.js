@@ -6,7 +6,7 @@ class EditDoctor extends Component {
     constructor(props){
         super(props)
         let supervisorsMap = this.props.doctors.map((supervisor)=>{
-            if(supervisor.pesel!=this.props.data.pesel){
+            if(supervisor.pesel!=this.props.data.pesel&&supervisor.supervisor.pesel!=this.props.data.pesel){
                 const supDep = supervisor.department!=undefined?supervisor.department.name:'';
                 return { value: supervisor, label: <span>{supervisor.firstName+" "+supervisor.lastName+" "}<span className="empty">{supDep}</span></span>}
             }
@@ -66,7 +66,7 @@ class EditDoctor extends Component {
     submitHandler(){
         const supervisorId = this.state.supervisor!=null ? this.state.supervisor.value.pesel : null;
         const departmentId = this.state.department!=null ? this.state.department.value.id : null;
-        if( this.state.firstName != '' && this.state.lastName!='' && this.state.supervisorId!='' ){
+        if( this.state.firstName != '' && this.state.lastName!='' && departmentId!=null ){
             const data = {
                 pesel: this.props.data.pesel,
                 firstName: this.state.firstName,

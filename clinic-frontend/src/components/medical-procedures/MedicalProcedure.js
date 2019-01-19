@@ -2,15 +2,19 @@ import React from 'react';
 import constants from '../../constants/pages';
 
 const MedicalProcedure = props => {
+    const doctors = props.data.doctors.map((doctor,key)=>{
+        return <p key={key}>{doctor.firstName+" "+doctor.lastName}</p>
+    })
     return(
         <div className="item-wrapper">
+            <div className="item-header">
+                <p>{props.data.name}</p>
+            </div>
             <div className="item-content">
                 <p className="label">cost:</p>
                 <p>{props.data.cost}</p>
-                <p className="label">name:</p>
-                <p>{props.data.name}</p>
                 <p className="label">doctors:</p>
-                {/* <p>{props.data.treatments}</p> */}
+                    {doctors}
             </div>
             <div className="item-footer">
                 <div className="controls">

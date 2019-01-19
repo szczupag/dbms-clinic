@@ -13,7 +13,7 @@ const Patient = props => {
                 <p className="label">phoneNumber:</p>
                 <p>{props.data.phoneNumber}</p>
                 <p className="label">treatments:</p>
-                <p>{props.data.treatments}</p>
+                <p>{/*props.data.treatments*/}</p>
             </div>
             <div className="item-footer">
                 <div className="controls">

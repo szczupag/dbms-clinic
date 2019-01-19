@@ -28,7 +28,7 @@ class Visitors extends Component {
         return(
             <div className="visitors">
                 <div className="page-title">
-                    <span>visitors</span>
+                    <span>Visitors</span>
                     <button 
                         className="default-btn back"
                         onClick={()=>this.props.changePanel(constants.HOME)}

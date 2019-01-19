@@ -15,7 +15,7 @@ const Visitor = props => {
                 <p className="label">id number:</p>
                 <p>{props.data.idNumber}</p>
                 <p className="label">visits:</p>
-                <p>{props.data.visits}</p>
+                <p>{/*props.data.visits*/}</p>
             </div>
             <div className="item-footer">
                 <div className="controls">

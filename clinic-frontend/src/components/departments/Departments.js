@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import constants from '../../constants/pages';
 import Department from './Department';
+import Select from 'react-select';
 
 class Departments extends Component {
     constructor(props){
         super(props)
         this.state = {
-            departments: []
+            departments: [],
+            sortBy: null
         }
+        this.sortChangeHandler = this.sortChangeHandler.bind(this);
     }
 
     componentDidMount () {
@@ -21,6 +24,20 @@ class Departments extends Component {
         this.setState({
             departments: newProps.departments
         })
+    }
+
+    sortChangeHandler(selectedSort){
+        this.setState({sortBy: selectedSort})
+        switch(selectedSort.value){
+            case 'name':
+                this.state.departments.sort((a,b)=>a.name>b.name);
+                break;
+            case 'clinic':
+                this.state.departments.sort((a,b)=>a.clinic>b.clinic);
+                break;
+            default:
+                break;
+        }
     }
 
     render(){
@@ -38,6 +55,18 @@ class Departments extends Component {
                         className="controls-btn add"
                         onClick={()=>this.props.changePanel(constants.NEW_DEPARTMENT)}
                     >Add new department</button>
+                </div>
+                <div className="dataDisplay">
+                    <Select
+                        placeholder="Sort by"
+                        className="selectBox sort"
+                        options={[
+                            { value: 'name', label: 'name' },
+                            { value: 'clinic', label: 'clinic' }
+                        ]}
+                        value={this.state.sortBy}
+                        onChange={this.sortChangeHandler}
+                    />
                 </div>
                 <div className="elements">
                 {

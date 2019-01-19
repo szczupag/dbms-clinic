@@ -35,7 +35,7 @@ class EditDoctor extends Component {
                     id: this.props.data.id,
                     name: this.state.name,
                     severity: this.state.severity,
-                    treatmentsIds: this.state.treatmentsIds
+                    // treatmentsIds: this.state.treatmentsIds
                 }
                 console.log(data);
                 this.props.putHandler(constants.DISEASES, data);
@@ -68,10 +68,10 @@ class EditDoctor extends Component {
                             placeholder="Severity*"
                             value={this.state.severity}
                             onChange={(e)=>this.severityChangeHandler(e)}></input>
-                        <input 
+                        {/* <input 
                             placeholder="Treatments"
                             value={this.state.treatmentsIds}
-                            onChange={(e)=>this.treatmentsIdChangeHandler(e)}></input>
+                            onChange={(e)=>this.treatmentsIdChangeHandler(e)}></input> */}
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}

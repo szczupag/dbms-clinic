@@ -47,7 +47,7 @@ class NewPatient extends Component {
                 lastName: this.state.lastName,
                 pesel: this.state.pesel,
                 phoneNumber: this.state.phoneNumber,
-                treatments: this.state.treatments,
+                // treatments: this.state.treatments,
             }
             console.log(data);
             this.props.postHandler(constants.PATEINTS, data);
@@ -85,10 +85,10 @@ class NewPatient extends Component {
                             placeholder="phoneNumber"
                             value={this.state.phoneNumber}
                             onChange={(e)=>this.phoneNumberChangeHandler(e)}></input>
-                        <input 
+                        {/* <input 
                             placeholder="treatments"
                             value={this.state.treatments}
-                            onChange={(e)=>this.treatmentsChangeHandler(e)}></input>
+                            onChange={(e)=>this.treatmentsChangeHandler(e)}></input> */}
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}

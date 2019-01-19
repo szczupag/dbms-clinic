@@ -61,7 +61,7 @@ class NewVisitor extends Component {
         return(
             <div className="form-panel">
                 <div className="page-title">
-                    <span>New patient</span>
+                    <span>New visitor</span>
                     <button 
                         className="default-btn back"
                         onClick={()=>this.props.changePanel(constants.VISITORS)}

@@ -10,6 +10,7 @@ class NewDoctor extends Component {
             return { value: supervisor, label: <span>{supervisor.firstName+" "+supervisor.lastName+" "}<span className="empty">{supDep}</span></span>}
         });
         let departmentsMap = this.props.departments.map((department)=>{
+            console.log(department)
             // show departments with clinic only
             if(department.clinic!==undefined){
                 return { value: department, label: <span>{department.name}<span className="empty">{department.clinic.name}</span></span> }

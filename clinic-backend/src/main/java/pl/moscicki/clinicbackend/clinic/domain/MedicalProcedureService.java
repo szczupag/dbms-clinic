@@ -14,9 +14,9 @@ class MedicalProcedureService {
     this.medicalProcedureRepository = medicalProcedureRepository;
   }
 
-  List<MedicalProcedureResponse> getAllMedicalProcedures(boolean withDoctors) {
+  List<MedicalProcedureResponse> getAllMedicalProcedures() {
     return medicalProcedureRepository.findAll().stream()
-            .map(medicalProcedure -> MedicalProcedureResponse.from(medicalProcedure, withDoctors))
+            .map(medicalProcedure -> MedicalProcedureResponse.from(medicalProcedure, true))
             .collect(Collectors.toList());
   }
 
@@ -25,7 +25,11 @@ class MedicalProcedureService {
   }
 
   void createMedicalProcedure(CreationMedicalProcedure creationMedicalProcedure, Set<Doctor> doctors) {
-    medicalProcedureRepository.save(MedicalProcedure.from(creationMedicalProcedure, doctors));
+    MedicalProcedure medicalProcedure = MedicalProcedure.from(creationMedicalProcedure, doctors);
+    if (doctors != null) {
+      doctors.forEach(doc -> doc.getMedicalProcedures().add(medicalProcedure));
+    }
+    medicalProcedureRepository.save(medicalProcedure);
   }
 
   public void updateMedicalProcedure(CreationMedicalProcedure creationMedicalProcedure, Set<Doctor> doctors,
@@ -33,6 +37,9 @@ class MedicalProcedureService {
     MedicalProcedure medicalProcedure = MedicalProcedure.from(creationMedicalProcedure, doctors);
     medicalProcedure.setMedicalProcedureId(medicalProcedureId);
 
+    if (doctors != null) {
+      doctors.forEach(doc -> doc.getMedicalProcedures().add(medicalProcedure));
+    }
     medicalProcedureRepository.save(medicalProcedure);
   }
 

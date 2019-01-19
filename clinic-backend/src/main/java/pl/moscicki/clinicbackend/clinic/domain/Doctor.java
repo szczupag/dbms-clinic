@@ -35,7 +35,10 @@ public class Doctor {
   @OneToOne
   private Doctor supervisor;
 
-  @ManyToMany(fetch = FetchType.LAZY)
+  @ManyToMany(fetch = FetchType.LAZY, cascade = {
+          CascadeType.PERSIST,
+          CascadeType.MERGE
+  })
   @JoinTable(name = "doctors_medical_procedures",
           joinColumns = @JoinColumn(name = "pesel"),
           inverseJoinColumns = @JoinColumn(name = "medical_procedure_id"))

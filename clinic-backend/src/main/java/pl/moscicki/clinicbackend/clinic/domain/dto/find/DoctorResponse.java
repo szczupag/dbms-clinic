@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Value;
 import pl.moscicki.clinicbackend.clinic.domain.Doctor;
-import pl.moscicki.clinicbackend.clinic.domain.MedicalProcedure;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ public class DoctorResponse {
   private String lastName;
   private Long salary;
   private String speciality;
-  private Set<String> medicalProcedures;
+  private Set<MedicalProcedureResponse> medicalProcedures;
   private DepartmentResponse department;
   private DoctorResponse supervisor;
 
@@ -32,13 +31,13 @@ public class DoctorResponse {
             .speciality(doctor.getSpeciality())
             .supervisor(withSupervisor ? mapSupervisor(doctor) : null)
             .department(withDepartment ? mapDepartment(doctor) : null)
-            .medicalProcedures(mapMedicalProcedures(doctor, withMedicalProcedures))
+            .medicalProcedures(withMedicalProcedures ? mapMedicalProcedures(doctor) : null)
             .build();
   }
 
   private static DepartmentResponse mapDepartment(Doctor doctor) {
     return doctor.getDepartment() != null ?
-            DepartmentResponse.from(doctor.getDepartment(), false, false) :
+            DepartmentResponse.from(doctor.getDepartment(), true, false) :
             null;
   }
 
@@ -48,11 +47,11 @@ public class DoctorResponse {
             : null;
     }
 
-  private static Set<String> mapMedicalProcedures(Doctor doctor, boolean withMedicalProcedures) {
-    return withMedicalProcedures ? doctor.getMedicalProcedures().stream()
-            .map(MedicalProcedure::getName)
-            .collect(Collectors.toSet()) : null;
+  private static Set<MedicalProcedureResponse> mapMedicalProcedures(Doctor doctor) {
+    return doctor.getMedicalProcedures().stream()
+            .map(medicalProcedure -> MedicalProcedureResponse.from(medicalProcedure, false))
+            .collect(Collectors.toSet());
   }
-  }
+}
 
 

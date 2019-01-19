@@ -19,8 +19,8 @@ class MedicalProceduresEndpoint {
 
   @CrossOrigin
   @GetMapping(value = "/all")
-  List<MedicalProcedureResponse> getAll(@RequestParam(value = "doctors", defaultValue = "false", required = false) boolean withDoctors) {
-    return clinicFacade.getAllMedicalProcedures(withDoctors);
+  List<MedicalProcedureResponse> getAll() {
+    return clinicFacade.getAllMedicalProcedures();
   }
 
   @CrossOrigin

@@ -105,6 +105,21 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
     doctorRepository.save(maciej);
     doctorRepository.save(agata);
 
+    //Medical procedures
+//    MedicalProcedure przeszczepWatroby =  MedicalProcedure.builder()
+//            .name("Przeszczep wątroby")
+//            .cost(10000L)
+//            .doctors(new HashSet<>(Arrays.asList(maciej, agata)))
+//            .build();
+//
+//    medicalProcedureRepository.save(przeszczepWatroby);
+//    maciej.setMedicalProcedures(new HashSet<>(Arrays.asList(przeszczepWatroby)));
+//    agata.setMedicalProcedures(new HashSet<>(Arrays.asList(przeszczepWatroby)));
+//    doctorRepository.save(maciej);
+//    doctorRepository.save(agata);
+
+
+
     log.info("Added entities to DB on application startup");
   }
 }

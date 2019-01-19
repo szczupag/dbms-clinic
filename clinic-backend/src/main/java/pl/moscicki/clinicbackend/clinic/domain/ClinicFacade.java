@@ -36,8 +36,8 @@ public class ClinicFacade {
     this.visitorService = visitorService;
   }
 
-  public Set<DoctorResponse> getAllDoctors(boolean withMedicalProcedures) {
-    return doctorService.getAll(withMedicalProcedures);
+  public Set<DoctorResponse> getAllDoctors() {
+    return doctorService.getAll();
   }
 
   public void createDoctor(CreationDoctor doctor) {
@@ -58,8 +58,8 @@ public class ClinicFacade {
     return doctorService.getDoctorsByPesel(pesels);
   }
 
-  public List<MedicalProcedureResponse> getAllMedicalProcedures(boolean withDoctors) {
-    return medicalProcedureService.getAllMedicalProcedures(withDoctors);
+  public List<MedicalProcedureResponse> getAllMedicalProcedures() {
+    return medicalProcedureService.getAllMedicalProcedures();
   }
 
   public Set<MedicalProcedure> getMedicalProceduresById(Set<Long> medicalProcedureIds) {

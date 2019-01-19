@@ -28,10 +28,7 @@ public class Treatment {
   @Temporal(TemporalType.DATE)
   private Date endDate;
 
-  @ManyToMany
-  @JoinTable(name = "treatments_mecial_procedures",
-          joinColumns = @JoinColumn(name = "treatment_id"),
-          inverseJoinColumns = @JoinColumn(name = "medical_procedure_id"))
+  @OneToMany(mappedBy = "treatment", fetch = FetchType.LAZY)
   private Set<MedicalProcedure> medicalProcedures;
 
   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

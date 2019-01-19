@@ -5,6 +5,7 @@ import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationMedicalProce
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Set;
 
 @Builder
@@ -24,17 +25,21 @@ public class MedicalProcedure {
 
   private Long cost;
 
+  @Temporal(TemporalType.DATE)
+  private Date date;
+
   @ManyToMany(mappedBy = "medicalProcedures")
   private Set<Doctor> doctors;
 
-  @ManyToMany(mappedBy = "medicalProcedures")
-  private Set<Treatment> treatments;
+  @ManyToOne
+  private Treatment treatment;
 
   static MedicalProcedure from(CreationMedicalProcedure medicalProcedure, Set<Doctor> doctors) {
     return MedicalProcedure.builder()
             .name(medicalProcedure.getName())
             .cost(medicalProcedure.getCost())
             .doctors(doctors)
+            .date(medicalProcedure.getDate())
             .build();
   }
 }

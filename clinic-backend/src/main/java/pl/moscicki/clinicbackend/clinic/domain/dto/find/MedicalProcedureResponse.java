@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Value;
 import pl.moscicki.clinicbackend.clinic.domain.MedicalProcedure;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,12 +18,14 @@ public class MedicalProcedureResponse {
   private String name;
   private Long cost;
   private Set<DoctorResponse> doctors;
+  private Date date;
 
   public static MedicalProcedureResponse from(MedicalProcedure medicalProcedure, boolean withDoctors) {
     return MedicalProcedureResponse.builder()
             .id(medicalProcedure.getMedicalProcedureId())
             .name(medicalProcedure.getName())
             .cost(medicalProcedure.getCost())
+            .date(medicalProcedure.getDate())
             .doctors(withDoctors ? mapDoctors(medicalProcedure) : null)
             .build();
   }

@@ -10,13 +10,13 @@ class NewLocalization extends Component {
                 return { value: clinic, label: clinic.name+" "+clinic.type}
             }
         });
-        clinicsMap.filter(function(el){return el != undefined;});
+        clinicsMap = clinicsMap.filter(function(el){return el != undefined;});
         this.state={
             city: '',
             postalCode: '',
             street: '',
             buildingNo: '',
-            clinics: clinicsMap[0]!=undefined?clinicsMap:[],
+            clinics: clinicsMap,
             clinic: null,
             error: null
         }
@@ -57,7 +57,7 @@ class NewLocalization extends Component {
                     postalCode: this.state.postalCode,
                     street: this.state.street,
                     buildingNo: parseInt(this.state.buildingNo),
-                    clinic: clinicId
+                    // clinic: clinicId
                 }
                 console.log(data);
                 this.props.postHandler(constants.LOCALIZATIONS, data);
@@ -98,14 +98,14 @@ class NewLocalization extends Component {
                             placeholder="Building number*"
                             value={this.state.buildingNo}
                             onChange={(e)=>this.buildingNoChangeHandler(e)}></input>
-                        <Select
+                        {/* <Select
                             name="cli-for-loc"
                             placeholder="Clinic*"
                             className="selectBox"
                             value={this.state.clinic}
                             onChange={this.clinicChangeHandler}
                             options={this.state.clinics}
-                        />
+                        /> */}
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}

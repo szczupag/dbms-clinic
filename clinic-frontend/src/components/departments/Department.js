@@ -7,6 +7,8 @@ const Department = props => {
             <div className="item-content">
                 <p className="label">name:</p>
                 <p>{props.data.name}</p>
+                <p className="label">clinic:</p>
+                <p>{props.data.clinic!=undefined?props.data.clinic.name:<span className="empty">No clinic with this department</span>}</p>
             </div>
             <div className="item-footer">
                 <div className="controls">

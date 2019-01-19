@@ -87,14 +87,14 @@ class EditLocalization extends Component {
                             placeholder="Building number*"
                             value={this.state.buildingNo}
                             onChange={(e)=>this.buildingNoChangeHandler(e)}></input>
-                        <Select
+                        {/* <Select
                             name="cli-for-loc"
                             placeholder="Clinic*"
                             className="selectBox"
                             value={this.state.clinic}
                             onChange={this.clinicChangeHandler}
                             options={this.state.clinics}
-                        />
+                        /> */}
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}

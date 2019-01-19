@@ -6,22 +6,32 @@ class NewClinic extends Component {
     constructor(props){
         super(props)
         let localizationMap = this.props.localizations.map((localization)=>{
+            // show localizations without clinic only            
             if (localization.clinic==undefined) {
-                return { value: localization, label: localization.street+" "+localization.postalCode+" "+localization.city+" "+localization.id}
+                return { value: localization, label: localization.street+" "+localization.postalCode+" "+localization.city}
             }
         });
-        localizationMap.filter(function(el){return el != undefined;});
+        let departmentsMap = this.props.departments.map((department)=>{
+            // show departments without clinic only
+            if(department.clinic==undefined){
+                return { value: department, label: department.name }
+            }
+        });
+        localizationMap = localizationMap.filter(function(el){return el !== undefined;});
+        departmentsMap = departmentsMap.filter(function(el){return el !== undefined;});
         this.state={
             name: '',
             type: '',
-            departments: [],
-            localizations: localizationMap[0]=undefined?locationsMap:[],
+            departments: departmentsMap,
+            localizations: localizationMap,
+            department: null,
             localization: null,
             error: null
         }
         this.nameChangeHandler = this.nameChangeHandler.bind(this);
         this.typeChangeHandler = this.typeChangeHandler.bind(this);
         this.localizationChangeHandler = this.localizationChangeHandler.bind(this);
+        this.departmentChangeHandler = this.departmentChangeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
     }
     
@@ -36,14 +46,21 @@ class NewClinic extends Component {
     localizationChangeHandler(selectedLoc){
         this.setState({localization: selectedLoc});
     }
-// 
+
+    departmentChangeHandler(selectedDep){
+        this.setState({department: selectedDep});
+    }
+
     submitHandler(){
         const localizationId = this.state.localization!=null ? this.state.localization.value.id : null;
+        const departmentIds = this.state.department!=null ? this.state.department.map(dep=>{return dep.value.id}):null;
+        console.log(departmentIds)
         if( this.state.name != '' && this.state.type!='' && localizationId!=null){
             const data = {
                 name: this.state.name,
                 type: this.state.type,
-                localizationId: localizationId
+                localizationId: localizationId,
+                departmentIds: departmentIds
             }
             this.props.postHandler(constants.CLINICS, data);
             this.props.changePanel(constants.CLINICS);
@@ -80,7 +97,14 @@ class NewClinic extends Component {
                             onChange={this.localizationChangeHandler}
                             options={this.state.localizations}
                         />
-                        
+                        <Select
+                            isMulti
+                            placeholder="Departments"
+                            className="selectBox"
+                            value={this.state.department}
+                            onChange={this.departmentChangeHandler}
+                            options={this.state.departments}
+                        />
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}

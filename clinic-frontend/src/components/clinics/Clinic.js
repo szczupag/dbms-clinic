@@ -2,6 +2,9 @@ import React from 'react';
 import constants from '../../constants/pages';
 
 const Clinic = props => {
+    const departments = props.data.departments.map((department,key)=>{
+        return <p key={key}>{department.name}</p>
+    })
     return(
         <div className="item-wrapper">
             <div className="item-header">
@@ -11,12 +14,7 @@ const Clinic = props => {
                 <p className="label">type:</p>
                 <p>{props.data.type}</p>
                 <p className="label">departments:</p>
-                {
-                    Object.keys(props.data.departments).length!=0 ?           
-                        <span>{props.data.departments.map((department)=>{
-                            return department.name
-                        })}</span> : <span className="empty">No departments in this clinic</span>
-                }
+                    {departments}
                 <p className="label">localization:</p>                
                 <p>{props.data.localization}</p>
                 

@@ -1,16 +1,32 @@
 import React, {Component} from 'react';
 import constants from '../../constants/pages';
+import Select from 'react-select';
 
 class EditClinic extends Component {
     constructor(props){
         super(props)
+        let localizationMap = this.props.localizations.map((localization)=>{
+            if (localization.clinic===undefined) {
+                return { value: localization, label: localization.street+" "+localization.postalCode+" "+localization.city+" "+localization.id}
+            }
+        });
+        let departmentsMap = this.props.departments.map((department)=>{
+            return { value: department, label: department.name }
+        });
+        localizationMap = localizationMap.filter(function(el){return el !== undefined;});
+        departmentsMap = departmentsMap.filter(function(el){return el !== undefined;});
         this.state={
             name: this.props.data.name,
             type: this.props.data.type,
             departments: this.props.departments,
+            department: departmentsMap,
+            localizations: localizationMap,
+            localization: this.props.localization,
             error: null
         }
         this.nameChangeHandler = this.nameChangeHandler.bind(this);
+        this.localizationChangeHandler = this.localizationChangeHandler.bind(this);
+        this.departmentChangeHandler = this.departmentChangeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
     }
 
@@ -22,19 +38,28 @@ class EditClinic extends Component {
         this.setState({type: e.target.value})
     }
 
+    localizationChangeHandler(selectedLoc){
+        this.setState({localization: selectedLoc});
+    }
+
+    departmentChangeHandler(selectedDep){
+        this.setState({department: selectedDep});
+    }
+
     submitHandler(){
-        if( this.state.name != '' && this.state.type!=''){
-            if( this.state.name != this.props.data.name || this.state.type != this.props.data.type){
-                const data = {
-                    id: this.props.data.id,
-                    name: this.state.name,
-                    type: this.state.type
-                }
-                this.props.putHandler(constants.CLINICS, data);
-                this.props.changePanel(constants.CLINICS);
-            }else{
-                this.setState({error: 'There are no updates for this clinic!'})
+        const localizationId = this.state.localization!=null ? this.state.localization.value.id : null;
+        const departmentIds = this.state.department!=null ? this.state.department.map(dep=>{return dep.value.id}):null;
+        if( this.state.name != '' && this.state.type!='' && this.state.localizationId == null){
+            const data = {
+                id: this.props.data.id,
+                name: this.state.name,
+                type: this.state.type,
+                localizationId: localizationId,
+                departmentIds: departmentIds
             }
+            this.props.putHandler(constants.CLINICS, data);
+            this.props.changePanel(constants.CLINICS);
+        
         }else if(this.state.name == '' || this.state.type ==''){
             this.setState({error: 'Not all required inputs are filled!'})
         }
@@ -60,6 +85,22 @@ class EditClinic extends Component {
                             placeholder="Type*"
                             value={this.state.type}
                             onChange={(e)=>this.typeChangeHandler(e)}></input>
+                        <Select
+                            name="loc-for-cli"
+                            placeholder="Localization*"
+                            className="selectBox"
+                            value={this.state.localization}
+                            onChange={this.localizationChangeHandler}
+                            options={this.state.localizations}
+                        />
+                        {/* <Select
+                            isMulti
+                            placeholder="Departments"
+                            className="selectBox"
+                            value={this.state.department}
+                            onChange={this.departmentChangeHandler}
+                            options={this.state.departments}
+                        /> */}
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}

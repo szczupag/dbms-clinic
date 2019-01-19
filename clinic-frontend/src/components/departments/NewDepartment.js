@@ -4,6 +4,10 @@ import constants from '../../constants/pages';
 class NewDepartment extends Component {
     constructor(props){
         super(props)
+        let doctorsMap = this.props.doctors.map((doctor)=>{
+            return { value: doctor, label: doctor.firstName+" "+doctor.lastName }
+        });
+        console.log(doctorsMap)
         this.state={
             name: '',
             error: null

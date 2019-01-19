@@ -79,6 +79,8 @@ class App extends Component {
     componentDidMount(){
       this.getHandler(constants.LOCALIZATIONS);
       this.getHandler(constants.CLINICS);
+      this.getHandler(constants.DEPARTMENTS);
+      this.getHandler(constants.DOCTORS);
     }
 
 //----------------- DATABASE HANDLERS -----------------
@@ -298,11 +300,15 @@ class App extends Component {
               changePanel={this.changePanel}
               data={this.state.edit}
               putHandler={this.putHandler}
+              doctors={this.state.doctors}
+              departments={this.state.departments}
             />;
           case constants.NEW_DOCTOR:
             return <NewDoctor
               changePanel={this.changePanel}
               postHandler={this.postHandler}
+              doctors={this.state.doctors}
+              departments={this.state.departments}
             />;
           case constants.DOCTORS:
             return <Doctors
@@ -344,6 +350,7 @@ class App extends Component {
             return <NewDepartment
               changePanel={this.changePanel}
               postHandler={this.postHandler}
+              doctors={this.state.doctors}
             />;
           case constants.DEPARTMENTS:
             return <Departments 
@@ -359,11 +366,14 @@ class App extends Component {
               changePanel={this.changePanel}
               data={this.state.edit}
               putHandler={this.putHandler}
+              localizations={this.state.localizations}
+              departments={this.state.departments}
             />;
           case constants.NEW_CLINIC:
             return <NewClinic 
               changePanel={this.changePanel}
               postHandler={this.postHandler}
+              departments={this.state.departments}
               localizations={this.state.localizations}
             />;
           case constants.CLINICS:

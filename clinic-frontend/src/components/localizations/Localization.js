@@ -14,7 +14,7 @@ const Localization = props => {
                 <p className="label">building number:</p>
                 <p>{props.data.buildingNo}</p>
                 <p className="label">clinic:</p>
-                <p>{props.data.clinic!=undefined?props.data.clinic:"No clinic at this location"}</p>
+                <p>{props.data.clinic!=undefined?props.data.clinic:<span className="empty">No clinic at this location</span>}</p>
             </div>
             <div className="item-footer">
                 <div className="controls">

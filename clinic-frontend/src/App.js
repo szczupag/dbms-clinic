@@ -48,6 +48,8 @@ import Visitors from './components/visitors/Visitors';
 import NewVisitor from './components/visitors/NewVisitor';
 import EditVisitor from './components/visitors/EditVisitor';
 
+import Error from './components/Error';
+
 const constants = require('./constants/pages');
 
 class App extends Component {
@@ -65,7 +67,8 @@ class App extends Component {
             patients: [],
             treatments: [],
             visits: [],
-            visitors: []
+            visitors: [],
+            error: '',
         }
         this.changePanel = this.changePanel.bind(this);
         this.editItemHandler = this.editItemHandler.bind(this);
@@ -74,6 +77,7 @@ class App extends Component {
         this.deleteHandler = this.deleteHandler.bind(this);
         this.postHandler = this.postHandler.bind(this);
         this.putHandler = this.putHandler.bind(this);
+        this.clearError = this.clearError.bind(this);
     }
 
     componentDidMount(){
@@ -87,6 +91,10 @@ class App extends Component {
       this.getHandler(constants.TREATMENTS);
       this.getHandler(constants.VISITS);
       this.getHandler(constants.VISITORS);
+    }
+
+    clearError(){
+      this.setState({error: ''});
     }
 
 //----------------- DATABASE HANDLERS -----------------
@@ -131,6 +139,7 @@ class App extends Component {
           })
           .catch( error => {
               console.log(error);
+              if(error.response)this.setState({error: error.response.data.message})
           });
     }
     deleteHandler(table,id){
@@ -141,6 +150,7 @@ class App extends Component {
             })
             .catch( error => {
                 console.log(error);
+                if(error.response)this.setState({error: error.response.data.message})
             });
     }
     putHandler(table, data){
@@ -157,6 +167,7 @@ class App extends Component {
             })
             .catch( error => {
                 console.log(error);
+                if(error.response)this.setState({error: error.response.data.message})
             });
     }
     postHandler(table, data){
@@ -167,6 +178,7 @@ class App extends Component {
             })
             .catch( error => {
                 console.log(error);
+                if(error.response)this.setState({error: error.response.data.message})
             });
     }
 //----------------- END DB HANDLERS -----------------
@@ -206,11 +218,15 @@ class App extends Component {
               changePanel={this.changePanel}
               data={this.state.edit}
               putHandler={this.putHandler}
+              patients={this.state.patients}
+              visitors={this.state.visitors}
             />;
           case constants.NEW_VISIT:
             return <NewVisit
               changePanel={this.changePanel}
               postHandler={this.postHandler}
+              patients={this.state.patients}
+              visitors={this.state.visitors}
             />;
           case constants.VISITS:
             return <Visits
@@ -220,6 +236,8 @@ class App extends Component {
               deleteHandler={this.deleteHandler}
               editItemHandler={this.editItemHandler}
               changePanel={this.changePanel}
+              patients={this.state.patients}
+              visitors={this.state.visitors}
             />;
           case constants.EDIT_TREATMENT:
             return <EditTreatment
@@ -424,6 +442,7 @@ class App extends Component {
     render() {
         return (
           <div className={"App " + this.state.panel}>
+              {this.state.error!=''?<Error message={this.state.error} onClick={()=>this.clearError()}/>:null}
               {this.panelSwitch()}
           </div>
         );
@@ -432,3 +451,4 @@ class App extends Component {
 
 export default App;
 
+// 

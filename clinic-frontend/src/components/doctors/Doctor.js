@@ -17,9 +17,8 @@ const Doctor = props => {
                 <p className="label">supervisor:</p>
                 <p>{props.data.supervisor!=undefined?props.data.supervisor.firstName+" "+props.data.supervisor.lastName:<span className="empty">No supervisor assigned</span>}</p>
                 <p className="label">department:</p>
-                <p>{props.data.department!=undefined?<span>{props.data.department.name}<span className="empty">{
-                    // props.data.department.clinic.name
-                    }</span></span>:<span className="empty">No department assigned</span>}</p>
+                <p>{props.data.department!=undefined?<span>{props.data.department.name}<span className="empty">{props.data.department.clinic.name}</span></span>:<span className="empty">No department assigned</span>}</p>
+                {/* <p></p> */}
             </div>
             <div className="item-footer">
                 <div className="controls">

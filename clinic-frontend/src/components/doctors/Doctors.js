@@ -60,6 +60,9 @@ class Doctors extends Component {
             case 'pesel':
                 this.state.doctors.sort((a,b)=>a.pesel>b.pesel);
                 break;
+            case 'salary':
+                this.state.doctors.sort((a,b)=>a.salary>b.salary);
+                break;
             default:
                 break;
         }
@@ -90,7 +93,8 @@ class Doctors extends Component {
                         className="selectBox sort"
                         options={[
                             { value: 'lastname', label: 'last name' },
-                            { value: 'pesel', label: 'PESEL' }
+                            { value: 'pesel', label: 'PESEL' },
+                            { value: 'salary', label: 'salary' }
                         ]}
                         value={this.state.sortBy}
                         onChange={this.sortChangeHandler}

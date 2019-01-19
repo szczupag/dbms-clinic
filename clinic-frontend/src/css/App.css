@@ -237,5 +237,52 @@ p{
 }
 
 /* ---- */
+.insideContainer *{
+  font-size: 13px;
+}
 
+.insideContainer div {
+  padding-left: 20px;
+}
 
+.insideContainer div p{
+  padding-left: 40px;
+}
+
+.errorPopup{
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: rgba(17, 23, 36, 0.8);
+  animation: popup 1s;
+  z-index: 99999;
+}
+
+.errorPopup .messageWrapper{
+  padding: 20px 20px 30px 20px;
+  margin: 40vh auto auto auto;
+  min-height: 100px;
+  width: 400px;
+  background-color: white;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.errorPopup .messageWrapper p:first-of-type{
+  color: rgb(221, 84, 84);
+  font-weight: 600;
+}
+
+@keyframes popup{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}

@@ -47,7 +47,6 @@ class NewVisitor extends Component {
                 lastName: this.state.lastName,
                 pesel: this.state.pesel,
                 idNumber: this.state.idNumber,
-                visits: this.state.visits,
             }
             console.log(data);
             this.props.postHandler(constants.VISITORS, data);
@@ -85,10 +84,6 @@ class NewVisitor extends Component {
                             placeholder="id number"
                             value={this.state.idNumber}
                             onChange={(e)=>this.idNumberChangeHandler(e)}></input>
-                        <input 
-                            placeholder="Visits"
-                            value={this.state.visits}
-                            onChange={(e)=>this.visitsChangeHandler(e)}></input>
                     </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}

@@ -6,7 +6,8 @@ class EditDoctor extends Component {
     constructor(props){
         super(props)
         let supervisorsMap = this.props.doctors.map((supervisor)=>{
-            if(supervisor.pesel!=this.props.data.pesel&&supervisor.supervisor.pesel!=this.props.data.pesel){
+            const supSup = supervisor.supervisor!=undefined?supervisor.supervisor:supervisor
+            if(supervisor.pesel!=this.props.data.pesel&&supSup!=this.props.data.pesel){
                 const supDep = supervisor.department!=undefined?supervisor.department.name:'';
                 return { value: supervisor, label: <span>{supervisor.firstName+" "+supervisor.lastName+" "}<span className="empty">{supDep}</span></span>}
             }
@@ -66,20 +67,25 @@ class EditDoctor extends Component {
     submitHandler(){
         const supervisorId = this.state.supervisor!=null ? this.state.supervisor.value.pesel : null;
         const departmentId = this.state.department!=null ? this.state.department.value.id : null;
-        if( this.state.firstName != '' && this.state.lastName!='' && departmentId!=null ){
-            const data = {
-                pesel: this.props.data.pesel,
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                supervisorId: this.state.supervisorId,
-                salary: this.state.salary,
-                speciality: this.state.speciality,
-                departmentId: departmentId,
-                supervisorId: supervisorId
+        if( this.state.firstName != '' && this.state.lastName!='' && this.state.pesel!='' && departmentId!=null){
+            if(Number.isInteger(parseInt(this.state.pesel))==true&&this.state.pesel.length==11
+                &&(Number.isInteger(parseInt(this.state.salary)))||this.state.salary==''){
+                const data = {
+                    pesel: this.props.data.pesel,
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    supervisorId: this.state.supervisorId,
+                    salary: this.state.salary,
+                    speciality: this.state.speciality,
+                    departmentId: departmentId,
+                    supervisorId: supervisorId
+                }
+                console.log(data);
+                this.props.putHandler(constants.DOCTORS, data);
+                this.props.changePanel(constants.DOCTORS);
+            }else{
+                this.setState({error: 'Invalid input!'})
             }
-            console.log(data);
-            this.props.putHandler(constants.DOCTORS, data);
-            this.props.changePanel(constants.DOCTORS);
         }else if( this.state.firstName == '' || this.state.lastName =='' || this.state.supervisorId == '' ){
             this.setState({error: 'Not all required inputs are filled!'})
         }

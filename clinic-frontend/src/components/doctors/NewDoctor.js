@@ -72,21 +72,28 @@ class NewDoctor extends Component {
         const supervisorId = this.state.supervisor!=null ? this.state.supervisor.value.pesel : null;
         const departmentId = this.state.department!=null ? this.state.department.value.id : null;
         if( this.state.firstName != '' && this.state.lastName!='' && this.state.pesel!='' && departmentId!=null){
-            const data = {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                pesel: this.state.pesel,
-                salary: this.state.salary,
-                speciality: this.state.speciality,
-                supervisorId: supervisorId,
-                departmentId: departmentId
+            if(Number.isInteger(parseInt(this.state.pesel))==true&&this.state.pesel.length==11
+                &&(Number.isInteger(parseInt(this.state.salary)))||this.state.salary==''){
+                const data = {
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    pesel: this.state.pesel,
+                    salary: this.state.salary,
+                    speciality: this.state.speciality,
+                    supervisorId: supervisorId,
+                    departmentId: departmentId
+                }
+                console.log(data);
+                this.props.postHandler(constants.DOCTORS, data);
+                this.props.changePanel(constants.DOCTORS);
+            }else{
+                this.setState({error: 'Invalid input!'})
             }
-            console.log(data);
-            this.props.postHandler(constants.DOCTORS, data);
-            this.props.changePanel(constants.DOCTORS);
         }else{
             this.setState({error: 'Not all required inputs are filled!'})
         }
+        
+        
     }
     
     render(){

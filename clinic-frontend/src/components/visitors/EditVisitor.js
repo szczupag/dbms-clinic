@@ -41,19 +41,19 @@ class EditVisitor extends Component {
     }
 
     submitHandler(){
-        if( this.state.firstName != '' && this.state.lastName!='' ){
-            if( this.state.firstName != this.props.data.firstName || this.state.lastName != this.props.data.lastName || this.state.idNumber != this.props.data.idNumber || this.state.pesel != this.props.data.pesel){
+        if( this.state.firstName != '' && this.state.lastName!='' && this.state.idNumber!=''){
+            if(this.state.idNumber.length==7){
                 const data = {
                     firstName: this.state.firstName,
                     lastName: this.state.lastName,
-                    pesel: this.props.data.pesel,
+                    // pesel: this.props.data.pesel,
                     idNumber: this.state.idNumber,
                 }
                 console.log(data);
                 this.props.putHandler(constants.VISITORS, data);
                 this.props.changePanel(constants.VISITORS);
             }else{
-                this.setState({error: 'There are no updates for this patient!'})
+                this.setState({error: 'Invalid input!'})
             }
         }else if( this.state.firstName == '' || this.state.lastName =='' || this.state.supervisorId == '' ){
             this.setState({error: 'Not all required inputs are filled!'})

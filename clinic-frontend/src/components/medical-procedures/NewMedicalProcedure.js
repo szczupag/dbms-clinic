@@ -35,15 +35,19 @@ class NewMedicalProcedure extends Component {
 
     submitHandler(){
         if( this.state.cost != '' && this.state.name!=''){
-            const doctorsIds = this.state.doctor!=null?this.state.doctor.map(doc=>{return doc.valueFix.pesel}):[];
-            const data = {
-                cost: this.state.cost,
-                doctorsIds: doctorsIds,
-                name: this.state.name
+            if(Number.isInteger(parseInt(this.state.cost))){
+                const doctorsIds = this.state.doctor!=null?this.state.doctor.map(doc=>{return doc.valueFix.pesel}):[];
+                const data = {
+                    cost: this.state.cost,
+                    doctorsIds: doctorsIds,
+                    name: this.state.name
             }
             console.log(data);
             this.props.postHandler(constants.MEDICAL_PROCEDURES, data);
             this.props.changePanel(constants.MEDICAL_PROCEDURES);
+            }else{
+                this.setState({error: 'Invalid input!'})
+            }
         }else{
             this.setState({error: 'Not all required inputs are filled!'})
         }
@@ -69,6 +73,7 @@ class NewMedicalProcedure extends Component {
                             placeholder="Cost*"
                             value={this.state.cost}
                             onChange={(e)=>this.costChangeHandler(e)}></input>
+                        
                         <Select
                             isMulti
                             placeholder="Doctors"

@@ -55,19 +55,23 @@ class EditTreatment extends Component {
 
     submitHandler(){
         if( this.state.startDate != '' && this.state.patient!=null){
-            const medicalProceduresIds = this.state.medicalProcedure!=null?this.state.medicalProcedure.map(med=>{return med.valueFix.id}):[];
-            const diseaseId = this.state.disease!=undefined?this.state.disease.value.id:'';
-            const data = {
-                id: this.props.data.id,
-                patientPesel: this.state.patient.value.pesel,
-                startDate: this.state.startDate,
-                endDate: this.state.endDate,
-                diseaseId: diseaseId,
-                medicalProceduresIds: medicalProceduresIds
+            if((this.state.endDate!=''&&this.state.endDate>=this.state.startDate)||this.state.endDate==''){
+                const medicalProceduresIds = this.state.medicalProcedure!=null?this.state.medicalProcedure.map(med=>{return med.valueFix.id}):[];
+                const diseaseId = this.state.disease!=undefined?this.state.disease.value.id:'';
+                const data = {
+                    id: this.props.data.id,
+                    patientPesel: this.state.patient.value.pesel,
+                    startDate: this.state.startDate,
+                    endDate: this.state.endDate,
+                    diseaseId: diseaseId,
+                    medicalProceduresIds: medicalProceduresIds
+                }
+                console.log(data);
+                this.props.putHandler(constants.TREATMENTS, data);
+                this.props.changePanel(constants.TREATMENTS);
+            }else{
+                this.setState({error: 'Invalid input!'})
             }
-            console.log(data);
-            this.props.putHandler(constants.TREATMENTS, data);
-            this.props.changePanel(constants.TREATMENTS);
         }else {
             this.setState({error: 'Not all required inputs are filled!'})
         }

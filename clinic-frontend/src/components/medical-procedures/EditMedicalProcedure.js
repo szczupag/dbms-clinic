@@ -35,16 +35,20 @@ class EditMedicalProcedure extends Component {
 
     submitHandler(){
         if( this.state.name != '' && this.state.cost!=''){
-            const doctorsIds = this.state.doctor!=null?this.state.doctor.map(doc=>{return doc.valueFix.pesel}):[];
-            const data = {
-                id: this.props.data.id,
-                cost: this.state.cost,
-                doctorsIds: doctorsIds,
-                name: this.state.name
+            if(Number.isInteger(parseInt(this.state.cost))){
+                const doctorsIds = this.state.doctor!=null?this.state.doctor.map(doc=>{return doc.valueFix.pesel}):[];
+                const data = {
+                    id: this.props.data.id,
+                    cost: this.state.cost,
+                    doctorsIds: doctorsIds,
+                    name: this.state.name
+                }
+                console.log(data);
+                this.props.putHandler(constants.MEDICAL_PROCEDURES, data);
+                this.props.changePanel(constants.MEDICAL_PROCEDURES);
+            }else{
+                this.setState({error: 'Invalid input!'})
             }
-            console.log(data);
-            this.props.putHandler(constants.MEDICAL_PROCEDURES, data);
-            this.props.changePanel(constants.MEDICAL_PROCEDURES);
         }else if( this.state.name == '' || this.state.cost ==''){
             this.setState({error: 'Not all required inputs are filled!'})
         }

@@ -41,16 +41,20 @@ class NewVisitor extends Component {
     }
 
     submitHandler(){
-        if( this.state.firstName != '' && this.state.lastName!='' && this.state.pesel!=''){
-            const data = {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                pesel: this.state.pesel,
-                idNumber: this.state.idNumber,
+        if( this.state.firstName != '' && this.state.lastName!='' && this.state.pesel!=''&& this.state.idNumber!=''){
+            if(Number.isInteger(parseInt(this.state.pesel))==true&&this.state.pesel.length==11&&this.state.idNumber.length==7){
+                const data = {
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    pesel: this.state.pesel,
+                    idNumber: this.state.idNumber,
+                }
+                console.log(data);
+                this.props.postHandler(constants.VISITORS, data);
+                this.props.changePanel(constants.VISITORS);
+            }else{
+                this.setState({error: 'Invalid input!'})
             }
-            console.log(data);
-            this.props.postHandler(constants.VISITORS, data);
-            this.props.changePanel(constants.VISITORS);
         }else{
             this.setState({error: 'Not all required inputs are filled!'})
         }
@@ -81,7 +85,7 @@ class NewVisitor extends Component {
                             value={this.state.pesel}
                             onChange={(e)=>this.peselChangeHandler(e)}></input>
                         <input 
-                            placeholder="id number"
+                            placeholder="id number*"
                             value={this.state.idNumber}
                             onChange={(e)=>this.idNumberChangeHandler(e)}></input>
                     </div>

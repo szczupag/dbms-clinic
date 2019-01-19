@@ -46,6 +46,9 @@ const Patient = props => {
                     <button 
                         className="controls-btn delete" 
                         onClick={()=>props.deleteHandler(constants.PATEINTS,props.data.pesel)}>Delete</button>
+                    <button 
+                        className="controls-btn count" 
+                        onClick={()=>props.countVisitors(props.data.pesel)}>Count visitors</button>
                 </div>
             </div>
         </div>

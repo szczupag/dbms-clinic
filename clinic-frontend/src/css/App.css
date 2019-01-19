@@ -80,6 +80,10 @@ p{
   background-color: rgb(221, 84, 84);
 }
 
+.controls-btn.count:hover{
+  background-color: rgb(221, 185, 84);
+}
+
 /* ---- */
 
 .page-title{
@@ -256,7 +260,7 @@ p{
   left: 0;
   position: absolute;
   background-color: rgba(17, 23, 36, 0.8);
-  animation: popup 1s;
+  animation: popup 0.5s;
   z-index: 99999;
 }
 
@@ -266,16 +270,11 @@ p{
   min-height: 100px;
   width: 400px;
   background-color: white;
-  border-radius: 25px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-}
-
-.errorPopup .messageWrapper p:first-of-type{
-  color: rgb(221, 84, 84);
-  font-weight: 600;
 }
 
 @keyframes popup{

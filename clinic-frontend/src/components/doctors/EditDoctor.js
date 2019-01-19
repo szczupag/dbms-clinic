@@ -68,8 +68,7 @@ class EditDoctor extends Component {
         const supervisorId = this.state.supervisor!=null ? this.state.supervisor.value.pesel : null;
         const departmentId = this.state.department!=null ? this.state.department.value.id : null;
         if( this.state.firstName != '' && this.state.lastName!='' && this.state.pesel!='' && departmentId!=null){
-            if(Number.isInteger(parseInt(this.state.pesel))==true&&this.state.pesel.length==11
-                &&(Number.isInteger(parseInt(this.state.salary)))||this.state.salary==''){
+            if((Number.isInteger(parseInt(this.state.salary)))||this.state.salary==''){
                 const data = {
                     pesel: this.props.data.pesel,
                     firstName: this.state.firstName,

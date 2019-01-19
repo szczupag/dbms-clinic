@@ -84,6 +84,7 @@ class Patients extends Component {
                             deleteHandler={this.props.deleteHandler}
                             editItemHandler={this.props.editItemHandler}
                             changePanel={this.props.changePanel}
+                            countVisitors={this.props.countVisitors}
                             />
                     })
                 }

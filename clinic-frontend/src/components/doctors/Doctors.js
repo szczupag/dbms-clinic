@@ -119,6 +119,7 @@ class Doctors extends Component {
                             deleteHandler={this.props.deleteHandler}
                             editItemHandler={this.props.editItemHandler}
                             changePanel={this.props.changePanel}
+                            raiseSalary={this.props.raiseSalary}
                             />
                     })
                 }

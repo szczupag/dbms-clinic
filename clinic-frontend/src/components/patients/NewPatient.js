@@ -42,16 +42,20 @@ class NewPatient extends Component {
 
     submitHandler(){
         if( this.state.firstName != '' && this.state.lastName!='' && this.state.pesel!=''){
-            const data = {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                pesel: this.state.pesel,
-                phoneNumber: this.state.phoneNumber,
-                // treatments: this.state.treatments,
+            if(Number.isInteger(parseInt(this.state.pesel))==true&&this.state.pesel.length==11){
+                const data = {
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    pesel: this.state.pesel,
+                    phoneNumber: this.state.phoneNumber,
+                    // treatments: this.state.treatments,
+                }
+                console.log(data);
+                this.props.postHandler(constants.PATEINTS, data);
+                this.props.changePanel(constants.PATEINTS);
+            }else{
+                this.setState({error: 'Invalid input!'})
             }
-            console.log(data);
-            this.props.postHandler(constants.PATEINTS, data);
-            this.props.changePanel(constants.PATEINTS);
         }else{
             this.setState({error: 'Not all required inputs are filled!'})
         }

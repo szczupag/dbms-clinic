@@ -31,6 +31,9 @@ const Doctor = props => {
                     <button 
                         className="controls-btn delete" 
                         onClick={()=>props.deleteHandler(constants.DOCTORS,props.data.pesel)}>Delete</button>
+                    <button 
+                        className="controls-btn count" 
+                        onClick={()=>props.raiseSalary(props.data.pesel)}>10% salary raise</button>
                 </div>
             </div>
         </div>

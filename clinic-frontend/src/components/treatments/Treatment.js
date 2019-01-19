@@ -5,7 +5,6 @@ const Treatment = props => {
     const medicalProcedures = props.data.medicalProcedures.map((med,key)=>{
         return <p key={key}>{med.name}</p>
     })
-    console.log(props.data)
     return(
         <div className="item-wrapper">
             <div className="item-content">

@@ -50,7 +50,6 @@ class NewMedicalProcedure extends Component {
     }
     
     render(){
-        console.log(this.state.doctors);
         return(
             <div className="form-panel">
                 <div className="page-title">

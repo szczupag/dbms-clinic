@@ -15,7 +15,6 @@ class Treatments extends Component {
         this.setState({
             treatments: this.props.treatments
         })
-        console.log(this.state.treatments)
     }
 
     componentWillReceiveProps(newProps){

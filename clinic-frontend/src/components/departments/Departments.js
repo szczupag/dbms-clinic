@@ -56,7 +56,7 @@ class Departments extends Component {
                         onClick={()=>this.props.changePanel(constants.NEW_DEPARTMENT)}
                     >Add new department</button>
                 </div>
-                <div className="dataDisplay">
+                <div className="sort">
                     <Select
                         placeholder="Sort by"
                         className="selectBox sort"

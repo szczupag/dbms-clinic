@@ -18,7 +18,7 @@ public class ClinicResponse {
   private String name;
   private String type;
   private Set<DepartmentResponse> departments;
-  private String localization;
+  private LocalizationResponse localization;
 
   public static ClinicResponse from(Clinic clinic, boolean withLocalization, boolean withDepartments) {
     return ClinicResponse.builder()
@@ -36,10 +36,9 @@ public class ClinicResponse {
             .collect(Collectors.toSet());
   }
 
-  private static String mapLocalization(Clinic clinic) {
+  private static LocalizationResponse mapLocalization(Clinic clinic) {
     return Objects.nonNull(clinic.getLocalization()) ?
-            String.format("%s %s %s", clinic.getLocalization().getCity(), clinic.getLocalization().getStreet(),
-                    clinic.getLocalization().getBuildingNo())
+            LocalizationResponse.from(clinic.getLocalization(), false)
             : null;
   }
 }

@@ -35,7 +35,7 @@ public class TreatmentResponse {
 
   private static Set<MedicalProcedureResponse> mapMedicalProcedures(Treatment treatment) {
     return treatment.getMedicalProcedures().stream()
-            .map(medicalProcedure -> MedicalProcedureResponse.from(medicalProcedure, false, false))
+            .map(medicalProcedure -> MedicalProcedureResponse.from(medicalProcedure, true, false))
             .collect(Collectors.toSet());
   }
 

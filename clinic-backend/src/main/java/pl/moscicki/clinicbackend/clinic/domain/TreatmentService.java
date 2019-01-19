@@ -57,6 +57,11 @@ class TreatmentService {
   }
 
   void deleteTreatment(Long treatmentId) {
+    treatmentRepository.findById(treatmentId).ifPresent(treatment -> {
+      if (treatment.getMedicalProcedures() != null) {
+        treatment.getMedicalProcedures().forEach(md -> md.setTreatment(null));
+      }
+    });
     treatmentRepository.deleteById(treatmentId);
   }
 }

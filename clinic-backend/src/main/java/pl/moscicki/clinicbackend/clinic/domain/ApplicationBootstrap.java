@@ -43,6 +43,10 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
     log.info("Adding entities to DB on application startup");
 
+    patientRepository.dropCreaterVisitorsCountFunctionIfExists();
+    patientRepository.createVisitorsCountFunction();
+    doctorRepository.dropProcedureRaiseIfExists();
+    doctorRepository.createProcedureRaise();
     //Localizations
     Localization szpitalna = Localization.builder()
             .city("Poznan")

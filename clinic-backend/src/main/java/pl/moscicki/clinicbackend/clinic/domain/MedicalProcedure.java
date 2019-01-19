@@ -28,10 +28,10 @@ public class MedicalProcedure {
   @Temporal(TemporalType.DATE)
   private Date date;
 
-  @ManyToMany(mappedBy = "medicalProcedures")
+  @ManyToMany(mappedBy = "medicalProcedures", cascade = CascadeType.MERGE)
   private Set<Doctor> doctors;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   private Treatment treatment;
 
   static MedicalProcedure from(CreationMedicalProcedure medicalProcedure, Set<Doctor> doctors) {

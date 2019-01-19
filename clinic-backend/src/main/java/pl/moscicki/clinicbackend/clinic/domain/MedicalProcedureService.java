@@ -4,6 +4,7 @@ import pl.moscicki.clinicbackend.clinic.domain.dto.creation.CreationMedicalProce
 import pl.moscicki.clinicbackend.clinic.domain.dto.find.MedicalProcedureResponse;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,14 +33,26 @@ class MedicalProcedureService {
     medicalProcedureRepository.save(medicalProcedure);
   }
 
-  public void updateMedicalProcedure(CreationMedicalProcedure creationMedicalProcedure, Set<Doctor> doctors,
+  void updateMedicalProcedure(CreationMedicalProcedure creationMedicalProcedure, Set<Doctor> doctors,
                                      Long medicalProcedureId) {
+
+    Optional<MedicalProcedure> old = medicalProcedureRepository.findById(medicalProcedureId);
+
+    old.ifPresent(medicalProcedure -> {
+              if (medicalProcedure.getDoctors() != null) {
+                medicalProcedure.getDoctors().forEach(doctor -> doctor.getMedicalProcedures().remove(medicalProcedure));
+              }
+            });
+
     MedicalProcedure medicalProcedure = MedicalProcedure.from(creationMedicalProcedure, doctors);
-    medicalProcedure.setMedicalProcedureId(medicalProcedureId);
+
+    medicalProcedure.setTreatment(old.get().getTreatment());
 
     if (doctors != null) {
       doctors.forEach(doc -> doc.getMedicalProcedures().add(medicalProcedure));
     }
+
+    medicalProcedure.setMedicalProcedureId(medicalProcedureId);
     medicalProcedureRepository.save(medicalProcedure);
   }
 

@@ -3,7 +3,6 @@ package pl.moscicki.clinicbackend.clinic.domain.dto.find;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Value;
-import pl.moscicki.clinicbackend.clinic.domain.MedicalProcedure;
 import pl.moscicki.clinicbackend.clinic.domain.Treatment;
 
 import java.util.Date;
@@ -19,7 +18,7 @@ public class TreatmentResponse {
   private Long id;
   private Date startDate;
   private Date endDate;
-  private Set<String> medicalProcedures;
+  private Set<MedicalProcedureResponse> medicalProcedures;
   private DiseaseResponse disease;
   private PatientResponse patient;
 
@@ -34,9 +33,9 @@ public class TreatmentResponse {
             .build();
   }
 
-  private static Set<String> mapMedicalProcedures(Treatment treatment) {
+  private static Set<MedicalProcedureResponse> mapMedicalProcedures(Treatment treatment) {
     return treatment.getMedicalProcedures().stream()
-            .map(MedicalProcedure::getName)
+            .map(medicalProcedure -> MedicalProcedureResponse.from(medicalProcedure, false, false))
             .collect(Collectors.toSet());
   }
 

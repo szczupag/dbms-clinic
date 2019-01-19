@@ -8,5 +8,5 @@ interface DepartmentRepository extends CrudRepository<Department, Long> {
   @Override
   Set<Department> findAll();
 
-  Set<Department> findAllByDepartmentId(Set<Long> ids);
+  Set<Department> findAllByDepartmentIdIn(Set<Long> ids);
 }

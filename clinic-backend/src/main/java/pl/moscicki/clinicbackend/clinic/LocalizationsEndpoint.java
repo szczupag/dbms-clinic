@@ -19,8 +19,8 @@ class LocalizationsEndpoint {
 
   @CrossOrigin
   @GetMapping("/all")
-  Set<LocalizationResponse> getAllLocalizations(@RequestParam(name = "withClinic", defaultValue = "false", required = false) boolean withClinic) {
-    return clinicFacade.getAllLocalizations(withClinic);
+  Set<LocalizationResponse> getAllLocalizations() {
+    return clinicFacade.getAllLocalizations();
   }
 
   @CrossOrigin

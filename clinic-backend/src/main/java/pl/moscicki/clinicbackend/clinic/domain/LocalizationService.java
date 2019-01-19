@@ -13,9 +13,9 @@ class LocalizationService {
     this.localizationRepository = localizationRepository;
   }
 
-  Set<LocalizationResponse> getAllLocalizations(boolean withClinic) {
+  Set<LocalizationResponse> getAllLocalizations() {
     return localizationRepository.findAll().stream()
-            .map(localization -> LocalizationResponse.from(localization, withClinic))
+            .map(localization -> LocalizationResponse.from(localization, true))
             .collect(Collectors.toSet());
   }
 

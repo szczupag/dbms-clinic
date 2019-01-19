@@ -14,7 +14,7 @@ class DepartmentService {
   }
 
   Set<Department> getDepartmentsByIds(Set<Long> departmentsIds) {
-    return departmentRepository.findAllByDepartmentId(departmentsIds);
+    return departmentRepository.findAllByDepartmentIdIn(departmentsIds);
   }
 
   Set<DepartmentResponse> getAllDepartments() {

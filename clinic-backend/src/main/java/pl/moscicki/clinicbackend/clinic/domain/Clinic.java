@@ -26,7 +26,7 @@ public class Clinic {
   @NotNull
   private String type;
 
-  @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+  @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<Department> departments;
 
   @OneToOne(cascade = CascadeType.ALL)

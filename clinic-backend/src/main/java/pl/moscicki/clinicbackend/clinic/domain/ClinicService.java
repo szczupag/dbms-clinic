@@ -24,6 +24,7 @@ class ClinicService {
     if (localization != null) {
       localization.setClinic(clinic);
     }
+    departments.forEach(department -> department.setClinic(clinic));
     clinicRepository.save(clinic);
   }
 

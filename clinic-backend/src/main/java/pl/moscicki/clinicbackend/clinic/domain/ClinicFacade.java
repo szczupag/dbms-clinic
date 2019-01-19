@@ -108,8 +108,8 @@ public class ClinicFacade {
     return localizationService.getLocalizationById(localizationId);
   }
 
-  public Set<LocalizationResponse> getAllLocalizations(boolean withClinic) {
-    return localizationService.getAllLocalizations(withClinic);
+  public Set<LocalizationResponse> getAllLocalizations() {
+    return localizationService.getAllLocalizations();
   }
 
   public void createLocalization(CreationLocalization localization) {

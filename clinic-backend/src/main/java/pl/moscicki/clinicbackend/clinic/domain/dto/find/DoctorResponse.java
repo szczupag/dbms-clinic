@@ -19,18 +19,18 @@ public class DoctorResponse {
   private String lastName;
   private Long salary;
   private String speciality;
-  private String supervisor;
   private Set<String> medicalProcedures;
   private DepartmentResponse department;
+  private DoctorResponse supervisor;
 
-  public static DoctorResponse from(Doctor doctor, boolean withMedicalProcedures, boolean withDepartment) {
+  public static DoctorResponse from(Doctor doctor, boolean withMedicalProcedures, boolean withDepartment, boolean withSupervisor) {
     return DoctorResponse.builder()
             .pesel(doctor.getPesel())
             .firstName(doctor.getFirstName())
             .lastName(doctor.getLastName())
             .salary(doctor.getSalary())
             .speciality(doctor.getSpeciality())
-            .supervisor(mapSupervisor(doctor))
+            .supervisor(withSupervisor ? mapSupervisor(doctor) : null)
             .department(withDepartment ? mapDepartment(doctor) : null)
             .medicalProcedures(mapMedicalProcedures(doctor, withMedicalProcedures))
             .build();
@@ -42,9 +42,9 @@ public class DoctorResponse {
             null;
   }
 
-  private static String mapSupervisor(Doctor doctor) {
+  private static DoctorResponse mapSupervisor(Doctor doctor) {
     return doctor.getSupervisor() != null ?
-            String.format("%s %s", doctor.getSupervisor().getFirstName(), doctor.getSupervisor().getLastName())
+            DoctorResponse.from(doctor.getSupervisor(), false, false, false)
             : null;
     }
 

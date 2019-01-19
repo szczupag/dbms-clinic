@@ -16,7 +16,7 @@ class DoctorService {
 
   Set<DoctorResponse> getAll(boolean medicalProcedure) {
     return doctorRepository.findAll().stream()
-            .map(doctor -> DoctorResponse.from(doctor, medicalProcedure, true))
+            .map(doctor -> DoctorResponse.from(doctor, medicalProcedure, true, true))
             .collect(Collectors.toSet());
   }
 

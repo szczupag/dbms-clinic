@@ -112,7 +112,6 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
     MedicalProcedure przeszczepWatroby =  MedicalProcedure.builder()
             .name("Przeszczep wątroby")
             .cost(10000L)
-            .date(new Date(1547912554813L))
             .doctors(new HashSet<>(Arrays.asList(maciej, agata)))
             .build();
 

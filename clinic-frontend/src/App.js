@@ -56,7 +56,7 @@ class App extends Component {
     constructor(props){
         super(props)
         this.state = {
-            panel: constants.HOME,
+            panel: constants.WELCOME,
             edit: null,
             clinics: [],
             departments: [],

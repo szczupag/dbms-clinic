@@ -48,7 +48,7 @@ function createWindow() {
     mainWindow.show();
     // Open the DevTools automatically if developing
     // if ( dev ) {
-      mainWindow.webContents.openDevTools();
+      // mainWindow.webContents.openDevTools();
     // }
   });
 

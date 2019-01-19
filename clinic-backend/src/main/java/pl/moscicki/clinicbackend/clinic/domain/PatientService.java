@@ -24,6 +24,10 @@ class PatientService {
   }
 
   void createPatient(CreationPatient creationPatient, Set<Treatment> treatments, Set<Visit> visits) {
+    if (patientRepository.findById(creationPatient.getPesel()).isPresent()) {
+      throw new RuntimeException("Pesel already used");
+    }
+
     patientRepository.save(Patient.from(creationPatient, treatments, visits));
   }
 

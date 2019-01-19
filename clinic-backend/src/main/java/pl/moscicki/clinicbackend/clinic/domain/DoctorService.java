@@ -24,8 +24,15 @@ class DoctorService {
     return doctorRepository.findAllByPeselIn(pesels);
   }
 
+  Doctor getDoctorByPesel(String pesel) {
+    return doctorRepository.findById(pesel).orElse(null);
+  }
+
   void createDoctor(CreationDoctor creationDoctor, Department department) {
     String supervisorId = Objects.nonNull(creationDoctor.getSupervisorId()) ? creationDoctor.getSupervisorId() : "";
+    if (supervisorId.equals(creationDoctor.getPesel())) {
+      throw new RuntimeException("One can not be it's supervisor");
+    }
 
     Doctor doctor = doctorRepository.findById(supervisorId)
             .map(supervisor -> Doctor.from(creationDoctor, supervisor, department))

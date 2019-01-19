@@ -24,6 +24,10 @@ class VisitorService {
   }
 
   void createVisitor(CreationVisitor creationVisitor, Set<Visit> visits) {
+    if (visitorRepository.findById(creationVisitor.getPesel()).isPresent()) {
+      throw new RuntimeException("Pesel already used");
+    }
+
     visitorRepository.save(Visitor.from(creationVisitor, visits));
   }
 

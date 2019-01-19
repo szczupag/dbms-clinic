@@ -15,5 +15,6 @@ public class CreationMedicalProcedure {
   private String name;
   private Long cost;
   private Set<String> doctorsIds;
+  @NotNull
   private Date date;
 }

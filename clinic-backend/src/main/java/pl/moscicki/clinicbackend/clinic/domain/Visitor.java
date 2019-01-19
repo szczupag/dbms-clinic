@@ -17,7 +17,7 @@ import java.util.Set;
 @Table(name = "visitors")
 public class Visitor {
   @Id
-  @NotNull
+  @NotNull()
   @Column(length = 11)
   String pesel;
 

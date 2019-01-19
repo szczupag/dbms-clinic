@@ -41,6 +41,10 @@ public class ClinicFacade {
   }
 
   public void createDoctor(CreationDoctor doctor) {
+    if (doctorService.getDoctorByPesel(doctor.getPesel()) != null) {
+      throw new RuntimeException("Pesel already used");
+    }
+
     doctorService.createDoctor(doctor,
             doctor.getDepartmentId() != null ? getDepartmentById(doctor.getDepartmentId()) : null);
   }

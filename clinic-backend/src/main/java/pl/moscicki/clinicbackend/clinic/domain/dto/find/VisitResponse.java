@@ -27,7 +27,7 @@ public class VisitResponse {
   }
 
   private static PatientResponse mapFromPatient(Visit visit) {
-    return PatientResponse.from(visit.getPatient(), false);
+    return PatientResponse.from(visit.getPatient(), false, false);
   }
 
   private static VisitorResponse mapFromVisitor(Visit visit) {

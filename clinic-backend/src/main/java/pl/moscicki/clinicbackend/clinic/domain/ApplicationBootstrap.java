@@ -157,10 +157,27 @@ public class ApplicationBootstrap implements ApplicationListener<ContextRefreshe
 
     treatmentRepository.save(treatment);
 
+    //Visitors
 
-//    .disease(katar)
-//            .patient(patient)
-//            .medicalProcedures(new HashSet<>(Collections.singletonList(przeszczepWatroby)))
+    Visitor visitor = Visitor.builder()
+            .firstName("Mariusz")
+            .lastName("Tomaszyk")
+            .pesel("12345678909")
+            .idNumber("ADZ-233")
+            .build();
+
+    visitorRepository.save(visitor);
+
+    Visit visit = Visit.builder()
+            .visitDate(new Date(1547212554813L))
+            .build();
+
+    visitRepository.save(visit);
+
+    visit.setPatient(patient);
+    visit.setVisitor(visitor);
+
+    visitRepository.save(visit);
     log.info("Added entities to DB on application startup");
   }
 }

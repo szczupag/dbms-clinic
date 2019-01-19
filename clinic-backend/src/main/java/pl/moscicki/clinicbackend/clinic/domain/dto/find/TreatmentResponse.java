@@ -45,6 +45,7 @@ public class TreatmentResponse {
   }
 
   private static PatientResponse mapPatient(Treatment treatment) {
-    return Objects.nonNull(treatment.getPatient()) ? PatientResponse.from(treatment.getPatient(), false) : null;
+    return Objects.nonNull(treatment.getPatient()) ? PatientResponse.from(treatment.getPatient(),
+            false, false) : null;
   }
 }

@@ -15,7 +15,7 @@ class VisitorService {
 
   Set<VisitorResponse> getAllVisistors() {
     return visitorRepository.findAll().stream()
-            .map(visitor -> VisitorResponse.from(visitor, false))
+            .map(visitor -> VisitorResponse.from(visitor, true))
             .collect(Collectors.toSet());
   }
 

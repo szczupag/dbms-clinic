@@ -23,7 +23,7 @@ public class Department {
   @NotNull
   private String name;
 
-  @OneToMany(mappedBy = "department", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+  @OneToMany(mappedBy = "department", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<Doctor> doctors;
 
   @ManyToOne(fetch = FetchType.LAZY)

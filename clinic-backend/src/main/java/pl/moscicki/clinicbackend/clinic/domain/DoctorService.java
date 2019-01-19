@@ -16,7 +16,7 @@ class DoctorService {
 
   Set<DoctorResponse> getAll(boolean medicalProcedure) {
     return doctorRepository.findAll().stream()
-            .map(doctor -> DoctorResponse.from(doctor, medicalProcedure))
+            .map(doctor -> DoctorResponse.from(doctor, medicalProcedure, true))
             .collect(Collectors.toSet());
   }
 
@@ -24,21 +24,21 @@ class DoctorService {
     return doctorRepository.findAllByPeselIn(pesels);
   }
 
-  void createDoctor(CreationDoctor creationDoctor) {
+  void createDoctor(CreationDoctor creationDoctor, Department department) {
     String supervisorId = Objects.nonNull(creationDoctor.getSupervisorId()) ? creationDoctor.getSupervisorId() : "";
 
     Doctor doctor = doctorRepository.findById(supervisorId)
-            .map(supervisor -> Doctor.from(creationDoctor, supervisor))
-            .orElse(Doctor.from(creationDoctor, null));
+            .map(supervisor -> Doctor.from(creationDoctor, supervisor, department))
+            .orElse(Doctor.from(creationDoctor, null, department));
     doctorRepository.save(doctor);
   }
 
-  void updateDoctor(CreationDoctor creationDoctor, String pesel) {
+  void updateDoctor(CreationDoctor creationDoctor, String pesel, Department department) {
     String supervisorId = Objects.nonNull(creationDoctor.getSupervisorId()) ? creationDoctor.getSupervisorId() : "";
 
     Doctor doctor = doctorRepository.findById(supervisorId)
-            .map(supervisor -> Doctor.from(creationDoctor, supervisor))
-            .orElse(Doctor.from(creationDoctor, null));
+            .map(supervisor -> Doctor.from(creationDoctor, supervisor, department))
+            .orElse(Doctor.from(creationDoctor, null, department));
     doctor.setPesel(pesel);
     doctorRepository.save(doctor);
   }

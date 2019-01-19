@@ -9,5 +9,5 @@ interface VisitRepository extends CrudRepository<Visit, Long> {
   @Override
   Set<Visit> findAll();
 
-  Set<Visit> findAllByVisitId(Set<Long> id);
+  Set<Visit> findAllByVisitIdIn(Set<Long> id);
 }

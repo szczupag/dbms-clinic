@@ -20,7 +20,7 @@ class TreatmentService {
   }
 
   Set<Treatment> getTreatmentsByIds(Set<Long> treatmentIds) {
-    return treatmentRepository.findAllByTreatmentId(treatmentIds);
+    return treatmentRepository.findAllByTreatmentIdIn(treatmentIds);
   }
 
   void createTreatment(CreationTreatment creationTreatment, Set<MedicalProcedure> medicalProcedures, Patient patient,

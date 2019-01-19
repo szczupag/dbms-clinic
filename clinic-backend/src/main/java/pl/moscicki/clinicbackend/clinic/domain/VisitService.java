@@ -21,7 +21,7 @@ public class VisitService {
   }
 
   Set<Visit> getVisitsById(Set<Long> ids) {
-    return visitRepository.findAllByVisitId(ids);
+    return visitRepository.findAllByVisitIdIn(ids);
   }
 
   void createVisit(CreationVisit creationVisit, Patient patient, Visitor visitor) {

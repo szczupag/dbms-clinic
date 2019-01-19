@@ -41,11 +41,13 @@ public class ClinicFacade {
   }
 
   public void createDoctor(CreationDoctor doctor) {
-    doctorService.createDoctor(doctor);
+    doctorService.createDoctor(doctor,
+            doctor.getDepartmentId() != null ? getDepartmentById(doctor.getDepartmentId()) : null);
   }
 
   public void updateDoctor(CreationDoctor doctor, String pesel) {
-    doctorService.updateDoctor(doctor, pesel);
+    doctorService.updateDoctor(doctor, pesel,
+            doctor.getDepartmentId() != null ? getDepartmentById(doctor.getDepartmentId()) : null);
   }
 
   public void deleteDoctor(String pesel) {
@@ -129,6 +131,10 @@ public class ClinicFacade {
 
   public Set<Department> getAllDepartmentsByIds(Set<Long> ids) {
     return departmentService.getDepartmentsByIds(ids);
+  }
+
+  private Department getDepartmentById(Long id) {
+    return departmentService.getDepartmentById(id);
   }
 
   public Set<DepartmentResponse> getAllDepartments() {

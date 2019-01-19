@@ -22,4 +22,5 @@ public class CreationDoctor implements Serializable {
   @NotNull
   private String speciality;
   private String supervisorId;
+  private Long departmentId;
 }

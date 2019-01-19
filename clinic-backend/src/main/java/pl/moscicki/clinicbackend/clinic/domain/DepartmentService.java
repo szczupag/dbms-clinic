@@ -13,6 +13,10 @@ class DepartmentService {
     this.departmentRepository = departmentRepository;
   }
 
+  Department getDepartmentById(Long departmentId) {
+    return departmentRepository.findById(departmentId).orElse(null);
+  }
+
   Set<Department> getDepartmentsByIds(Set<Long> departmentsIds) {
     return departmentRepository.findAllByDepartmentIdIn(departmentsIds);
   }

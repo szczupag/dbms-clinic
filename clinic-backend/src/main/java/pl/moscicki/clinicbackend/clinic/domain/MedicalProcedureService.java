@@ -21,7 +21,7 @@ class MedicalProcedureService {
   }
 
   Set<MedicalProcedure> getMedicalProceduresById(Set<Long> medicalProcedureIds) {
-    return medicalProcedureRepository.findAllByMedicalProcedureId(medicalProcedureIds);
+    return medicalProcedureRepository.findAllByMedicalProcedureIdIn(medicalProcedureIds);
   }
 
   void createMedicalProcedure(CreationMedicalProcedure creationMedicalProcedure, Set<Doctor> doctors) {

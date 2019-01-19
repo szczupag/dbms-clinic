@@ -32,7 +32,7 @@ public class DepartmentResponse {
 
   private static Set<DoctorResponse> mapDoctors(Set<Doctor> doctors) {
     return doctors.stream()
-            .map(doctor -> DoctorResponse.from(doctor, false))
+            .map(doctor -> DoctorResponse.from(doctor, false, false))
             .collect(Collectors.toSet());
 
   }

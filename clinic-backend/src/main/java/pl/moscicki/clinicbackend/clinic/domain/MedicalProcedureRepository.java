@@ -10,5 +10,5 @@ interface MedicalProcedureRepository extends CrudRepository<MedicalProcedure, Lo
   @Override
   List<MedicalProcedure> findAll();
 
-  Set<MedicalProcedure> findAllByMedicalProcedureId(Set<Long> ids);
+  Set<MedicalProcedure> findAllByMedicalProcedureIdIn(Set<Long> ids);
 }

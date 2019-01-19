@@ -45,13 +45,14 @@ public class Doctor {
   @JoinColumn(name = "department_id")
   private Department department;
 
-  static Doctor from(CreationDoctor doctor, Doctor supervisor) {
+  static Doctor from(CreationDoctor doctor, Doctor supervisor, Department department) {
     return Doctor.builder()
             .pesel(doctor.getPesel())
             .firstName(doctor.getFirstName())
             .lastName(doctor.getLastName())
             .salary(doctor.getSalary())
             .speciality(doctor.getSpeciality())
+            .department(department)
             .supervisor(supervisor)
             .build();
   }

@@ -9,5 +9,5 @@ interface TreatmentRepository extends CrudRepository<Treatment, Long> {
   @Override
   Set<Treatment> findAll();
 
-  Set<Treatment> findAllByTreatmentId(Set<Long> ids);
+  Set<Treatment> findAllByTreatmentIdIn(Set<Long> ids);
 }

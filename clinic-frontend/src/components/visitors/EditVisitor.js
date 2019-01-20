@@ -46,7 +46,7 @@ class EditVisitor extends Component {
                 const data = {
                     firstName: this.state.firstName,
                     lastName: this.state.lastName,
-                    // pesel: this.props.data.pesel,
+                    pesel: this.props.data.pesel,
                     idNumber: this.state.idNumber,
                 }
                 console.log(data);

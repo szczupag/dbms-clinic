@@ -100,13 +100,13 @@ class App extends Component {
       this.setState({message: ''});
     }
 
-//----------------- DATABASE FUNCTIONS
+//----------------- DATABASE FUNCTIONS -----------------
 
     countVisitors(pesel){
       axios.get(`/patients/visitors/count/${pesel}`)
         .then(response=>{
           console.log("r",response);
-          this.setState({message: "VISITROS COUNTED: "+response.data});
+          this.setState({message: "count visits: "+response.data});
         })
         .catch( error => {
           console.log("e",error);

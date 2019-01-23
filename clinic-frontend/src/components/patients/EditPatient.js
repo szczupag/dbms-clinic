@@ -41,20 +41,16 @@ class EditPatient extends Component {
 
     submitHandler(){
         if( this.state.firstName != '' && this.state.lastName!='' ){
-            if( this.state.firstName != this.props.data.firstName || this.state.lastName != this.props.data.lastName ){
-                const data = {
-                    firstName: this.state.firstName,
-                    lastName: this.state.lastName,
-                    pesel: this.props.data.pesel,
-                    phoneNumber: this.state.phoneNumber,
-                    // treatments: this.state.treatments,
-                }
-                console.log(data);
-                this.props.putHandler(constants.PATEINTS, data);
-                this.props.changePanel(constants.PATEINTS);
-            }else{
-                this.setState({error: 'There are no updates for this patient!'})
+            const data = {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                pesel: this.props.data.pesel,
+                phoneNumber: this.state.phoneNumber,
+                // treatments: this.state.treatments,
             }
+            console.log(data);
+            this.props.putHandler(constants.PATEINTS, data);
+            this.props.changePanel(constants.PATEINTS);
         }else if( this.state.firstName == '' || this.state.lastName =='' || this.state.supervisorId == '' ){
             this.setState({error: 'Not all required inputs are filled!'})
         }

@@ -66,7 +66,7 @@ class NewLocalization extends Component {
                 this.setState({error: 'Not all required inputs are filled!'})
             }
         }else{
-            this.setState({error: 'Wrong input type!'})
+            this.setState({error: 'Invalid building number!'})
         }
     }
 

@@ -54,7 +54,7 @@ class NewPatient extends Component {
                 this.props.postHandler(constants.PATEINTS, data);
                 this.props.changePanel(constants.PATEINTS);
             }else{
-                this.setState({error: 'Invalid input!'})
+                this.setState({error: 'Invalid pesel!'})
             }
         }else{
             this.setState({error: 'Not all required inputs are filled!'})

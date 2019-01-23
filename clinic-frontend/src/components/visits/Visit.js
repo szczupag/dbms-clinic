@@ -12,8 +12,6 @@ const Visit = props => {
                 <p>{props.data.visitor.firstName+" "+props.data.visitor.lastName}</p>
                 <p className="label">visit date:</p>
                 <p>{props.data.visitDate}</p>
-                <p className="label">end date:</p>
-                <p>{props.data.endDate}</p>
             </div>
             <div className="item-footer">
                 <div className="controls">

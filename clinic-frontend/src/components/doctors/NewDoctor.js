@@ -86,8 +86,10 @@ class NewDoctor extends Component {
                 console.log(data);
                 this.props.postHandler(constants.DOCTORS, data);
                 this.props.changePanel(constants.DOCTORS);
-            }else{
-                this.setState({error: 'Invalid input!'})
+            } else if(Number.isInteger(parseInt(this.state.pesel))!=true||this.state.pesel.length!=11){
+                this.setState({error: 'Invalid pesel!'})
+            } else if (!Number.isInteger(parseInt(this.state.salary))){
+                this.setState({error: 'Invalid salary!'})
             }
         }else{
             this.setState({error: 'Not all required inputs are filled!'})

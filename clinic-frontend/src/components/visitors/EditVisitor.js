@@ -53,7 +53,7 @@ class EditVisitor extends Component {
                 this.props.putHandler(constants.VISITORS, data);
                 this.props.changePanel(constants.VISITORS);
             }else{
-                this.setState({error: 'Invalid input!'})
+                this.setState({error: 'Invalid id!'})
             }
         }else if( this.state.firstName == '' || this.state.lastName =='' || this.state.supervisorId == '' ){
             this.setState({error: 'Not all required inputs are filled!'})

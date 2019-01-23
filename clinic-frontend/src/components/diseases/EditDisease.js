@@ -30,7 +30,6 @@ class EditDoctor extends Component {
 
     submitHandler(){
         if( this.state.name != '' && this.state.severity!=''){
-            if( this.state.name != this.props.data.name || this.state.severity != this.props.data.severity){
                 const data = {
                     id: this.props.data.id,
                     name: this.state.name,
@@ -40,9 +39,6 @@ class EditDoctor extends Component {
                 console.log(data);
                 this.props.putHandler(constants.DISEASES, data);
                 this.props.changePanel(constants.DISEASES);
-            }else{
-                this.setState({error: 'There are no updates for this treatment'})
-            }
         }else if( this.state.name == '' || this.state.severity ==''){
             this.setState({error: 'Not all required inputs are filled!'})
         }

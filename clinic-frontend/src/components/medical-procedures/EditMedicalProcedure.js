@@ -47,7 +47,7 @@ class EditMedicalProcedure extends Component {
                 this.props.putHandler(constants.MEDICAL_PROCEDURES, data);
                 this.props.changePanel(constants.MEDICAL_PROCEDURES);
             }else{
-                this.setState({error: 'Invalid input!'})
+                this.setState({error: 'Invalid cost!'})
             }
         }else if( this.state.name == '' || this.state.cost ==''){
             this.setState({error: 'Not all required inputs are filled!'})

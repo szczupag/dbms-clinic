@@ -1,48 +1,54 @@
 import React, {Component} from 'react';
 import constants from '../../constants/pages';
+import Select from 'react-select';
 
 class EditVisit extends Component {
     constructor(props){
         super(props)
+        let patientsMap = this.props.patients.map(patient=>{
+            return { value: patient, label: <p>{patient.firstName+" "+patient.lastName}<span className="empty">{patient.pesel}</span></p>}
+        });
+        let visitorsMap = this.props.visitors.map(visitor=>{
+            return { value: visitor, label: <p>{visitor.firstName+" "+visitor.lastName}<span className="empty">{visitor.pesel}</span></p>}
+        });
         this.state={
-            patientPesel: this.props.data.patient.pesel,
-            visitorId: this.props.data.visitorId,
+            patient: null,
+            patients: patientsMap,
+            visitor: null,
+            visitors: visitorsMap,
             visitDate: this.props.data.visitDate,
             error: null
         }
         this.patientChangeHandler = this.patientChangeHandler.bind(this);
         this.visitDateChangeHandler = this.visitDateChangeHandler.bind(this);
-        this.visitorIdChangeHandler = this.visitorIdChangeHandler.bind(this);
+        this.visitorChangeHandler = this.visitorChangeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
     }
 
-    patientChangeHandler(e){
-        this.setState({patientPesel: e.target.value})
+    patientChangeHandler(selected){
+        this.setState({patient: selected})
     }
 
     visitDateChangeHandler(e){
         this.setState({visitDate: e.target.value})
     }
 
-    visitorIdChangeHandler(e){
-        this.setState({visitorId: e.target.value})
+    visitorChangeHandler(selected){
+        this.setState({visitor: selected})
     }
 
     submitHandler(){
-        if( this.state.visitDate != '' && this.state.patientPesel!=''){
-            if( this.state.visitDate != this.props.data.visitDate || this.state.patientPesel != this.props.data.patientPesel){
-                const data = {
-                    id: this.props.data.id,
-                    patientPesel: this.state.patientPesel,
-                    visitDate: this.state.visitDate,
-                    visitorId: this.state.visitorId
-                }
-                console.log(data);
-                this.props.putHandler(constants.VISITS, data);
-                this.props.changePanel(constants.VISITS);
-            }else{
-                this.setState({error: 'There are no updates for this visit'})
+        if( this.state.visitDate != '' && this.state.patient!=null && this.state.visitor!=null){
+            const data = {
+                id: this.props.data.id,
+                patientPesel: this.state.patient.value.pesel,
+                visitDate: this.state.visitDate,
+                visitorPesel: this.state.visitor.value.pesel
             }
+            console.log(data);
+            this.props.putHandler(constants.VISITS, data);
+            this.props.changePanel(constants.VISITS);
+          
         }else if( this.state.visitDate == '' || this.state.patientPesel ==''){
             this.setState({error: 'Not all required inputs are filled!'})
         }
@@ -60,19 +66,28 @@ class EditVisit extends Component {
                 </div>
                 <div className="form">
                     <div className="item-content">
-                        <input 
-                            placeholder="Patient pesel*"
-                            value={this.state.patientPesel}
-                            onChange={(e)=>this.patientChangeHandler(e)}></input>
+                        <Select
+                            name="loc-for-cli"
+                            placeholder="Patient*"
+                            className="selectBox"
+                            value={this.state.patient}
+                            onChange={this.patientChangeHandler}
+                            options={this.state.patients}
+                        />
+                        <Select
+                            name="loc-for-cli"
+                            placeholder="Visitor*"
+                            className="selectBox"
+                            value={this.state.visitor}
+                            onChange={this.visitorChangeHandler}
+                            options={this.state.visitors}
+                        />
                         <input 
                             placeholder="Visit date*"
+                            type="date"
                             value={this.state.visitDate}
                             onChange={(e)=>this.visitDateChangeHandler(e)}></input>
-                        <input 
-                            placeholder="Visitor pesel"
-                            value={this.state.visitorId}
-                            onChange={(e)=>this.visitorIdChangeHandler(e)}></input>
-                    </div>
+                   </div>
                     <div className="item-footer">
                         {this.state.error != null ? <p className="form-error">{this.state.error}</p> : null}
                         <div className="controls">

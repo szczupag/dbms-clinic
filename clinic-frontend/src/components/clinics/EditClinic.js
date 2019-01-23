@@ -11,7 +11,7 @@ class EditClinic extends Component {
             }
         });
         let departmentsMap = this.props.departments.map((department)=>{
-            return { valueFix: department, value: department+'', label: department.name }
+            return { valueFix: department, value: department.id+'', label: department.name }
         });
         localizationMap = localizationMap.filter(function(el){return el !== undefined;});
         departmentsMap = departmentsMap.filter(function(el){return el !== undefined;});

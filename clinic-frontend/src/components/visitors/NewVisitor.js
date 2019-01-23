@@ -52,8 +52,10 @@ class NewVisitor extends Component {
                 console.log(data);
                 this.props.postHandler(constants.VISITORS, data);
                 this.props.changePanel(constants.VISITORS);
+            }else if(Number.isInteger(parseInt(this.state.pesel))!=true || this.state.pesel.length!=11){
+                this.setState({error: 'Invalid pesel'})
             }else{
-                this.setState({error: 'Invalid input!'})
+                this.setState({error: 'Invalid id!'})
             }
         }else{
             this.setState({error: 'Not all required inputs are filled!'})

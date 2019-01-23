@@ -41,12 +41,12 @@ class NewMedicalProcedure extends Component {
                     cost: this.state.cost,
                     doctorsIds: doctorsIds,
                     name: this.state.name
-            }
-            console.log(data);
-            this.props.postHandler(constants.MEDICAL_PROCEDURES, data);
-            this.props.changePanel(constants.MEDICAL_PROCEDURES);
+                }
+                console.log(data);
+                this.props.postHandler(constants.MEDICAL_PROCEDURES, data);
+                this.props.changePanel(constants.MEDICAL_PROCEDURES);
             }else{
-                this.setState({error: 'Invalid input!'})
+                this.setState({error: 'Invalid cost!'})
             }
         }else{
             this.setState({error: 'Not all required inputs are filled!'})

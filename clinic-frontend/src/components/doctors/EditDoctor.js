@@ -82,8 +82,8 @@ class EditDoctor extends Component {
                 console.log(data);
                 this.props.putHandler(constants.DOCTORS, data);
                 this.props.changePanel(constants.DOCTORS);
-            }else{
-                this.setState({error: 'Invalid input!'})
+            }else if (!Number.isInteger(parseInt(this.state.salary))){
+                this.setState({error: 'Invalid salary!'})
             }
         }else if( this.state.firstName == '' || this.state.lastName =='' || this.state.supervisorId == '' ){
             this.setState({error: 'Not all required inputs are filled!'})
